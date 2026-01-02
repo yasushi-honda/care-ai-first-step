@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>介護×AI はじめの一歩 | 2時間で「使える！」を実感する入門講座</title>
+    <meta name="description" content="介護現場で働く方向けのAI入門講座。記録作成、家族対応、レクリエーションなど、現場で使えるAI活用法を2時間で学べます。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4285F4;
+            --primary-light: #E8F0FE;
+            --secondary: #34A853;
+            --secondary-light: #E6F4EA;
+            --accent: #FBBC04;
+            --accent-light: #FEF7E0;
+            --danger: #EA4335;
+            --danger-light: #FEEEE8;
+            --text: #202124;
+            --text-light: #5F6368;
+            --bg: #FAFAFA;
+            --card-bg: #FFFFFF;
+            --border: #E8EAED;
+            --shadow: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-hover: 0 4px 16px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --radius-sm: 8px;
+            /* 介護向けのアクセントカラー */
+            --care-primary: #00897B;
+            --care-primary-light: #E0F2F1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ヘッダー */
+        header {
+            background: linear-gradient(135deg, var(--care-primary) 0%, #26A69A 100%);
+            color: white;
+            padding: 60px 24px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 30px); }
+        }
+
+        header h1 {
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--text);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        /* ナビゲーション */
+        nav {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            display: block;
+            padding: 8px 16px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 20px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            background: var(--care-primary-light);
+            color: var(--care-primary);
+        }
+
+        /* メインコンテンツ */
+        main {
+            padding: 48px 0 80px;
+        }
+
+        section {
+            margin-bottom: 64px;
+        }
+
+        h2 {
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-size: 1.5rem;
+            color: var(--care-primary);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--care-primary-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2 .icon {
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            color: var(--text);
+            margin: 32px 0 16px;
+            padding-left: 16px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        p {
+            margin-bottom: 16px;
+        }
+
+        /* カード */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: var(--care-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .card-time {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            background: var(--care-primary-light);
+            padding: 4px 12px;
+            border-radius: 12px;
+            margin-left: auto;
+        }
+
+        /* 用語ツールチップ */
+        .term {
+            color: var(--care-primary);
+            border-bottom: 2px dotted var(--care-primary);
+            cursor: help;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .term:hover .tooltip,
+        .term:focus .tooltip,
+        .term.active .tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .tooltip {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            background: var(--text);
+            color: white;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: 400;
+            line-height: 1.6;
+            width: max-content;
+            max-width: 280px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: var(--text);
+        }
+
+        /* ハイライトボックス */
+        .highlight-box {
+            background: linear-gradient(135deg, var(--accent-light) 0%, #FFF9E6 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            margin: 24px 0;
+        }
+
+        .highlight-box.warning {
+            background: linear-gradient(135deg, var(--danger-light) 0%, #FFF5F2 100%);
+            border-left-color: var(--danger);
+        }
+
+        .highlight-box.tip {
+            background: linear-gradient(135deg, var(--secondary-light) 0%, #F0FAF3 100%);
+            border-left-color: var(--secondary);
+        }
+
+        .highlight-box.care {
+            background: linear-gradient(135deg, var(--care-primary-light) 0%, #E8F5F3 100%);
+            border-left-color: var(--care-primary);
+        }
+
+        .highlight-box strong {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        /* リスト */
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* 困りごとリスト */
+        .problem-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .problem-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .problem-list li:last-child {
+            border-bottom: none;
+        }
+
+        .problem-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .problem-text {
+            flex: 1;
+        }
+
+        .problem-text .problem {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .problem-text .solution {
+            color: var(--care-primary);
+            font-weight: 500;
+        }
+
+        /* プロンプト例 */
+        .prompt-card {
+            background: #F8F9FA;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin: 12px 0;
+            position: relative;
+        }
+
+        .prompt-card::before {
+            content: '💬';
+            position: absolute;
+            top: -12px;
+            left: 16px;
+            background: var(--bg);
+            padding: 0 8px;
+        }
+
+        .prompt-text {
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .copy-btn {
+            background: var(--care-primary);
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #00796B;
+        }
+
+        .copy-btn.copied {
+            background: var(--secondary);
+        }
+
+        /* 用語集 */
+        .glossary-item {
+            background: var(--card-bg);
+            border-radius: var(--radius-sm);
+            padding: 20px 24px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .glossary-term {
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--care-primary);
+            margin-bottom: 8px;
+        }
+
+        .glossary-desc {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        /* リンクカード */
+        .link-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--card-bg);
+            border-radius: var(--radius-sm);
+            padding: 20px 24px;
+            margin-bottom: 12px;
+            text-decoration: none;
+            color: var(--text);
+            box-shadow: var(--shadow);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .link-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .link-icon {
+            font-size: 2rem;
+        }
+
+        .link-content {
+            flex: 1;
+        }
+
+        .link-title {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .link-desc {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .link-arrow {
+            color: var(--care-primary);
+            font-size: 1.5rem;
+        }
+
+        /* フッター */
+        footer {
+            background: var(--text);
+            color: white;
+            text-align: center;
+            padding: 32px 24px;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+        }
+
+        /* タイムライン */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--care-primary-light);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 8px;
+            width: 14px;
+            height: 14px;
+            background: var(--care-primary);
+            border-radius: 50%;
+            border: 3px solid var(--care-primary-light);
+        }
+
+        .timeline-time {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        .timeline-content {
+            background: var(--card-bg);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        /* セキュリティ比較表 */
+        .security-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+
+        .security-table th,
+        .security-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .security-table th {
+            background: var(--care-primary-light);
+            font-weight: 700;
+            color: var(--care-primary);
+        }
+
+        .security-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .ng-text {
+            color: var(--danger);
+            font-weight: 500;
+        }
+
+        .ok-text {
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 600px) {
+            body {
+                font-size: 16px;
+            }
+
+            header {
+                padding: 40px 20px 60px;
+            }
+
+            nav ul {
+                gap: 4px;
+            }
+
+            nav a {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card-header {
+                flex-wrap: wrap;
+            }
+
+            .card-time {
+                margin-left: 0;
+                margin-top: 8px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .tooltip {
+                position: fixed;
+                bottom: auto;
+                top: 50%;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                max-width: calc(100vw - 48px);
+            }
+
+            .tooltip::after {
+                display: none;
+            }
+
+            .security-table {
+                font-size: 0.85rem;
+            }
+
+            .security-table th,
+            .security-table td {
+                padding: 8px 12px;
+            }
+        }
+
+        /* アニメーション */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .card, .glossary-item, .link-card {
+            opacity: 0;
+        }
+
+        .card.visible, .glossary-item.visible, .link-card.visible {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="badge">介護職向け・約2時間</div>
+        <h1>介護×AI はじめの一歩</h1>
+        <p>現場で「使える！」を実感する入門講座</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a onclick="scrollToSection('intro')">はじめに</a></li>
+            <li><a onclick="scrollToSection('program')">プログラム</a></li>
+            <li><a onclick="scrollToSection('prompts')">プロンプト例</a></li>
+            <li><a onclick="scrollToSection('glossary')">用語集</a></li>
+            <li><a onclick="scrollToSection('next')">次のステップ</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <!-- イントロ -->
+        <section id="intro">
+            <h2><span class="icon">👋</span>はじめに</h2>
+            
+            <div class="card">
+                <p>「AIって難しそう…」「パソコン苦手だし…」</p>
+                <p>そんな不安を感じていませんか？</p>
+                <p>この講座では、<strong>介護現場で実際に役立つ</strong>AI活用法を、手を動かしながら学びます。2時間後には、AIを使って記録の下書きを作ったり、レクリエーションのアイデアを出したりできるようになります。</p>
+            </div>
+
+            <h3>介護現場の「困った」をAIが助けてくれます</h3>
+            
+            <div class="card">
+                <ul class="problem-list">
+                    <li>
+                        <span class="problem-icon">📝</span>
+                        <div class="problem-text">
+                            <div class="problem">記録を書く時間がない…</div>
+                            <div class="solution">→ メモからAIが文章を作成</div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="problem-icon">👨‍👩‍👧</span>
+                        <div class="problem-text">
+                            <div class="problem">ご家族への説明文を考えるのが大変…</div>
+                            <div class="solution">→ 伝えたいことを入れれば下書き作成</div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="problem-icon">🎨</span>
+                        <div class="problem-text">
+                            <div class="problem">レクのネタが尽きた…</div>
+                            <div class="solution">→ 条件に合わせてアイデア出し</div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="problem-icon">🖼️</span>
+                        <div class="problem-text">
+                            <div class="problem">掲示物を作りたいけどセンスが…</div>
+                            <div class="solution">→ 言葉だけでイラスト・ポスター生成</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <h3>今日のゴール</h3>
+            <div class="highlight-box tip">
+                <ul>
+                    <li>✅ AIと自然に会話できるようになる</li>
+                    <li>✅ 介護現場で使えるプロンプトを知る</li>
+                    <li>✅ 画像を生成できるようになる</li>
+                    <li>✅ 簡単なアプリを作れるようになる</li>
+                    <li>✅ 安全に使うためのルールを理解する</li>
+                </ul>
+            </div>
+
+            <h3>AIって結局なに？</h3>
+            <p>難しく考える必要はありません。身近なもので例えると...</p>
+            
+            <div class="card">
+                <p><strong>🧮 電卓</strong> → 計算を代わりにやってくれる道具</p>
+                <p><strong>🤖 AI</strong> → 「言葉でのやりとり」を代わりにやってくれる道具</p>
+                <p style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">AIは「魔法」ではなく「便利な道具」です。<br>イメージとしては、<strong>知識は豊富だけど、利用者さんのことは知らない新人職員</strong>のような存在。指示が曖昧だと見当違いの回答をすることもあるので、具体的に伝えることが大切です。</p>
+            </div>
+        </section>
+
+        <!-- プログラム -->
+        <section id="program">
+            <h2><span class="icon">📚</span>プログラム</h2>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="step-number">1</div>
+                    <div class="card-title">不安をほぐす・言葉を覚える</div>
+                    <div class="card-time">約25分</div>
+                </div>
+                <p>AIについての不安を解消し、最低限の用語を学びます。覚える言葉は<strong>たった3つ</strong>だけ。</p>
+                <div class="highlight-box care">
+                    <p><strong>
+                        <span class="term" tabindex="0">プロンプト
+                            <span class="tooltip">AIへの「お願い」のこと。利用者さんへの声かけと同じで、具体的に伝えるほど良い結果が返ってきます。</span>
+                        </span></strong>
+                        ＝ AIへの「お願い」</p>
+                    <p><strong>
+                        <span class="term" tabindex="0">生成AI
+                            <span class="tooltip">文章・画像・音声などを「作ってくれる」AI。今日使うGeminiがこれです。</span>
+                        </span></strong>
+                        ＝ 文章や画像を「作る」AI</p>
+                    <p><strong>
+                        <span class="term" tabindex="0">モデル
+                            <span class="tooltip">AIの「頭脳」のバージョン。新しいほど賢いことが多いですが、用途に応じて選びます。</span>
+                        </span></strong>
+                        ＝ AIの頭脳のバージョン</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="step-number">2</div>
+                    <div class="card-title">Geminiで体験する</div>
+                    <div class="card-time">約40分</div>
+                </div>
+                <p>実際にGeminiを使って、AIの便利さを体感します。</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">5分</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">🔗 Geminiを開く</div>
+                            <p>gemini.google.com にアクセスしてGoogleアカウントでログイン</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">10分</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">💬 会話してみる</div>
+                            <p>介護記録の文章化や、レクリエーションのアイデア出しを体験</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">15分</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">🎨 画像生成を体験</div>
+                            <p>季節の掲示物やイベントポスターを言葉だけで作成</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">10分</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">📋 かんたんアプリ作成</div>
+                            <p>Gemini Canvasでチェックリストアプリを作成。プログラミング知識ゼロでOK！</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="step-number">3</div>
+                    <div class="card-title">セキュリティの話【重要】</div>
+                    <div class="card-time">約10分</div>
+                </div>
+                
+                <div class="highlight-box warning">
+                    <strong>⚠️ これだけは絶対に守ってください</strong>
+                    <p>AIに入力した内容は、AIの学習に使われる可能性があります。<br><strong>利用者さんの情報は絶対に入力しないでください。</strong></p>
+                </div>
+
+                <table class="security-table">
+                    <tr>
+                        <th>❌ 入れてはダメ</th>
+                        <th>✅ こう変換すればOK</th>
+                    </tr>
+                    <tr>
+                        <td class="ng-text">山田花子さん（実名）</td>
+                        <td class="ok-text">Aさん、80代女性</td>
+                    </tr>
+                    <tr>
+                        <td class="ng-text">〇〇市△△町1-2-3</td>
+                        <td class="ok-text">（住所は入れない）</td>
+                    </tr>
+                    <tr>
+                        <td class="ng-text">介護記録をそのままコピペ</td>
+                        <td class="ok-text">「朝食8割、むせなし」程度のメモ</td>
+                    </tr>
+                    <tr>
+                        <td class="ng-text">ケアプランの内容</td>
+                        <td class="ok-text">「歩行訓練が目標の方」と一般化</td>
+                    </tr>
+                    <tr>
+                        <td class="ng-text">ご家族の連絡先</td>
+                        <td class="ok-text">（連絡先は入れない）</td>
+                    </tr>
+                </table>
+
+                <h3>業務で本格的に使いたい場合は？</h3>
+                <p>個人情報を気にせず使いたい場合は、以下の選択肢があります：</p>
+                <ul>
+                    <li><strong>
+                        <span class="term" tabindex="0">Vertex AI
+                            <span class="tooltip">Googleの企業向けAIサービス。入力データは学習に使われず、セキュリティが高い。導入には費用がかかります。</span>
+                        </span></strong>
+                        ：企業向け、入力データは学習に使われない</li>
+                    <li><strong>
+                        <span class="term" tabindex="0">ローカルAI
+                            <span class="tooltip">自分のパソコンだけで動くAI。インターネットに接続しないため、データが外部に出ません。高性能なPCが必要です。</span>
+                        </span></strong>
+                        ：自分のPCだけで動く、ネットに出ない</li>
+                </ul>
+                <p style="font-size: 0.9rem; color: var(--text-light);">※ 詳しくは施設の管理者や情報担当者にご相談ください</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="step-number">4</div>
+                    <div class="card-title">休憩</div>
+                    <div class="card-time">5分</div>
+                </div>
+                <p>☕ 一息つきましょう</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="step-number">5</div>
+                    <div class="card-title">Google AI Studioで広がる可能性</div>
+                    <div class="card-time">約30分</div>
+                </div>
+                <p>Geminiより自由度の高い「
+                    <span class="term" tabindex="0">Google AI Studio
+                        <span class="tooltip">Googleが提供する開発者向けのAIツール。最新モデルが無料で使え、作ったアプリを他の人に共有できます。</span>
+                    </span>」を体験します。</p>
+                
+                <div class="highlight-box tip">
+                    <strong>✨ AI Studioのメリット</strong>
+                    <ul>
+                        <li>最新・最高性能のモデルが<strong>無料</strong>で使える</li>
+                        <li>Geminiより自由度が高い</li>
+                        <li><strong>Build機能</strong>で作ったアプリを職場の仲間に共有できる</li>
+                    </ul>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">5分</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">🔗 AI Studioを開く</div>
+                            <p>aistudio.google.com にアクセス</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">10分</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">🔄 いろんなモデルを試す</div>
+                            <p>モデルの違いを体験。同じ質問でも回答が変わることを実感</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">15分</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">🚀 Build機能でアプリを共有</div>
+                            <p>「I'm Feeling Lucky」でワンクリックアプリ生成 → 共有リンクを作成</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="step-number">6</div>
+                    <div class="card-title">まとめ・質疑応答</div>
+                    <div class="card-time">約10分</div>
+                </div>
+                <p>今日の振り返りと、明日から使えるヒントをお伝えします。</p>
+                
+                <div class="highlight-box tip">
+                    <strong>🎉 今日できるようになったこと</strong>
+                    <ul>
+                        <li>✅ AIと会話できるようになった</li>
+                        <li>✅ 介護現場で使えるプロンプトを知った</li>
+                        <li>✅ 画像を生成できた</li>
+                        <li>✅ 簡単なアプリを作れた</li>
+                        <li>✅ セキュリティの基本を理解した</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- プロンプト例 -->
+        <section id="prompts">
+            <h2><span class="icon">💬</span>介護現場で使えるプロンプト例</h2>
+            <p>以下のプロンプトをコピーして、そのまま使ってみてください。<br><strong>※ 実際に使う際は、個人情報を入れないよう注意してください</strong></p>
+
+            <h3>📝 記録・申し送り</h3>
+            
+            <div class="prompt-card">
+                <div class="prompt-text">以下のメモを介護記録の文章にしてください。丁寧な言葉遣いで、客観的な表現にしてください。
+
+メモ：朝食8割摂取、むせなし、機嫌よい、10時にトイレ誘導で排尿あり</div>
+                <button class="copy-btn" onclick="copyPrompt(this)">コピー</button>
+            </div>
+
+            <div class="prompt-card">
+                <div class="prompt-text">夜勤の申し送り事項を文章にしてください。
+
+・22時巡回時、Aさん覚醒。トイレ誘導で排尿あり
+・2時、Bさんナースコール。体位変換実施
+・全体的に落ち着いた夜だった</div>
+                <button class="copy-btn" onclick="copyPrompt(this)">コピー</button>
+            </div>
+
+            <h3>👨‍👩‍👧 ご家族への連絡</h3>
+
+            <div class="prompt-card">
+                <div class="prompt-text">ご家族への月次報告のお手紙を書いてください。温かみのある文面でお願いします。
+
+伝えたい内容：
+・最近よく笑顔が見られる
+・食事量が安定している（8〜9割摂取）
+・他の利用者さんとの交流が増えた
+・来月の誕生日会のお知らせ</div>
+                <button class="copy-btn" onclick="copyPrompt(this)">コピー</button>
+            </div>
+
+            <div class="prompt-card">
+                <div class="prompt-text">体調変化をご家族に電話でお伝えする際の話し方を教えてください。
+
+状況：
+・昨日から微熱（37.2度）が続いている
+・食欲はやや低下しているが水分は摂れている
+・主治医に連絡済み、様子観察の指示
+・緊急性は低いが念のためお知らせしたい</div>
+                <button class="copy-btn" onclick="copyPrompt(this)">コピー</button>
+            </div>
+
+            <h3>🎨 レクリエーション</h3>
+
+            <div class="prompt-card">
+                <div class="prompt-text">以下の条件に合うレクリエーションを5つ提案してください。
+
+条件：
+・車椅子の方も参加できる
+・1月にふさわしい季節感がある
+・準備に時間がかからない（30分以内）
+・10〜15人で実施
+・所要時間は30分程度</div>
+                <button class="copy-btn" onclick="copyPrompt(this)">コピー</button>
+            </div>
+
+            <div class="prompt-card">
+                <div class="prompt-text">認知症の方向けの回想法に使える話題を教えてください。
+
+条件：
+・昭和20〜30年代の話題
+・できれば視覚的な資料も提案してほしい
+・参加者は80〜90代の女性が中心</div>
+                <button class="copy-btn" onclick="copyPrompt(this)">コピー</button>
+            </div>
+
+            <h3>🖼️ 画像生成（掲示物・ポスター）</h3>
+
+            <div class="prompt-card">
+                <div class="prompt-text">1月の壁面飾り用のイラストを描いてください。
+
+条件：
+・富士山と初日の出のデザイン
+・高齢者が見やすい明るくはっきりした色合い
+・シンプルで温かみのあるタッチ</div>
+                <button class="copy-btn" onclick="copyPrompt(this)">コピー</button>
+            </div>
+
+            <div class="prompt-card">
+                <div class="prompt-text">節分のイベント告知ポスターを作ってください。
+
+内容：
+・タイトル「節分 豆まき大会」
+・日時：2月3日（月）14:00〜
+・場所：1階 食堂
+・高齢者が読みやすい大きな文字で
+・鬼と豆のかわいいイラスト入り</div>
+                <button class="copy-btn" onclick="copyPrompt(this)">コピー</button>
+            </div>
+
+            <h3>📋 アプリ作成（Gemini Canvas / AI Studio Build）</h3>
+
+            <div class="prompt-card">
+                <div class="prompt-text">バイタルチェックの記録表アプリを作ってください。
+
+機能：
+・体温、血圧（上・下）、脈拍を入力できる
+・日付と時刻は自動で入る
+・入力したデータが一覧で見られる
+・シンプルで見やすいデザイン</div>
+                <button class="copy-btn" onclick="copyPrompt(this)">コピー</button>
+            </div>
+
+            <div class="prompt-card">
+                <div class="prompt-text">服薬確認のチェックリストアプリを作ってください。
+
+機能：
+・朝・昼・夕・就寝前の4つの時間帯
+・チェックを入れると時刻が記録される
+・1日分をリセットできるボタン
+・チェック漏れがあると色で分かる</div>
+                <button class="copy-btn" onclick="copyPrompt(this)">コピー</button>
+            </div>
+
+            <div class="highlight-box tip">
+                <strong>💡 プロンプトのコツ</strong>
+                <p>利用者さんへの声かけと同じです。</p>
+                <p>❌「お茶どうぞ」→ 熱いの？冷たいの？</p>
+                <p>⭕「少し冷ましたほうじ茶をお持ちしました」→ 安心して飲める</p>
+                <p style="margin-top: 8px;"><strong>具体的に、詳しく伝える</strong>ほど、望み通りの結果が得られます。</p>
+            </div>
+        </section>
+
+        <!-- 用語集 -->
+        <section id="glossary">
+            <h2><span class="icon">📖</span>用語集</h2>
+            <p>講座で出てきた用語をまとめました。分からなくなったら戻ってきてください。</p>
+
+            <div class="glossary-item">
+                <div class="glossary-term">プロンプト（Prompt）</div>
+                <div class="glossary-desc">AIへの「お願い」や「指示」のこと。利用者さんへの声かけと同じで、具体的に詳しく伝えるほど、望み通りの結果が返ってきます。</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">生成AI（Generative AI）</div>
+                <div class="glossary-desc">文章・画像・音声・動画などを新しく「作り出す」ことができるAI。ChatGPT、Gemini、Claudeなどがこれにあたります。</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">モデル（Model）</div>
+                <div class="glossary-desc">AIの「頭脳」のバージョンのこと。新しいモデルほど賢いことが多いですが、用途に応じて選びます。</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Gemini（ジェミニ）</div>
+                <div class="glossary-desc">Googleが提供する生成AI。会話、画像生成、アプリ作成などができます。Googleアカウントがあれば無料で使えます。</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Google AI Studio</div>
+                <div class="glossary-desc">Googleが提供する開発者向けのAIツール。最新・最高性能のモデルが無料で使え、Build機能で作ったアプリを他の人に共有できます。</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">チャット形式</div>
+                <div class="glossary-desc">LINEのように、メッセージを交互にやりとりする形式のこと。AIとの会話は基本的にこの形式で行います。</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">コンテキスト（Context）</div>
+                <div class="glossary-desc">会話の「流れ」や「文脈」のこと。AIは会話の流れを覚えているので、「それについてもっと教えて」のような指示ができます。</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">Vertex AI</div>
+                <div class="glossary-desc">Googleの企業向けAIサービス。入力したデータがAIの学習に使われないため、個人情報を扱う業務でも使用できます。導入には費用がかかります。</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term">ローカルAI</div>
+                <div class="glossary-desc">自分のパソコンだけで動くAI。インターネットに接続しないため、データが外部に出ることがありません。高性能なパソコンが必要です。</div>
+            </div>
+        </section>
+
+        <!-- 次のステップ -->
+        <section id="next">
+            <h2><span class="icon">🚀</span>次のステップ</h2>
+            <p>もっとAIを活用したい方のためのリンク集です。</p>
+
+            <div class="link-card" onclick="window.open('https://gemini.google.com', '_blank')">
+                <div class="link-icon">✨</div>
+                <div class="link-content">
+                    <div class="link-title">Gemini</div>
+                    <div class="link-desc">まずはここから。記録の下書きやアイデア出しに使ってみましょう</div>
+                </div>
+                <div class="link-arrow">→</div>
+            </div>
+
+            <div class="link-card" onclick="window.open('https://aistudio.google.com', '_blank')">
+                <div class="link-icon">🔬</div>
+                <div class="link-content">
+                    <div class="link-title">Google AI Studio</div>
+                    <div class="link-desc">最新モデルを試したい、アプリを共有したい方に</div>
+                </div>
+                <div class="link-arrow">→</div>
+            </div>
+
+            <div class="link-card" onclick="window.open('https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ja', '_blank')">
+                <div class="link-icon">📚</div>
+                <div class="link-content">
+                    <div class="link-title">プロンプト設計の基本（Google公式）</div>
+                    <div class="link-desc">より効果的なプロンプトの書き方を学びたい方に</div>
+                </div>
+                <div class="link-arrow">→</div>
+            </div>
+
+            <div class="highlight-box care">
+                <strong>💡 明日から使ってみよう</strong>
+                <ul>
+                    <li>まずは記録の下書き作成から試してみる</li>
+                    <li>うまくいかなくても大丈夫、プロンプトを変えて試す</li>
+                    <li><strong>個人情報は入れない</strong>ことだけ忘れずに</li>
+                    <li>困ったらこのページを見返す</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>介護×AI はじめの一歩 | 入門講座資料</p>
+    </footer>
+
+    <script>
+        // ページ内スクロール
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                const navHeight = document.querySelector('nav').offsetHeight;
+                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({
+                    top: elementPosition - navHeight - 16,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // コピー機能
+        function copyPrompt(button) {
+            const text = button.previousElementSibling.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'コピーしました！';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'コピー';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // スクロールアニメーション
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.card, .glossary-item, .link-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // モバイルでのツールチップ対応
+        document.querySelectorAll('.term').forEach(term => {
+            term.addEventListener('click', function(e) {
+                // 他のツールチップを閉じる
+                document.querySelectorAll('.term').forEach(t => {
+                    if (t !== this) {
+                        t.classList.remove('active');
+                    }
+                });
+                this.classList.toggle('active');
+            });
+        });
+
+        // ツールチップ外クリックで閉じる
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.term')) {
+                document.querySelectorAll('.term').forEach(t => {
+                    t.classList.remove('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
