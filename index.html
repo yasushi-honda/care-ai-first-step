@@ -242,8 +242,8 @@
         @media (max-width: 768px) {
             :root { --font-base: 17px; --font-lg: 19px; --font-xl: 22px; --font-2xl: 26px; --font-sm: 15px; }
             header { padding: 60px 20px 80px; }
-            nav ul { gap: 8px; }
-            nav a { padding: 10px 16px; font-size: 14px; }
+            nav ul { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; max-width: 320px; }
+            nav a { padding: 10px 12px; font-size: 14px; text-align: center; }
             .container, .container-narrow { padding: 0 16px; }
             .card { padding: 24px; }
             .detail-section { padding: 28px 20px; }
