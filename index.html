@@ -86,6 +86,11 @@
         .program-overview { display: grid; gap: 20px; }
         .program-step { background: var(--card-bg); border-radius: var(--radius); padding: 24px 28px; display: flex; align-items: center; gap: 20px; box-shadow: var(--shadow-sm); cursor: pointer; transition: all 0.3s; border: 2px solid transparent; }
         .program-step:hover { box-shadow: var(--shadow); border-color: var(--primary); transform: translateX(8px); }
+        .program-step-break { background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); }
+        .program-step-break:hover { border-color: var(--accent); }
+        .program-step-break .step-number { background: var(--accent); }
+        .program-step-break .step-time { background: var(--accent-light); color: #E65100; }
+        .program-step-break .step-arrow { color: var(--accent); }
         .step-number { width: 56px; height: 56px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'M PLUS Rounded 1c', sans-serif; font-size: var(--font-xl); font-weight: 700; flex-shrink: 0; }
         .step-content { flex: 1; }
         .step-title { font-family: 'M PLUS Rounded 1c', sans-serif; font-size: var(--font-lg); font-weight: 700; color: var(--text); margin-bottom: 4px; }
@@ -98,6 +103,9 @@
         .detail-section { background: var(--card-bg); border-radius: var(--radius-lg); padding: 48px; margin-bottom: 40px; box-shadow: var(--shadow); border-top: 6px solid var(--primary); }
         .detail-section-compact { padding: 32px 48px; }
         .detail-section-compact .detail-header { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .detail-section-break { background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); border-top: 6px solid var(--accent); }
+        .detail-section-break .step-number { background: var(--accent); }
+        .detail-section-break .detail-header-content h3 { color: #E65100; }
         .detail-header { display: flex; align-items: center; gap: 20px; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid var(--border); }
         .detail-header .step-number { width: 64px; height: 64px; font-size: var(--font-2xl); }
         .detail-header-content h3 { margin: 0; padding: 0; border: none; font-size: var(--font-xl); }
@@ -110,6 +118,9 @@
         .workflow-step { background: white; border-radius: var(--radius-sm); padding: 16px 20px; display: flex; align-items: flex-start; gap: 16px; }
         .workflow-num { width: 32px; height: 32px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: var(--font-sm); flex-shrink: 0; }
         .workflow-text { flex: 1; font-size: var(--font-base); }
+        .workflow-link { display: inline-flex; align-items: center; gap: 8px; background: var(--primary); color: white; text-decoration: none; padding: 12px 24px; border-radius: 25px; font-size: var(--font-sm); font-weight: 700; margin-top: 12px; transition: all 0.3s; box-shadow: var(--shadow-sm); width: fit-content; }
+        .workflow-link:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: var(--shadow); }
+        .workflow-link::after { content: '→'; font-size: 1.1em; }
 
         /* プロンプトカード */
         .prompt-group { margin: 32px 0; }
@@ -210,8 +221,8 @@
 
         /* モードリスト */
         .mode-list { display: flex; flex-direction: column; gap: 12px; }
-        .mode-item { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
-        .mode-name { font-weight: 700; color: var(--text); white-space: nowrap; }
+        .mode-item { display: flex; align-items: baseline; gap: 8px; }
+        .mode-name { font-weight: 700; color: var(--text); white-space: nowrap; flex-shrink: 0; }
         .mode-name::after { content: '：'; }
         .mode-desc { color: var(--text-medium); }
 
@@ -268,6 +279,7 @@
             .mode-name::after, .option-name::after { content: ''; }
             .mode-desc, .option-desc { padding-left: 0; }
             .workflow-example { font-size: 14px; }
+            .workflow-link { width: 100%; justify-content: center; padding: 14px 20px; }
         }
         @media print { nav, .copy-btn { display: none; } .card, .detail-section { box-shadow: none; border: 1px solid #ccc; } }
     </style>
@@ -287,7 +299,6 @@
             <li><a tabindex="0" role="button" onclick="scrollToSection('overview')" onkeydown="handleNavKey(event, 'overview')">プログラム</a></li>
             <li><a tabindex="0" role="button" onclick="scrollToSection('details')" onkeydown="handleNavKey(event, 'details')">詳細</a></li>
             <li><a tabindex="0" role="button" onclick="scrollToSection('glossary')" onkeydown="handleNavKey(event, 'glossary')">用語集</a></li>
-            <li><a tabindex="0" role="button" onclick="scrollToSection('next')" onkeydown="handleNavKey(event, 'next')">次のステップ</a></li>
         </ul>
     </nav>
 
@@ -388,9 +399,9 @@
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <div class="step-title">不安をほぐす・言葉を覚える</div>
-                        <div class="step-desc">AIの基本と、覚える用語はたった3つだけ</div>
+                        <div class="step-desc">AIの基本と、覚える用語はたった2つだけ</div>
                     </div>
-                    <div class="step-time">約25分</div>
+                    <div class="step-time">約5分</div>
                     <div class="step-arrow">→</div>
                 </div>
 
@@ -400,7 +411,7 @@
                         <div class="step-title">Geminiで体験する</div>
                         <div class="step-desc">会話・画像生成・アプリ作成を実際に体験</div>
                     </div>
-                    <div class="step-time">約40分</div>
+                    <div class="step-time">約35分</div>
                     <div class="step-arrow">→</div>
                 </div>
 
@@ -414,11 +425,11 @@
                     <div class="step-arrow">→</div>
                 </div>
 
-                <div class="program-step animate-on-scroll" onclick="scrollToSection('step4')">
+                <div class="program-step program-step-break animate-on-scroll" onclick="scrollToSection('step4')">
                     <div class="step-number">4</div>
                     <div class="step-content">
-                        <div class="step-title">休憩</div>
-                        <div class="step-desc">一息つきましょう ☕</div>
+                        <div class="step-title">休憩 ☕</div>
+                        <div class="step-desc">一息つきましょう</div>
                     </div>
                     <div class="step-time">5分</div>
                     <div class="step-arrow">→</div>
@@ -428,9 +439,9 @@
                     <div class="step-number">5</div>
                     <div class="step-content">
                         <div class="step-title">Google AI Studioで広がる可能性</div>
-                        <div class="step-desc">音声入力で議事録作成・アプリ共有を体験</div>
+                        <div class="step-desc">音声入力・アプリ作成・Webページ作成を体験</div>
                     </div>
-                    <div class="step-time">約30分</div>
+                    <div class="step-time">約50分</div>
                     <div class="step-arrow">→</div>
                 </div>
 
@@ -440,7 +451,7 @@
                         <div class="step-title">まとめ・質疑応答</div>
                         <div class="step-desc">振り返りと、明日から使えるヒント</div>
                     </div>
-                    <div class="step-time">約10分</div>
+                    <div class="step-time">約15分</div>
                     <div class="step-arrow">→</div>
                 </div>
             </div>
@@ -459,14 +470,14 @@
                     <div class="step-number">1</div>
                     <div class="detail-header-content">
                         <h3>不安をほぐす・言葉を覚える</h3>
-                        <div class="time">⏱ 約25分</div>
+                        <div class="time">⏱ 約5分</div>
                     </div>
                 </div>
 
-                <p>AIについての不安を解消し、最低限の用語を学びます。覚える言葉は<strong>たった3つ</strong>だけです。</p>
+                <p>AIについての不安を解消し、最低限の用語を学びます。覚える言葉は<strong>たった2つ</strong>だけです。</p>
 
                 <div class="highlight-box info">
-                    <strong>🔤 覚える用語は3つだけ</strong>
+                    <strong>🔤 覚える用語は2つだけ</strong>
                     <div class="mt-md">
                         <p class="mb-md">
                             <strong class="text-lg">
@@ -476,21 +487,13 @@
                             </strong><br>
                             ＝ AIへの「お願い」
                         </p>
-                        <p class="mb-md">
+                        <p class="mb-0">
                             <strong class="text-lg">
                                 <span class="term" tabindex="0">生成AI
                                     <span class="tooltip">文章・画像・音声などを「作ってくれる」AI。今日使うGeminiがこれです。</span>
                                 </span>
                             </strong><br>
                             ＝ 文章や画像を「作る」AI
-                        </p>
-                        <p class="mb-0">
-                            <strong class="text-lg">
-                                <span class="term" tabindex="0">モデル
-                                    <span class="tooltip">AIの「頭脳」のバージョン。新しいほど賢いことが多いですが、用途に応じて選びます。</span>
-                                </span>
-                            </strong><br>
-                            ＝ AIの頭脳のバージョン
                         </p>
                     </div>
                 </div>
@@ -510,7 +513,7 @@
                     <div class="step-number">2</div>
                     <div class="detail-header-content">
                         <h3>Geminiで体験する</h3>
-                        <div class="time">⏱ 約40分</div>
+                        <div class="time">⏱ 約35分</div>
                     </div>
                 </div>
 
@@ -529,7 +532,6 @@
                             <span class="mode-desc">じっくり考えて回答。複雑な問題や日本語入りの画像生成向き</span>
                         </div>
                     </div>
-                    <p class="mb-0 text-muted mt-md">※ 画面下部の「思考モード」ボタンから切り替えられます</p>
                 </div>
 
                 <div class="workflow">
@@ -537,7 +539,7 @@
                     <div class="workflow-steps">
                         <div class="workflow-step">
                             <div class="workflow-num">1</div>
-                            <div class="workflow-text"><strong>Geminiを開く</strong>（5分）<br>gemini.google.com にアクセスしてGoogleアカウントでログイン</div>
+                            <div class="workflow-text"><strong>Geminiを開く</strong>（5分）<br>下のボタンをクリックして、Googleアカウントでログイン<br><a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" class="workflow-link">Geminiを開く</a></div>
                         </div>
                         <div class="workflow-step">
                             <div class="workflow-num">2</div>
@@ -545,11 +547,11 @@
                         </div>
                         <div class="workflow-step">
                             <div class="workflow-num">3</div>
-                            <div class="workflow-text"><strong>画像生成を体験</strong>（15分）<br>季節の掲示物やイベントポスターを言葉だけで作成</div>
+                            <div class="workflow-text"><strong>画像生成を体験</strong>（10分）<br>季節の掲示物やイベントポスターを言葉だけで作成</div>
                         </div>
                         <div class="workflow-step">
                             <div class="workflow-num">4</div>
-                            <div class="workflow-text"><strong>かんたんアプリ作成</strong>（10分）<br>Gemini Canvasでチェックリストアプリを作成</div>
+                            <div class="workflow-text"><strong>かんたんアプリ作成</strong>（10分）<br>Gemini Canvasでレク用クイズアプリを作成</div>
                         </div>
                     </div>
                 </div>
@@ -575,6 +577,18 @@
 ・準備に時間がかからない（30分以内）
 ・10〜15人で実施
 ・所要時間は30分程度</div>
+                        <button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button>
+                    </div>
+
+                    <div class="prompt-card">
+                        <div class="prompt-label">家族への月次報告</div>
+                        <div class="prompt-text">ご家族への月次報告のお手紙を書いてください。温かみのある文面でお願いします。
+
+伝えたい内容：
+・最近よく笑顔が見られる
+・食事量が安定している（8〜9割摂取）
+・他の利用者さんとの交流が増えた
+・来月の誕生日会のお知らせ</div>
                         <button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button>
                     </div>
                 </div>
@@ -623,14 +637,15 @@
                     </div>
 
                     <div class="prompt-card">
-                        <div class="prompt-label">チェックリスト</div>
-                        <div class="prompt-text">服薬確認のチェックリストアプリを作ってください。
+                        <div class="prompt-label">レク用クイズ</div>
+                        <div class="prompt-text">高齢者向けのレクリエーション用クイズアプリを作ってください。
 
-機能：
-・朝・昼・夕・就寝前の4つの時間帯
-・チェックを入れると時刻が記録される
-・1日分をリセットできるボタン
-・チェック漏れがあると色で分かる</div>
+テーマ：昭和の思い出クイズ
+・昭和30〜40年代の歌謡曲、映画、流行語などから出題
+・4択形式で、正解すると「正解！」と表示
+・全部で5問
+・文字は大きく、ボタンも押しやすいサイズで
+・正解数を最後に表示</div>
                         <button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button>
                     </div>
                 </div>
@@ -732,12 +747,12 @@
             </div>
 
             <!-- Step 4 -->
-            <div id="step4" class="detail-section detail-section-compact animate-on-scroll">
+            <div id="step4" class="detail-section detail-section-compact detail-section-break animate-on-scroll">
                 <div class="detail-header">
                     <div class="step-number">4</div>
                     <div class="detail-header-content">
                         <h3>休憩 ☕</h3>
-                        <div class="time">⏱ 5分</div>
+                        <p style="margin: 8px 0 0 0; color: #795548;">一息つきましょう。水分補給やストレッチをどうぞ。</p>
                     </div>
                 </div>
             </div>
@@ -748,22 +763,21 @@
                     <div class="step-number">5</div>
                     <div class="detail-header-content">
                         <h3>Google AI Studioで広がる可能性</h3>
-                        <div class="time">⏱ 約30分</div>
+                        <div class="time">⏱ 約50分</div>
                     </div>
                 </div>
 
                 <p>Geminiより自由度の高い「
                     <span class="term" tabindex="0">Google AI Studio
-                        <span class="tooltip">Googleが提供する開発者向けのAIツール。最新モデルが無料で使え、作ったアプリを他の人に共有できます。</span>
+                        <span class="tooltip">Googleが提供する無料のAIツール。音声入力での文字起こしや、作ったアプリを他の人に共有できます。</span>
                     </span>」を体験します。</p>
 
                 <div class="highlight-box tip">
                     <strong>✨ AI Studioのメリット</strong>
                     <ul>
-                        <li>最新・最高性能のモデルが<strong>無料</strong>で使える</li>
-                        <li>Geminiより自由度が高い</li>
                         <li><strong>音声入力</strong>で議事録を自動作成できる</li>
                         <li><strong>Build機能</strong>で作ったアプリを職場の仲間に共有できる</li>
+                        <li>すべて<strong>無料</strong>で使える</li>
                     </ul>
                 </div>
 
@@ -772,19 +786,15 @@
                     <div class="workflow-steps">
                         <div class="workflow-step">
                             <div class="workflow-num">1</div>
-                            <div class="workflow-text"><strong>AI Studioを開く</strong>（5分）<br>aistudio.google.com にアクセス</div>
+                            <div class="workflow-text"><strong>AI Studioを開く</strong>（5分）<br>下のボタンをクリックしてアクセス<br><a href="https://aistudio.google.com/prompts/new_chat" target="_blank" rel="noopener noreferrer" class="workflow-link">AI Studioを開く</a></div>
                         </div>
                         <div class="workflow-step">
                             <div class="workflow-num">2</div>
-                            <div class="workflow-text"><strong>いろんなモデルを試す</strong>（5分）<br>モデルの違いを体験。同じ質問でも回答が変わることを実感</div>
+                            <div class="workflow-text"><strong>🎤 音声入力で議事録作成</strong>（20分）<br>声で話した内容を文字起こし → 議事録に整形</div>
                         </div>
                         <div class="workflow-step">
                             <div class="workflow-num">3</div>
-                            <div class="workflow-text"><strong>🎤 音声入力で議事録作成</strong>（10分）<br>声で話した内容を文字起こし → 議事録に整形</div>
-                        </div>
-                        <div class="workflow-step">
-                            <div class="workflow-num">4</div>
-                            <div class="workflow-text"><strong>Build機能でアプリを共有</strong>（10分）<br>「I'm Feeling Lucky」でアプリ生成 → 共有リンク作成</div>
+                            <div class="workflow-text"><strong>Build機能でアプリ・Webページ作成</strong>（25分）<br>議事録AIアプリ、施設紹介ページを作成し、共有リンクを発行</div>
                         </div>
                     </div>
                 </div>
@@ -795,17 +805,16 @@
                     <div class="highlight-box info workflow-box">
                         <strong>📝 ワークの流れ</strong>
                         <div class="workflow-list">
-                            <div class="workflow-list-item"><span class="workflow-list-num">1</span><span class="workflow-list-text">AI Studioの<strong>マイクボタン</strong>をクリック</span></div>
+                            <div class="workflow-list-item"><span class="workflow-list-num">1</span><span class="workflow-list-text">入力欄の「<strong>＋</strong>」→「<strong>Record Audio</strong>」をクリック</span></div>
                             <div class="workflow-list-item"><span class="workflow-list-num">2</span><span class="workflow-list-text">30秒〜1分程度、会議風に話してみる<br><span class="workflow-example">例：「本日の議題は〇〇です。Aさんから△△の報告がありました...」</span></span></div>
-                            <div class="workflow-list-item"><span class="workflow-list-num">3</span><span class="workflow-list-text">文字起こしされたテキストを確認</span></div>
-                            <div class="workflow-list-item"><span class="workflow-list-num">4</span><span class="workflow-list-text">下のプロンプトを追加して送信</span></div>
-                            <div class="workflow-list-item"><span class="workflow-list-num">5</span><span class="workflow-list-text">整形された議事録が完成！</span></div>
+                            <div class="workflow-list-item"><span class="workflow-list-num">3</span><span class="workflow-list-text">録音を停止し、下のプロンプトを入力して送信</span></div>
+                            <div class="workflow-list-item"><span class="workflow-list-num">4</span><span class="workflow-list-text">AIが文字起こし＆議事録形式に整形！</span></div>
                         </div>
                     </div>
 
                     <div class="prompt-card">
                         <div class="prompt-label">議事録整形</div>
-                        <div class="prompt-text">上記の内容を議事録形式にまとめてください。
+                        <div class="prompt-text">上記の音声を文字起こしして、議事録形式にまとめてください。
 
 形式：
 ・日時、参加者（わかれば）
@@ -825,46 +834,49 @@
                 </div>
 
                 <div class="prompt-group">
-                    <div class="prompt-group-title">👨‍👩‍👧 ご家族への連絡で使うプロンプト</div>
+                    <div class="prompt-group-title">🚀 Build機能でアプリ・Webページ作成</div>
 
-                    <div class="prompt-card">
-                        <div class="prompt-label">月次報告</div>
-                        <div class="prompt-text">ご家族への月次報告のお手紙を書いてください。温かみのある文面でお願いします。
+                    <div class="highlight-box tip" style="margin-bottom: 20px;">
+                        <strong>✨ Geminiとの違い：無料で共有できる！</strong>
+                        <p style="margin-bottom: 0;">Gemini Canvasで作ったアプリは、無料プランだと自分だけしか使えません。<br>AI StudioのBuild機能なら、<strong>作ったアプリを共有リンクで職場の仲間に配布</strong>できます。しかも無料です。</p>
+                    </div>
 
-伝えたい内容：
-・最近よく笑顔が見られる
-・食事量が安定している（8〜9割摂取）
-・他の利用者さんとの交流が増えた
-・来月の誕生日会のお知らせ</div>
-                        <button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 アプリ作成の始め方</strong>
+                        <p class="mb-0">左メニューの「<strong>Build</strong>」をクリックして、作りたいアプリを説明します。</p>
                     </div>
 
                     <div class="prompt-card">
-                        <div class="prompt-label">体調連絡</div>
-                        <div class="prompt-text">体調変化をご家族に電話でお伝えする際の話し方を教えてください。
-
-状況：
-・昨日から微熱（37.2度）が続いている
-・食欲はやや低下しているが水分は摂れている
-・主治医に連絡済み、様子観察の指示
-・緊急性は低いが念のためお知らせしたい</div>
-                        <button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button>
-                    </div>
-                </div>
-
-                <div class="prompt-group">
-                    <div class="prompt-group-title">🚀 Build機能でアプリ作成</div>
-
-                    <div class="prompt-card">
-                        <div class="prompt-label">バイタル記録</div>
-                        <div class="prompt-text">バイタルチェックの記録表アプリを作ってください。
+                        <div class="prompt-label">議事録AIアプリ</div>
+                        <div class="prompt-text">音声録音から議事録を自動作成するアプリを作ってください。
 
 機能：
-・体温、血圧（上・下）、脈拍を入力できる
-・日付と時刻は自動で入る
-・入力したデータが一覧で見られる
+・マイクで音声を録音できる（録音開始/停止ボタン）
+・録音した音声をAIが文字起こしする
+・文字起こし結果を議事録形式に整形する（日時、議題、発言内容、決定事項）
+・完成した議事録をワンクリックでコピーできるボタン
 ・シンプルで見やすいデザイン</div>
                         <button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button>
+                    </div>
+
+                    <div class="prompt-card">
+                        <div class="prompt-label">施設紹介ページ</div>
+                        <div class="prompt-text">介護施設の紹介ページを作ってください。
+
+内容：
+・施設名「やすらぎの里」
+・キャッチコピー「笑顔あふれる毎日を」
+・サービス内容（デイサービス、ショートステイ）
+・営業時間、住所、電話番号の欄
+・お問い合わせボタン
+・温かみのある色合いで、見やすいデザイン</div>
+                        <button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button>
+                    </div>
+
+                    <div class="highlight-box warning" style="margin-top: 20px;">
+                        <strong>🔗 共有方法と注意点</strong>
+                        <p class="mb-sm">右上の「<strong>Share app</strong>」から共有リンクを発行できます。</p>
+                        <p style="margin-bottom: 0;">⚠️ <strong>注意</strong>：共有リンクを開くには、相手も<strong>Googleアカウントでログイン</strong>が必要です。<br>　職場の方には「Googleにログインしてから開いてね」と伝えましょう。</p>
                     </div>
                 </div>
             </div>
@@ -875,7 +887,7 @@
                     <div class="step-number">6</div>
                     <div class="detail-header-content">
                         <h3>まとめ・質疑応答</h3>
-                        <div class="time">⏱ 約10分</div>
+                        <div class="time">⏱ 約15分</div>
                     </div>
                 </div>
 
@@ -924,18 +936,13 @@
                 </div>
 
                 <div class="glossary-item animate-on-scroll">
-                    <div class="glossary-term">モデル（Model）</div>
-                    <div class="glossary-desc">AIの「頭脳」のバージョンのこと。新しいモデルほど賢いことが多いですが、用途に応じて選びます。</div>
-                </div>
-
-                <div class="glossary-item animate-on-scroll">
                     <div class="glossary-term">Gemini（ジェミニ）</div>
                     <div class="glossary-desc">Googleが提供する生成AI。会話、画像生成、アプリ作成などができます。Googleアカウントがあれば無料で使えます。</div>
                 </div>
 
                 <div class="glossary-item animate-on-scroll">
                     <div class="glossary-term">Google AI Studio</div>
-                    <div class="glossary-desc">Googleが提供する開発者向けのAIツール。最新・最高性能のモデルが無料で使え、音声入力やBuild機能でアプリを共有できます。</div>
+                    <div class="glossary-desc">Googleが提供する無料のAIツール。音声入力での文字起こしや、Build機能で作ったアプリを他の人に共有できます。</div>
                 </div>
 
                 <div class="glossary-item animate-on-scroll">
@@ -950,52 +957,6 @@
             </div>
         </section>
 
-        <!-- 次のステップ -->
-        <section id="next" class="container">
-            <div class="section-header">
-                <h2><span class="icon">🚀</span>次のステップ</h2>
-                <p>もっとAIを活用したい方のためのリンク集</p>
-            </div>
-
-            <div class="link-grid">
-                <div class="link-card animate-on-scroll" onclick="window.open('https://gemini.google.com', '_blank')">
-                    <div class="link-icon">✨</div>
-                    <div class="link-content">
-                        <div class="link-title">Gemini</div>
-                        <div class="link-desc">まずはここから。記録の下書きやアイデア出しに使ってみましょう</div>
-                    </div>
-                    <div class="link-arrow">→</div>
-                </div>
-
-                <div class="link-card animate-on-scroll" onclick="window.open('https://aistudio.google.com', '_blank')">
-                    <div class="link-icon">🔬</div>
-                    <div class="link-content">
-                        <div class="link-title">Google AI Studio</div>
-                        <div class="link-desc">最新モデルを試したい、音声入力やアプリ共有を使いたい方に</div>
-                    </div>
-                    <div class="link-arrow">→</div>
-                </div>
-
-                <div class="link-card animate-on-scroll" onclick="window.open('https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ja', '_blank')">
-                    <div class="link-icon">📚</div>
-                    <div class="link-content">
-                        <div class="link-title">プロンプト設計の基本（Google公式）</div>
-                        <div class="link-desc">より効果的なプロンプトの書き方を学びたい方に</div>
-                    </div>
-                    <div class="link-arrow">→</div>
-                </div>
-            </div>
-
-            <div class="highlight-box info mt-lg">
-                <strong>💡 困ったときは</strong>
-                <ul>
-                    <li>このページをブックマークしておく</li>
-                    <li>プロンプト例をコピーして使う</li>
-                    <li>うまくいかなくても、言い方を変えて何度か試す</li>
-                    <li>「〇〇について、もっと詳しく」と深掘りする</li>
-                </ul>
-            </div>
-        </section>
     </main>
 
     <footer>
