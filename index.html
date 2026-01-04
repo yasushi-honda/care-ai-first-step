@@ -204,6 +204,28 @@
         /* フッター */
         footer { background: var(--text); color: white; text-align: center; padding: 48px 24px; font-size: var(--font-base); }
 
+        /* フッターバナー */
+        .footer-banner {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        .footer-banner a {
+            display: inline-block;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .footer-banner a:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+        .footer-banner img {
+            max-width: 480px;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
         /* ユーティリティクラス */
         .text-lg { font-size: var(--font-lg); }
         .text-xl { font-size: var(--font-xl); }
@@ -280,6 +302,10 @@
             .mode-desc, .option-desc { padding-left: 0; }
             .workflow-example { font-size: 14px; }
             .workflow-link { width: 100%; justify-content: center; padding: 14px 20px; }
+            /* フッターバナーのモバイル対応 */
+            .footer-banner img {
+                max-width: 100%;
+            }
         }
         @media print { nav, .copy-btn { display: none; } .card, .detail-section { box-shadow: none; border: 1px solid #ccc; } }
     </style>
@@ -961,6 +987,11 @@
 
     <footer>
         <p>介護×AI はじめの一歩 | 入門講座資料</p>
+        <div class="footer-banner">
+            <a href="https://one-stream.io/user/CwGemEM3sSOZX6f5uhBm0jUJUs93/playlist/c203a473-fa9d-404e-917d-b1886ede8a84" target="_blank" rel="noopener noreferrer">
+                <img src="/horiemon13-gpt.png" alt="ChatGPT資格試験対策コース">
+            </a>
+        </div>
     </footer>
 
     <script>
