@@ -52,13 +52,18 @@ header p { font-size: var(--font-lg); opacity: 0.95; }
 
 /* シリーズナビゲーション */
 .series-nav { background: var(--card-bg); border-bottom: 2px solid var(--border); padding: 12px 24px; }
-.series-nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-.series-nav a { color: var(--primary); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 20px; transition: all 0.3s; }
-.series-nav a:hover { background: var(--primary-light); }
-.series-progress { display: flex; align-items: center; gap: 8px; }
-.progress-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--border); transition: all 0.3s; }
-.progress-dot.active { background: var(--primary); transform: scale(1.2); }
+.series-nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.series-nav-item { color: var(--primary); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 20px; transition: all 0.3s; font-size: var(--font-sm); }
+.series-nav-item:hover { background: var(--primary-light); }
+.series-nav-item.disabled { color: var(--text-light); pointer-events: none; opacity: 0.5; }
+.series-nav-item.nav-list { background: var(--primary-light); }
+.series-progress { display: flex; align-items: center; gap: 0; }
+.progress-step { display: flex; align-items: center; }
+.progress-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--border); transition: all 0.3s; flex-shrink: 0; }
+.progress-dot.active { background: var(--primary); transform: scale(1.3); box-shadow: 0 0 0 3px rgba(0, 137, 123, 0.2); }
 .progress-dot.completed { background: var(--secondary); }
+.progress-line { width: 12px; height: 3px; background: var(--border); }
+.progress-line.completed { background: var(--secondary); }
 
 /* ナビゲーション */
 nav { background: var(--card-bg); border-bottom: 2px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
