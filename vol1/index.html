@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vol.1 はじめの一歩 | 介護×AI はじめの一歩</title>
+    <meta name="description" content="介護現場で働く方向けのAI入門講座。記録作成、家族対応、レクリエーションなど、現場で使えるAI活用法を2時間で学べます。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/shared/style.css">
+</head>
+<body>
+    <!-- シリーズナビゲーション -->
+    <div class="series-nav">
+        <div class="series-nav-inner">
+            <a href="/">← シリーズ一覧</a>
+            <div class="series-progress">
+                <span class="progress-dot active" title="Vol.1"></span>
+                <span class="progress-dot" title="Vol.2"></span>
+                <span class="progress-dot" title="Vol.3"></span>
+                <span class="progress-dot" title="Vol.4"></span>
+                <span class="progress-dot" title="Vol.5"></span>
+                <span class="progress-dot" title="Vol.6"></span>
+                <span class="progress-dot" title="Vol.7"></span>
+                <span class="progress-dot" title="Vol.8"></span>
+                <span class="progress-dot" title="Vol.9"></span>
+                <span class="progress-dot" title="Vol.10"></span>
+                <span class="progress-dot" title="Vol.11"></span>
+                <span class="progress-dot" title="Vol.12"></span>
+            </div>
+            <a href="/vol2/">次の講座 →</a>
+        </div>
+    </div>
+
+    <header id="top">
+        <div class="header-content">
+            <div class="badge">Vol.1・約2時間</div>
+            <h1>介護×AI はじめの一歩</h1>
+            <p>現場で「使える！」を実感する入門講座</p>
+        </div>
+    </header>
+    <nav role="navigation" aria-label="メインナビゲーション">
+        <ul>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('intro')" onkeydown="handleNavKey(event, 'intro')">はじめに</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('overview')" onkeydown="handleNavKey(event, 'overview')">プログラム</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('details')" onkeydown="handleNavKey(event, 'details')">詳細</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('glossary')" onkeydown="handleNavKey(event, 'glossary')">用語集</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="intro" class="container">
+            <div class="section-header">
+                <h2><span class="icon">👋</span>はじめに</h2>
+                <p>この講座で学ぶことと、AIの基本的な考え方</p>
+            </div>
+            <div class="card intro-card animate-on-scroll">
+                <p class="text-lg">「AIって難しそう…」「パソコン苦手だし…」</p>
+                <p class="text-lg">そんな不安を感じていませんか？</p>
+                <p>この講座では、<strong>介護現場で実際に役立つ</strong>AI活用法を、手を動かしながら学びます。<br>2時間後には、AIを使って記録の下書きを作ったり、レクリエーションのアイデアを出したり、会議の議事録を自動作成したりできるようになります。</p>
+            </div>
+            <h3>介護現場の「困った」をAIが助けてくれます</h3>
+            <div class="card animate-on-scroll">
+                <ul class="problem-list">
+                    <li><span class="problem-icon">📝</span><div class="problem-text"><div class="problem">記録を書く時間がない…</div><div class="solution">→ メモからAIが文章を作成</div></div></li>
+                    <li><span class="problem-icon">👨‍👩‍👧</span><div class="problem-text"><div class="problem">ご家族への説明文を考えるのが大変…</div><div class="solution">→ 伝えたいことを入れれば下書き作成</div></div></li>
+                    <li><span class="problem-icon">🎤</span><div class="problem-text"><div class="problem">会議の議事録作成が負担…</div><div class="solution">→ 音声から自動で文字起こし・要約</div></div></li>
+                    <li><span class="problem-icon">🎨</span><div class="problem-text"><div class="problem">レクのネタが尽きた…</div><div class="solution">→ 条件に合わせてアイデア出し</div></div></li>
+                    <li><span class="problem-icon">🖼️</span><div class="problem-text"><div class="problem">掲示物を作りたいけどセンスが…</div><div class="solution">→ 言葉だけでイラスト・ポスター生成</div></div></li>
+                </ul>
+            </div>
+            <h3>今日のゴール</h3>
+            <div class="highlight-box tip animate-on-scroll">
+                <strong>🎯 2時間後にできるようになること</strong>
+                <ul>
+                    <li>AIと自然に会話できるようになる</li>
+                    <li>介護現場で使えるプロンプトを知る</li>
+                    <li>音声から議事録を自動作成できる</li>
+                    <li>画像を生成できるようになる</li>
+                    <li>簡単なアプリを作れるようになる</li>
+                    <li>安全に使うためのルールを理解する</li>
+                </ul>
+            </div>
+            <h3>AIって結局なに？</h3>
+            <div class="card animate-on-scroll">
+                <p class="text-lg mb-lg">難しく考える必要はありません。身近なもので例えると...</p>
+                <div class="bg-primary-light mb-lg">
+                    <p class="text-lg mb-sm"><strong>🧮 電卓</strong> → 計算を代わりにやってくれる道具</p>
+                    <p class="text-lg mb-0"><strong>🤖 AI</strong> → 「言葉でのやりとり」を代わりにやってくれる道具</p>
+                </div>
+                <p>AIは「魔法」ではなく「便利な道具」です。</p>
+                <p>イメージとしては、<strong class="text-primary">知識は豊富だけど、利用者さんのことは知らない新人職員</strong>のような存在。指示が曖昧だと見当違いの回答をすることもあるので、具体的に伝えることが大切です。</p>
+            </div>
+        </section>
+        <section id="overview" class="container">
+            <div class="section-header">
+                <h2><span class="icon">📚</span>プログラム概要</h2>
+                <p>全体の流れを確認しましょう（各項目をクリックで詳細へ）</p>
+            </div>
+            <div class="program-overview">
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step1')"><div class="step-number">1</div><div class="step-content"><div class="step-title">不安をほぐす・言葉を覚える</div><div class="step-desc">AIの基本と、覚える用語はたった2つだけ</div></div><div class="step-time">約5分</div><div class="step-arrow">→</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step2')"><div class="step-number">2</div><div class="step-content"><div class="step-title">Geminiで体験する</div><div class="step-desc">会話・画像生成・アプリ作成を実際に体験</div></div><div class="step-time">約35分</div><div class="step-arrow">→</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step3')"><div class="step-number">3</div><div class="step-content"><div class="step-title">セキュリティの話【重要】</div><div class="step-desc">個人情報の取り扱いルールを確認</div></div><div class="step-time">約10分</div><div class="step-arrow">→</div></div>
+                <div class="program-step program-step-break animate-on-scroll" onclick="scrollToSection('step4')"><div class="step-number">4</div><div class="step-content"><div class="step-title">休憩 ☕</div><div class="step-desc">一息つきましょう</div></div><div class="step-time">5分</div><div class="step-arrow">→</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step5')"><div class="step-number">5</div><div class="step-content"><div class="step-title">Google AI Studioで広がる可能性</div><div class="step-desc">音声入力・アプリ作成・Webページ作成を体験</div></div><div class="step-time">約50分</div><div class="step-arrow">→</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step6')"><div class="step-number">6</div><div class="step-content"><div class="step-title">まとめ・質疑応答</div><div class="step-desc">振り返りと、明日から使えるヒント</div></div><div class="step-time">約15分</div><div class="step-arrow">→</div></div>
+            </div>
+        </section>
+        <section id="details" class="container-narrow">
+            <div class="section-header">
+                <h2><span class="icon">📖</span>プログラム詳細</h2>
+                <p>各ステップの内容と、使うプロンプトを確認</p>
+            </div>
+            <div id="step1" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">1</div><div class="detail-header-content"><h3>不安をほぐす・言葉を覚える</h3><div class="time">⏱ 約5分</div></div></div>
+                <p>AIについての不安を解消し、最低限の用語を学びます。覚える言葉は<strong>たった2つ</strong>だけです。</p>
+                <div class="highlight-box info">
+                    <strong>🔤 覚える用語は2つだけ</strong>
+                    <div class="mt-md">
+                        <p class="mb-md"><strong class="text-lg"><span class="term" tabindex="0">プロンプト<span class="tooltip">AIへの「お願い」のこと。利用者さんへの声かけと同じで、具体的に伝えるほど良い結果が返ってきます。</span></span></strong><br>＝ AIへの「お願い」</p>
+                        <p class="mb-0"><strong class="text-lg"><span class="term" tabindex="0">生成AI<span class="tooltip">文章・画像・音声などを「作ってくれる」AI。今日使うGeminiがこれです。</span></span></strong><br>＝ 文章や画像を「作る」AI</p>
+                    </div>
+                </div>
+                <div class="highlight-box accent">
+                    <strong>💡 プロンプトのコツ</strong>
+                    <p class="text-lg">利用者さんへの声かけと同じです。</p>
+                    <p class="mb-sm">❌「お茶どうぞ」→ 熱いの？冷たいの？</p>
+                    <p class="mb-md">⭕「少し冷ましたほうじ茶をお持ちしました」→ 安心して飲める</p>
+                    <p class="mb-0"><strong>具体的に、詳しく伝える</strong>ほど、望み通りの結果が得られます。</p>
+                </div>
+            </div>
+            <div id="step2" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">2</div><div class="detail-header-content"><h3>Geminiで体験する</h3><div class="time">⏱ 約35分</div></div></div>
+                <p>実際にGeminiを使って、AIの便利さを体感します。</p>
+                <div class="highlight-box accent">
+                    <strong>⚙️ Geminiのモード選択</strong>
+                    <p class="mb-md">Geminiには複数のモードがあります。目的に応じて使い分けましょう。</p>
+                    <div class="mode-list">
+                        <div class="mode-item"><span class="mode-name">高速モード</span><span class="mode-desc">素早く回答。簡単な質問や会話向き</span></div>
+                        <div class="mode-item"><span class="mode-name">思考モード</span><span class="mode-desc">じっくり考えて回答。複雑な問題や日本語入りの画像生成向き</span></div>
+                    </div>
+                </div>
+                <div class="workflow">
+                    <div class="workflow-title">📍 このステップの流れ</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><div class="workflow-num">1</div><div class="workflow-text"><strong>Geminiを開く</strong>（5分）<br>下のボタンをクリックして、Googleアカウントでログイン<br><a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" class="workflow-link">Geminiを開く</a></div></div>
+                        <div class="workflow-step"><div class="workflow-num">2</div><div class="workflow-text"><strong>会話してみる</strong>（10分）<br>介護記録の文章化や、レクリエーションのアイデア出しを体験</div></div>
+                        <div class="workflow-step"><div class="workflow-num">3</div><div class="workflow-text"><strong>画像生成を体験</strong>（10分）<br>季節の掲示物やイベントポスターを言葉だけで作成</div></div>
+                        <div class="workflow-step"><div class="workflow-num">4</div><div class="workflow-text"><strong>かんたんアプリ作成</strong>（10分）<br>Gemini Canvasでレク用クイズアプリを作成</div></div>
+                    </div>
+                </div>
+                <div class="prompt-group">
+                    <div class="prompt-group-title">💬 会話・記録作成で使うプロンプト</div>
+                    <div class="prompt-card"><div class="prompt-label">記録作成</div><div class="prompt-text">以下のメモを介護記録の文章にしてください。丁寧な言葉遣いで、客観的な表現にしてください。
+
+メモ：朝食8割摂取、むせなし、機嫌よい、10時にトイレ誘導で排尿あり</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">レクアイデア</div><div class="prompt-text">以下の条件に合うレクリエーションを5つ提案してください。
+
+条件：
+・車椅子の方も参加できる
+・1月にふさわしい季節感がある
+・準備に時間がかからない（30分以内）
+・10〜15人で実施
+・所要時間は30分程度</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">家族への月次報告</div><div class="prompt-text">ご家族への月次報告のお手紙を書いてください。温かみのある文面でお願いします。
+
+伝えたい内容：
+・最近よく笑顔が見られる
+・食事量が安定している（8〜9割摂取）
+・他の利用者さんとの交流が増えた
+・来月の誕生日会のお知らせ</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+                <div class="prompt-group">
+                    <div class="prompt-group-title">🎨 画像生成で使うプロンプト</div>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 画像生成のコツ</strong>
+                        <p class="mb-sm">メニューから「<strong>画像を作成</strong>」を選択するか、プロンプトに「描いて」「生成して」などの言葉を含めます。</p>
+                        <p class="mb-0">日本語の文字を含む画像を生成する場合は、「<strong>思考モード</strong>」の方が文字が正確に描画されやすい傾向があります。</p>
+                    </div>
+                    <div class="prompt-card"><div class="prompt-label">壁面飾り</div><div class="prompt-text">1月の壁面飾り用のイラストを描いてください。
+
+条件：
+・富士山と初日の出のデザイン
+・高齢者が見やすい明るくはっきりした色合い
+・シンプルで温かみのあるタッチ</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">イベントポスター</div><div class="prompt-text">節分のイベント告知ポスターを作ってください。
+
+内容：
+・タイトル「節分 豆まき大会」
+・日時：2月3日（月）14:00〜
+・場所：1階 食堂
+・高齢者が読みやすい大きな文字で
+・鬼と豆のかわいいイラスト入り</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+                <div class="prompt-group">
+                    <div class="prompt-group-title">📱 アプリ作成で使うプロンプト</div>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 アプリ作成の始め方</strong>
+                        <p class="mb-sm">メニューから「<strong>Canvas</strong>」を選ぶと、アプリ作成モードになります。</p>
+                        <p class="mb-0">作りたいものを説明すると、AIがコードを書いて動くアプリを作ってくれます。</p>
+                    </div>
+                    <div class="prompt-card"><div class="prompt-label">レク用クイズ</div><div class="prompt-text">高齢者向けのレクリエーション用クイズアプリを作ってください。
+
+テーマ：昭和の思い出クイズ
+・昭和30〜40年代の歌謡曲、映画、流行語などから出題
+・4択形式で、正解すると「正解！」と表示
+・全部で5問
+・文字は大きく、ボタンも押しやすいサイズで
+・正解数を最後に表示</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+            </div>
+            <div id="step3" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">3</div><div class="detail-header-content"><h3>セキュリティの話【重要】</h3><div class="time">⏱ 約10分</div></div></div>
+                <div class="highlight-box warning">
+                    <strong>⚠️ これだけは絶対に守ってください</strong>
+                    <p class="text-lg">AIに入力した内容は、AIの学習に使われる可能性があります。</p>
+                    <p class="text-lg mb-0"><strong>利用者さんの情報は絶対に入力しないでください。</strong></p>
+                </div>
+                <h4>具体的にどうすればいい？</h4>
+                <table class="security-table">
+                    <tr><th>❌ 入れてはダメ</th><th>✅ こう変換すればOK</th></tr>
+                    <tr><td class="ng-text">山田花子さん（実名）</td><td class="ok-text">Aさん、80代女性</td></tr>
+                    <tr><td class="ng-text">〇〇市△△町1-2-3</td><td class="ok-text">（住所は入れない）</td></tr>
+                    <tr><td class="ng-text">介護記録をそのままコピペ</td><td class="ok-text">「朝食8割、むせなし」程度のメモ</td></tr>
+                    <tr><td class="ng-text">ケアプランの内容</td><td class="ok-text">「歩行訓練が目標の方」と一般化</td></tr>
+                    <tr><td class="ng-text">ご家族の連絡先</td><td class="ok-text">（連絡先は入れない）</td></tr>
+                </table>
+                <div class="security-cards">
+                    <div class="security-card-item"><div class="ng">❌ 山田花子さん（実名）</div><div class="ok">✅ Aさん、80代女性</div></div>
+                    <div class="security-card-item"><div class="ng">❌ 〇〇市△△町1-2-3</div><div class="ok">✅ （住所は入れない）</div></div>
+                    <div class="security-card-item"><div class="ng">❌ 介護記録をそのままコピペ</div><div class="ok">✅ 「朝食8割、むせなし」程度のメモ</div></div>
+                    <div class="security-card-item"><div class="ng">❌ ケアプランの内容</div><div class="ok">✅ 「歩行訓練が目標の方」と一般化</div></div>
+                    <div class="security-card-item"><div class="ng">❌ ご家族の連絡先</div><div class="ok">✅ （連絡先は入れない）</div></div>
+                </div>
+                <h4>業務で本格的に使いたい場合は？</h4>
+                <p>個人情報を気にせず使いたい場合は、以下の選択肢があります：</p>
+                <div class="option-list mb-lg">
+                    <div class="option-item"><span class="option-name"><span class="term" tabindex="0">Vertex AI<span class="tooltip">Googleの企業向けAIサービス。入力データは学習に使われず、セキュリティが高い。導入には費用がかかります。</span></span></span><span class="option-desc">企業向け、入力データは学習に使われない</span></div>
+                    <div class="option-item"><span class="option-name"><span class="term" tabindex="0">ローカルAI<span class="tooltip">自分のパソコンだけで動くAI。インターネットに接続しないため、データが外部に出ません。高性能なPCが必要です。</span></span></span><span class="option-desc">自分のPCだけで動く、ネットに出ない</span></div>
+                </div>
+                <p class="text-muted">※ 施設での本格導入をご検討の際は、お気軽にご相談ください</p>
+            </div>
+            <div id="step4" class="detail-section detail-section-compact detail-section-break animate-on-scroll">
+                <div class="detail-header"><div class="step-number">4</div><div class="detail-header-content"><h3>休憩 ☕</h3><p style="margin: 8px 0 0 0; color: #795548;">一息つきましょう。水分補給やストレッチをどうぞ。</p></div></div>
+            </div>
+            <div id="step5" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">5</div><div class="detail-header-content"><h3>Google AI Studioで広がる可能性</h3><div class="time">⏱ 約50分</div></div></div>
+                <p>Geminiより自由度の高い「<span class="term" tabindex="0">Google AI Studio<span class="tooltip">Googleが提供する無料のAIツール。音声入力での文字起こしや、作ったアプリを他の人に共有できます。</span></span>」を体験します。</p>
+                <div class="highlight-box tip">
+                    <strong>✨ AI Studioのメリット</strong>
+                    <ul>
+                        <li><strong>音声入力</strong>で議事録を自動作成できる</li>
+                        <li><strong>Build機能</strong>で作ったアプリを職場の仲間に共有できる</li>
+                        <li>すべて<strong>無料</strong>で使える</li>
+                    </ul>
+                </div>
+                <div class="workflow">
+                    <div class="workflow-title">📍 このステップの流れ</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><div class="workflow-num">1</div><div class="workflow-text"><strong>AI Studioを開く</strong>（5分）<br>下のボタンをクリックしてアクセス<br><a href="https://aistudio.google.com/prompts/new_chat" target="_blank" rel="noopener noreferrer" class="workflow-link">AI Studioを開く</a></div></div>
+                        <div class="workflow-step"><div class="workflow-num">2</div><div class="workflow-text"><strong>🎤 音声入力で議事録作成</strong>（20分）<br>声で話した内容を文字起こし → 議事録に整形</div></div>
+                        <div class="workflow-step"><div class="workflow-num">3</div><div class="workflow-text"><strong>Build機能でアプリ・Webページ作成</strong>（25分）<br>議事録AIアプリ、施設紹介ページを作成し、共有リンクを発行</div></div>
+                    </div>
+                </div>
+                <div class="prompt-group">
+                    <div class="prompt-group-title">🎤 音声入力で議事録作成ワーク</div>
+                    <div class="highlight-box info workflow-box">
+                        <strong>📝 ワークの流れ</strong>
+                        <div class="workflow-list">
+                            <div class="workflow-list-item"><span class="workflow-list-num">1</span><span class="workflow-list-text">入力欄の「<strong>＋</strong>」→「<strong>Record Audio</strong>」をクリック</span></div>
+                            <div class="workflow-list-item"><span class="workflow-list-num">2</span><span class="workflow-list-text">30秒〜1分程度、会議風に話してみる<br><span class="workflow-example">例：「本日の議題は〇〇です。Aさんから△△の報告がありました...」</span></span></div>
+                            <div class="workflow-list-item"><span class="workflow-list-num">3</span><span class="workflow-list-text">録音を停止し、下のプロンプトを入力して送信</span></div>
+                            <div class="workflow-list-item"><span class="workflow-list-num">4</span><span class="workflow-list-text">AIが文字起こし＆議事録形式に整形！</span></div>
+                        </div>
+                    </div>
+                    <div class="prompt-card"><div class="prompt-label">議事録整形</div><div class="prompt-text">上記の音声を文字起こしして、議事録形式にまとめてください。
+
+形式：
+・日時、参加者（わかれば）
+・議題
+・主な発言内容
+・決定事項
+・次回までのアクション</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="highlight-box warning mt-md">
+                        <strong>⚠️ 音声入力時の注意</strong>
+                        <p class="mb-0">Step 3で学んだセキュリティルールは音声入力でも同じです。<br><strong>利用者さんの実名や個人情報は話さないでください。</strong><br>練習では架空の内容で試しましょう。</p>
+                    </div>
+                </div>
+                <div class="prompt-group">
+                    <div class="prompt-group-title">🚀 Build機能でアプリ・Webページ作成</div>
+                    <div class="highlight-box tip" style="margin-bottom: 20px;">
+                        <strong>✨ Geminiとの違い：無料で共有できる！</strong>
+                        <p style="margin-bottom: 0;">Gemini Canvasで作ったアプリは、無料プランだと自分だけしか使えません。<br>AI StudioのBuild機能なら、<strong>作ったアプリを共有リンクで職場の仲間に配布</strong>できます。しかも無料です。</p>
+                    </div>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 アプリ作成の始め方</strong>
+                        <p class="mb-0">左メニューの「<strong>Build</strong>」をクリックして、作りたいアプリを説明します。</p>
+                    </div>
+                    <div class="prompt-card"><div class="prompt-label">議事録AIアプリ</div><div class="prompt-text">音声録音から議事録を自動作成するアプリを作ってください。
+
+機能：
+・マイクで音声を録音できる（録音開始/停止ボタン）
+・録音した音声をAIが文字起こしする
+・文字起こし結果を議事録形式に整形する（日時、議題、発言内容、決定事項）
+・完成した議事録をワンクリックでコピーできるボタン
+・シンプルで見やすいデザイン</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">施設紹介ページ</div><div class="prompt-text">介護施設の紹介ページを作ってください。
+
+内容：
+・施設名「やすらぎの里」
+・キャッチコピー「笑顔あふれる毎日を」
+・サービス内容（デイサービス、ショートステイ）
+・営業時間、住所、電話番号の欄
+・お問い合わせボタン
+・温かみのある色合いで、見やすいデザイン</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="highlight-box warning" style="margin-top: 20px;">
+                        <strong>🔗 共有方法と注意点</strong>
+                        <p class="mb-sm">右上の「<strong>Share app</strong>」から共有リンクを発行できます。</p>
+                        <p style="margin-bottom: 0;">⚠️ <strong>注意</strong>：共有リンクを開くには、相手も<strong>Googleアカウントでログイン</strong>が必要です。<br>　職場の方には「Googleにログインしてから開いてね」と伝えましょう。</p>
+                    </div>
+                </div>
+            </div>
+            <div id="step6" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">6</div><div class="detail-header-content"><h3>まとめ・質疑応答</h3><div class="time">⏱ 約15分</div></div></div>
+                <p>今日の振り返りと、明日から使えるヒントをお伝えします。</p>
+                <div class="highlight-box tip">
+                    <strong>🎉 今日できるようになったこと</strong>
+                    <ul>
+                        <li>AIと会話できるようになった</li>
+                        <li>介護現場で使えるプロンプトを知った</li>
+                        <li>音声から議事録を作成できた</li>
+                        <li>画像を生成できた</li>
+                        <li>簡単なアプリを作れた</li>
+                        <li>セキュリティの基本を理解した</li>
+                    </ul>
+                </div>
+                <div class="highlight-box info">
+                    <strong>💡 明日から使ってみよう</strong>
+                    <ul>
+                        <li>まずは記録の下書き作成から試してみる</li>
+                        <li>うまくいかなくても大丈夫、プロンプトを変えて試す</li>
+                        <li><strong>個人情報は入れない</strong>ことだけ忘れずに</li>
+                        <li>困ったらこのページを見返す</li>
+                    </ul>
+                </div>
+                <div class="highlight-box accent">
+                    <strong>📅 次回予告：Vol.2「一歩先へ」</strong>
+                    <p class="mb-0">次回は今日の内容を復習しながら、<strong>画像編集</strong>や<strong>自社Webページ作成</strong>など、一歩進んだ活用法を学びます。お楽しみに！</p>
+                </div>
+            </div>
+        </section>
+        <section id="glossary" class="container">
+            <div class="section-header">
+                <h2><span class="icon">📖</span>用語集</h2>
+                <p>講座で出てきた用語をまとめました</p>
+            </div>
+            <div class="glossary-grid">
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">プロンプト（Prompt）</div><div class="glossary-desc">AIへの「お願い」や「指示」のこと。利用者さんへの声かけと同じで、具体的に詳しく伝えるほど、望み通りの結果が返ってきます。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">生成AI（Generative AI）</div><div class="glossary-desc">文章・画像・音声・動画などを新しく「作り出す」ことができるAI。ChatGPT、Gemini、Claudeなどがこれにあたります。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">Gemini（ジェミニ）</div><div class="glossary-desc">Googleが提供する生成AI。会話、画像生成、アプリ作成などができます。Googleアカウントがあれば無料で使えます。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">Google AI Studio</div><div class="glossary-desc">Googleが提供する無料のAIツール。音声入力での文字起こしや、Build機能で作ったアプリを他の人に共有できます。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">Vertex AI</div><div class="glossary-desc">Googleの企業向けAIサービス。入力したデータがAIの学習に使われないため、個人情報を扱う業務でも使用できます。導入には費用がかかります。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">ローカルAI</div><div class="glossary-desc">自分のパソコンだけで動くAI。インターネットに接続しないため、データが外部に出ることがありません。高性能なパソコンが必要です。</div></div>
+            </div>
+        </section>
+    </main>
+    <footer id="footer">
+        <p>介護×AI はじめの一歩 Vol.1 | 入門講座資料</p>
+        <div class="footer-banner">
+            <a href="https://one-stream.io/user/CwGemEM3sSOZX6f5uhBm0jUJUs93/playlist/c203a473-fa9d-404e-917d-b1886ede8a84" target="_blank" rel="noopener noreferrer">
+                <img src="/public/horiemon13-gpt.png" alt="ChatGPT資格試験対策コース">
+            </a>
+        </div>
+    </footer>
+    <div class="scroll-buttons">
+        <button class="scroll-btn to-top" onclick="scrollToTop()" aria-label="ページトップへ戻る" title="トップへ">↑</button>
+        <button class="scroll-btn to-footer" onclick="scrollToFooter()" aria-label="フッターへ移動" title="関連講座を見る">↓</button>
+    </div>
+    <script>
+        function handleNavKey(event, id) { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); scrollToSection(id); } }
+        function scrollToSection(id) { const element = document.getElementById(id); if (element) { const navHeight = document.querySelector('nav').offsetHeight; const seriesNavHeight = document.querySelector('.series-nav').offsetHeight; const elementPosition = element.getBoundingClientRect().top + window.pageYOffset; window.scrollTo({ top: elementPosition - navHeight - seriesNavHeight - 20, behavior: 'smooth' }); } }
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function scrollToFooter() { document.getElementById('footer').scrollIntoView({ behavior: 'smooth' }); }
+        function updateScrollButtons() { const scrollTop = window.pageYOffset; const windowHeight = window.innerHeight; const documentHeight = document.documentElement.scrollHeight; const scrollBottom = documentHeight - scrollTop - windowHeight; const toTopBtn = document.querySelector('.scroll-btn.to-top'); const toFooterBtn = document.querySelector('.scroll-btn.to-footer'); if (scrollTop > 200) { toTopBtn.classList.add('visible'); } else { toTopBtn.classList.remove('visible'); } if (scrollBottom > 200) { toFooterBtn.classList.add('visible'); } else { toFooterBtn.classList.remove('visible'); } }
+        window.addEventListener('scroll', updateScrollButtons); updateScrollButtons();
+        function copyPrompt(button) { const promptCard = button.closest('.prompt-card'); const text = promptCard.querySelector('.prompt-text').textContent; navigator.clipboard.writeText(text).then(() => { const originalText = button.textContent; button.textContent = 'コピーしました！'; button.classList.add('copied'); setTimeout(() => { button.textContent = originalText; button.classList.remove('copied'); }, 2000); }).catch(err => { const textarea = document.createElement('textarea'); textarea.value = text; document.body.appendChild(textarea); textarea.select(); document.execCommand('copy'); document.body.removeChild(textarea); button.textContent = 'コピーしました！'; button.classList.add('copied'); setTimeout(() => { button.textContent = 'コピーする'; button.classList.remove('copied'); }, 2000); }); }
+        const observer = new IntersectionObserver((entries) => { entries.forEach((entry, index) => { if (entry.isIntersecting) { setTimeout(() => { entry.target.classList.add('visible'); }, index * 50); } }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }); document.querySelectorAll('.animate-on-scroll').forEach(el => { observer.observe(el); });
+        document.querySelectorAll('.term').forEach(term => { term.addEventListener('click', function(e) { e.stopPropagation(); document.querySelectorAll('.term').forEach(t => { if (t !== this) t.classList.remove('active'); }); this.classList.toggle('active'); }); }); document.addEventListener('click', function(e) { if (!e.target.closest('.term')) { document.querySelectorAll('.term').forEach(t => t.classList.remove('active')); } });
+        window.addEventListener('scroll', function() { const sections = document.querySelectorAll('section[id]'); const navLinks = document.querySelectorAll('nav a'); let current = ''; sections.forEach(section => { const sectionTop = section.offsetTop; if (pageYOffset >= sectionTop - 200) { current = section.getAttribute('id'); } }); navLinks.forEach(link => { link.classList.remove('active'); const onclick = link.getAttribute('onclick'); if (onclick && onclick.includes(current)) { link.classList.add('active'); } }); });
+    </script>
+</body>
+</html>

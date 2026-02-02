@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ja" class="vol2">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vol.2 一歩先へ | 介護×AI はじめの一歩</title>
+    <meta name="description" content="介護×AI講座の第2回。Vol.1の復習から、画像編集・自社Webページ作成・AIチャットボット追加へステップアップします。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/shared/style.css">
+    <style>
+        /* Vol.2専用カラー */
+        header { background: linear-gradient(135deg, #1565C0 0%, #1976D2 50%, #42A5F5 100%); }
+        .step-number { background: #1976D2; }
+        .detail-section { border-top-color: #1976D2; }
+        nav a:hover, nav a.active { background: #E3F2FD; color: #1565C0; border-color: #1976D2; }
+        .series-nav a:hover { background: #E3F2FD; }
+        .progress-dot.active { background: #1976D2; }
+        .workflow { background: #E3F2FD; }
+        .workflow-title { color: #1565C0; }
+        .workflow-num { background: #1976D2; }
+        .workflow-link { background: #1976D2; }
+        .workflow-link:hover { background: #1565C0; }
+        .highlight-box.info { background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); border-left-color: #1976D2; }
+        .term { color: #1976D2; border-bottom-color: #1976D2; }
+        .glossary-item { border-left-color: #1976D2; }
+        .glossary-term { color: #1976D2; }
+        .section-header h2 { color: #1565C0; }
+        h3 { border-left-color: #1976D2; }
+        .text-primary { color: #1976D2; }
+        .copy-btn { background: #1976D2; }
+        .copy-btn:hover { background: #1565C0; }
+        .prompt-label { background: #1976D2; }
+        .scroll-btn.to-top { background: #1976D2; }
+        .scroll-btn.to-top:hover { background: #1565C0; }
+        .link-card:hover { border-color: #1976D2; }
+        .link-arrow { color: #1976D2; }
+        .problem-text .solution { color: #1976D2; }
+        .workflow-list-num { background: #1976D2; }
+    </style>
+</head>
+<body>
+    <!-- シリーズナビゲーション -->
+    <div class="series-nav">
+        <div class="series-nav-inner">
+            <a href="/">← シリーズ一覧</a>
+            <div class="series-progress">
+                <span class="progress-dot completed" title="Vol.1"></span>
+                <span class="progress-dot active" title="Vol.2"></span>
+                <span class="progress-dot" title="Vol.3"></span>
+                <span class="progress-dot" title="Vol.4"></span>
+                <span class="progress-dot" title="Vol.5"></span>
+                <span class="progress-dot" title="Vol.6"></span>
+                <span class="progress-dot" title="Vol.7"></span>
+                <span class="progress-dot" title="Vol.8"></span>
+                <span class="progress-dot" title="Vol.9"></span>
+                <span class="progress-dot" title="Vol.10"></span>
+                <span class="progress-dot" title="Vol.11"></span>
+                <span class="progress-dot" title="Vol.12"></span>
+            </div>
+            <a href="/vol1/">← 前の講座</a>
+        </div>
+    </div>
+
+    <header id="top">
+        <div class="header-content">
+            <div class="badge">Vol.2・約2時間</div>
+            <h1>介護×AI 一歩先へ</h1>
+            <p>前回の復習から、もう少し便利に</p>
+        </div>
+    </header>
+
+    <nav role="navigation" aria-label="メインナビゲーション">
+        <ul>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('intro')" onkeydown="handleNavKey(event, 'intro')">はじめに</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('overview')" onkeydown="handleNavKey(event, 'overview')">プログラム</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('details')" onkeydown="handleNavKey(event, 'details')">詳細</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('glossary')" onkeydown="handleNavKey(event, 'glossary')">用語集</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="intro" class="container">
+            <div class="section-header">
+                <h2><span class="icon">👋</span>はじめに</h2>
+                <p>Vol.1から1ヶ月、覚えていますか？大丈夫、一緒に思い出しましょう</p>
+            </div>
+
+            <div class="card intro-card animate-on-scroll">
+                <p class="text-lg">前回から1ヶ月が経ちました。</p>
+                <p class="text-lg">「あれ、どうやるんだっけ…」と思っても大丈夫。</p>
+                <p>今日は<strong>前回の復習をしながら、そのまま一歩先へ</strong>進みます。<br>復習と新しい学びが自然につながるので、忘れていても安心してください。</p>
+            </div>
+
+            <h3>今日のゴール</h3>
+            <div class="highlight-box tip animate-on-scroll">
+                <strong>🎯 2時間後にできるようになること</strong>
+                <ul>
+                    <li>Vol.1の内容を思い出し、使えるようになる</li>
+                    <li><strong>作った画像をAIに見せて編集</strong>できる</li>
+                    <li><strong>AIに自社サイトを調べさせる</strong>ことができる</li>
+                    <li><strong>自社の紹介ページをAIで作成</strong>できる</li>
+                    <li>作ったページに<strong>AIチャットボットを追加</strong>できる</li>
+                </ul>
+            </div>
+
+            <h3>Vol.1で学んだこと（復習）</h3>
+            <div class="card animate-on-scroll">
+                <ul class="problem-list">
+                    <li><span class="problem-icon">💬</span><div class="problem-text"><div class="problem">プロンプト</div><div class="solution">→ AIへの「お願い」。具体的に伝えるほど良い結果</div></div></li>
+                    <li><span class="problem-icon">🎨</span><div class="problem-text"><div class="problem">画像生成</div><div class="solution">→ Geminiで言葉だけでイラストやポスターを作成</div></div></li>
+                    <li><span class="problem-icon">🎤</span><div class="problem-text"><div class="problem">音声→議事録</div><div class="solution">→ AI Studioで音声を文字起こし&整形</div></div></li>
+                    <li><span class="problem-icon">🚀</span><div class="problem-text"><div class="problem">Build機能</div><div class="solution">→ アプリやWebページを作って共有</div></div></li>
+                    <li><span class="problem-icon">🔒</span><div class="problem-text"><div class="problem">セキュリティ</div><div class="solution">→ 個人情報は絶対に入力しない</div></div></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="overview" class="container">
+            <div class="section-header">
+                <h2><span class="icon">📚</span>プログラム概要</h2>
+                <p>復習しながら、一歩先へステップアップ</p>
+            </div>
+            <div class="program-overview">
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step1')"><div class="step-number">1</div><div class="step-content"><div class="step-title">会話・記録作成の復習</div><div class="step-desc">Geminiを開いて、記録作成を試してみる</div></div><div class="step-time">15分</div><div class="step-arrow">→</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step2')"><div class="step-number">2</div><div class="step-content"><div class="step-title">画像生成→編集【メイン①】</div><div class="step-desc">作った画像をAIに見せて、言葉で修正する</div></div><div class="step-time">30分</div><div class="step-arrow">→</div></div>
+                <div class="program-step program-step-break animate-on-scroll" onclick="scrollToSection('step3')"><div class="step-number">3</div><div class="step-content"><div class="step-title">休憩 ☕</div><div class="step-desc">一息つきましょう</div></div><div class="step-time">5分</div><div class="step-arrow">→</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step4')"><div class="step-number">4</div><div class="step-content"><div class="step-title">音声→議事録の復習</div><div class="step-desc">AI Studioで音声入力を試してみる</div></div><div class="step-time">15分</div><div class="step-arrow">→</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step5')"><div class="step-number">5</div><div class="step-content"><div class="step-title">自社ページ＋チャットボット【メイン②】</div><div class="step-desc">AIに自社を調べさせ、紹介ページを作り、チャットボットを追加</div></div><div class="step-time">35分</div><div class="step-arrow">→</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step6')"><div class="step-number">6</div><div class="step-content"><div class="step-title">まとめ・次回予告</div><div class="step-desc">振り返りと、Vol.3の予告</div></div><div class="step-time">20分</div><div class="step-arrow">→</div></div>
+            </div>
+        </section>
+
+        <section id="details" class="container-narrow">
+            <div class="section-header">
+                <h2><span class="icon">📖</span>プログラム詳細</h2>
+                <p>各ステップの内容と、使うプロンプトを確認</p>
+            </div>
+
+            <!-- Step 1: 会話・記録作成の復習 -->
+            <div id="step1" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">1</div><div class="detail-header-content"><h3>会話・記録作成の復習</h3><div class="time">⏱ 15分</div></div></div>
+                <p>まずはGeminiを開いて、Vol.1で学んだ記録作成を試してみましょう。</p>
+
+                <div class="workflow">
+                    <div class="workflow-title">📍 このステップの流れ</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><div class="workflow-num">1</div><div class="workflow-text"><strong>Geminiを開く</strong>（3分）<br>ログインできるか確認<br><a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" class="workflow-link">Geminiを開く</a></div></div>
+                        <div class="workflow-step"><div class="workflow-num">2</div><div class="workflow-text"><strong>記録作成を試す</strong>（7分）<br>下のプロンプトをコピーして試してみる</div></div>
+                        <div class="workflow-step"><div class="workflow-num">3</div><div class="workflow-text"><strong>振り返り</strong>（5分）<br>うまくいった？困ったことは？</div></div>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">💬 復習用プロンプト</div>
+                    <div class="prompt-card"><div class="prompt-label">記録作成</div><div class="prompt-text">以下のメモを介護記録の文章にしてください。丁寧な言葉遣いで、客観的な表現にしてください。
+
+メモ：昼食9割摂取、お茶よく飲む、午後のレクに参加、笑顔多い</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+
+                <div class="highlight-box warning">
+                    <strong>⚠️ セキュリティ確認</strong>
+                    <p class="mb-0">覚えていますか？<strong>利用者さんの実名や個人情報は入力しない</strong>ルールです。<br>「Aさん」「80代女性」のように匿名化しましょう。</p>
+                </div>
+            </div>
+
+            <!-- Step 2: 画像生成→編集【メイン①】 -->
+            <div id="step2" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">2</div><div class="detail-header-content"><h3>画像生成→編集【メイン①】</h3><div class="time">⏱ 30分</div></div></div>
+                <p>Vol.1では画像を「作る」ことを学びました。今日は<strong>作った画像をAIに見せて、言葉で編集</strong>する方法を学びます。</p>
+
+                <div class="highlight-box tip">
+                    <strong>✨ 今日の新しい学び</strong>
+                    <p class="mb-0">AIが画像を「見て」「理解して」「修正」できるようになりました。<br>「文字を大きくして」「色を変えて」と言葉で伝えるだけで、画像を直してくれます。</p>
+                </div>
+
+                <div class="workflow">
+                    <div class="workflow-title">📍 このステップの流れ</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><div class="workflow-num">1</div><div class="workflow-text"><strong>【復習】画像を生成する</strong>（10分）<br>まずは壁面飾りやポスターを作ってみる</div></div>
+                        <div class="workflow-step"><div class="workflow-num">2</div><div class="workflow-text"><strong>【新】作った画像を編集する</strong>（15分）<br>「この画像を編集して」と伝えて修正を依頼</div></div>
+                        <div class="workflow-step"><div class="workflow-num">3</div><div class="workflow-text"><strong>いろいろ試してみる</strong>（5分）<br>文字サイズ、色、要素の追加など</div></div>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">🎨 画像生成（復習）</div>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 画像生成の始め方</strong>
+                        <p class="mb-0">Geminiで「<strong>思考モード</strong>」を選び、「描いて」「作って」などの言葉を含めてプロンプトを送信します。</p>
+                    </div>
+                    <div class="prompt-card"><div class="prompt-label">ひな祭りポスター</div><div class="prompt-text">ひな祭りのイベント告知ポスターを作ってください。
+
+内容：
+・タイトル「ひなまつり会」
+・日時：3月3日（月）14:00〜
+・場所：1階 食堂
+・高齢者が読みやすい大きな文字で
+・お雛様のかわいいイラスト入り
+・ピンクと白を基調とした春らしい色合い</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">✏️ 画像編集（今日の新しい学び）</div>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 画像編集のやり方</strong>
+                        <p class="mb-sm">生成された画像が表示されたら、<strong>そのまま同じチャットで</strong>編集の指示を送ります。</p>
+                        <p class="mb-0">AIが「この画像」を覚えているので、「文字を大きく」「色を変えて」と言うだけでOKです。</p>
+                    </div>
+                    <div class="prompt-card"><div class="prompt-label">編集例1</div><div class="prompt-text">この画像を編集してください。
+・「ひなまつり会」の文字をもっと大きく
+・日時と場所の文字も見やすく</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">編集例2</div><div class="prompt-text">この画像をさらに編集してください。
+・背景をもう少し淡いピンクに
+・お雛様の隣にお内裏様も追加して</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">編集例3</div><div class="prompt-text">この画像を編集してください。
+・下の方に「参加無料」と追加
+・全体的にもう少し明るい印象に</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>💡 ポイント</strong>
+                    <p class="mb-0">一発で完璧にならなくても大丈夫！<br>「もう少し〇〇して」と<strong>何度でも修正を依頼</strong>できます。<br>人間のデザイナーに頼むのと同じ感覚で、気軽に伝えてみましょう。</p>
+                </div>
+            </div>
+
+            <!-- Step 3: 休憩 -->
+            <div id="step3" class="detail-section detail-section-compact detail-section-break animate-on-scroll">
+                <div class="detail-header"><div class="step-number">3</div><div class="detail-header-content"><h3>休憩 ☕</h3><p style="margin: 8px 0 0 0; color: #795548;">一息つきましょう。水分補給やストレッチをどうぞ。</p></div></div>
+            </div>
+
+            <!-- Step 4: 音声→議事録の復習 -->
+            <div id="step4" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">4</div><div class="detail-header-content"><h3>音声→議事録の復習</h3><div class="time">⏱ 15分</div></div></div>
+                <p>AI Studioの音声入力機能を復習します。覚えていますか？</p>
+
+                <div class="workflow">
+                    <div class="workflow-title">📍 このステップの流れ</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><div class="workflow-num">1</div><div class="workflow-text"><strong>AI Studioを開く</strong>（3分）<br><a href="https://aistudio.google.com/prompts/new_chat" target="_blank" rel="noopener noreferrer" class="workflow-link">AI Studioを開く</a></div></div>
+                        <div class="workflow-step"><div class="workflow-num">2</div><div class="workflow-text"><strong>音声を録音する</strong>（5分）<br>「＋」→「Record Audio」で30秒程度話す</div></div>
+                        <div class="workflow-step"><div class="workflow-num">3</div><div class="workflow-text"><strong>議事録に整形</strong>（7分）<br>下のプロンプトで議事録形式にまとめる</div></div>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">🎤 復習用プロンプト</div>
+                    <div class="prompt-card"><div class="prompt-label">議事録整形</div><div class="prompt-text">上記の音声を文字起こしして、議事録形式にまとめてください。
+
+形式：
+・日時、参加者（わかれば）
+・議題
+・主な発言内容
+・決定事項
+・次回までのアクション</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+
+                <div class="highlight-box warning">
+                    <strong>⚠️ セキュリティ確認</strong>
+                    <p class="mb-0">音声入力でも同じです。<strong>利用者さんの実名や個人情報は話さない</strong>でください。<br>練習では架空の内容で試しましょう。</p>
+                </div>
+            </div>
+
+            <!-- Step 5: 自社ページ＋チャットボット【メイン②】 -->
+            <div id="step5" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">5</div><div class="detail-header-content"><h3>自社ページ＋チャットボット【メイン②】</h3><div class="time">⏱ 35分</div></div></div>
+                <p>Vol.1では架空の施設のページを作りました。今日は<strong>いろ葉さんの実際のWebサイトをAIに調べさせて</strong>、紹介ページを作り、さらに<strong>AIチャットボットを追加</strong>します。</p>
+
+                <div class="highlight-box tip">
+                    <strong>✨ 今日の新しい学び</strong>
+                    <ul>
+                        <li>AIにWebサイトを読ませて、情報をまとめさせる</li>
+                        <li>その情報をもとにページを自動生成</li>
+                        <li>作ったページにAIチャットボットを追加</li>
+                    </ul>
+                </div>
+
+                <div class="workflow">
+                    <div class="workflow-title">📍 このステップの流れ（3段階）</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><div class="workflow-num">1</div><div class="workflow-text"><strong>AIに自社サイトを調べさせる</strong>（8分）<br>AI Studioのチャットで、いろ葉のサイトを読ませる</div></div>
+                        <div class="workflow-step"><div class="workflow-num">2</div><div class="workflow-text"><strong>Buildで紹介ページを作成</strong>（12分）<br>調べた情報をもとにページを自動生成</div></div>
+                        <div class="workflow-step"><div class="workflow-num">3</div><div class="workflow-text"><strong>AIチャットボットを追加</strong>（10分）<br>ページに質問できるチャットボットを追加</div></div>
+                        <div class="workflow-step"><div class="workflow-num">4</div><div class="workflow-text"><strong>共有してみる</strong>（5分）<br>共有リンクを発行して、隣の人に見せる</div></div>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">🔍 Step 1: AIに自社サイトを調べさせる</div>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 やり方</strong>
+                        <p class="mb-0">AI Studioのチャット画面で、下のプロンプトを送信します。<br>AIがWebサイトを読んで、情報をまとめてくれます。</p>
+                    </div>
+                    <div class="prompt-card"><div class="prompt-label">サイト調査</div><div class="prompt-text">https://168abc.jp/ のウェブサイトを見て、以下の情報をまとめてください。
+
+・会社名
+・理念・ミッション
+・提供しているサービス一覧
+・施設の特徴
+・連絡先（電話番号など）</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">🚀 Step 2: Buildで紹介ページを作成</div>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 やり方</strong>
+                        <p class="mb-0">左メニューの「<strong>Build</strong>」をクリックして、下のプロンプトを送信します。<br>先ほど調べた情報をもとにページが自動生成されます。</p>
+                    </div>
+                    <div class="prompt-card"><div class="prompt-label">紹介ページ作成</div><div class="prompt-text">株式会社いろ葉の施設紹介ページを作ってください。
+
+内容：
+・会社名「株式会社いろ葉」
+・理念「ケセラセラ ありのままに」を大きく表示
+・3つのイキカタ（生き方、活き方、逝き方）の説明
+・サービス一覧（デイサービス、住宅型有料老人ホーム、訪問介護、小規模多機能型居宅介護など）
+・連絡先：099-297-6242
+・お問い合わせボタン
+
+デザイン：
+・温かみのある色合い（緑やベージュ系）
+・木のぬくもりを感じるイメージ
+・高齢者にも見やすい文字サイズ</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">🤖 Step 3: AIチャットボットを追加</div>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 やり方</strong>
+                        <p class="mb-0">ページができたら、<strong>同じチャットで続けて</strong>下のプロンプトを送信します。<br>AIが「このページ」を覚えているので、チャットボットを追加してくれます。</p>
+                    </div>
+                    <div class="prompt-card"><div class="prompt-label">チャットボット追加</div><div class="prompt-text">このページに、施設について質問できるAIチャットボットを追加してください。
+
+・右下にチャットアイコンを配置
+・クリックするとチャット画面が開く
+・「いろ葉について何でも聞いてね」と表示
+・施設の情報（サービス内容、理念など）をもとに回答できるようにする
+・やさしい口調で回答する</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>🔗 共有方法</strong>
+                    <p class="mb-sm">右上の「<strong>Share app</strong>」から共有リンクを発行できます。</p>
+                    <p class="mb-0">⚠️ 共有リンクを開くには、相手も<strong>Googleアカウントでログイン</strong>が必要です。</p>
+                </div>
+            </div>
+
+            <!-- Step 6: まとめ -->
+            <div id="step6" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">6</div><div class="detail-header-content"><h3>まとめ・次回予告</h3><div class="time">⏱ 20分</div></div></div>
+                <p>今日の振り返りと、次回の予告です。</p>
+
+                <div class="highlight-box tip">
+                    <strong>🎉 今日できるようになったこと</strong>
+                    <ul>
+                        <li>Vol.1の内容を思い出して使えた</li>
+                        <li><strong>作った画像を言葉で編集</strong>できた</li>
+                        <li><strong>AIに自社サイトを調べさせる</strong>ことができた</li>
+                        <li><strong>自社の紹介ページをAIで作成</strong>できた</li>
+                        <li>ページに<strong>AIチャットボットを追加</strong>できた</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box info">
+                    <strong>💡 業務で使うヒント</strong>
+                    <ul>
+                        <li>画像編集：ポスターや掲示物の微調整に便利</li>
+                        <li>サイト調査：競合施設の情報収集にも使える</li>
+                        <li>ページ作成：イベント告知ページなど一時的なものに</li>
+                        <li>チャットボット：よくある質問への自動回答に</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>📅 次回予告：Vol.3</strong>
+                    <p class="mb-0">次回のテーマは準備中です。お楽しみに！</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="glossary" class="container">
+            <div class="section-header">
+                <h2><span class="icon">📖</span>用語集</h2>
+                <p>今日出てきた新しい用語</p>
+            </div>
+            <div class="glossary-grid">
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">画像編集</div><div class="glossary-desc">AIが生成した画像を、言葉で指示して修正すること。「文字を大きく」「色を変えて」などと伝えるだけで、AIが画像を理解して修正してくれます。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">AIチャットボット</div><div class="glossary-desc">Webページに埋め込める、AIによる自動応答機能。訪問者の質問に、あらかじめ設定した情報をもとに自動で回答します。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">Build機能（復習）</div><div class="glossary-desc">Google AI Studioの機能で、アプリやWebページを作成できます。作ったものは共有リンクで他の人に配布できます。</div></div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <p>介護×AI はじめの一歩 Vol.2 | 入門講座資料</p>
+        <div class="footer-banner">
+            <a href="https://one-stream.io/user/CwGemEM3sSOZX6f5uhBm0jUJUs93/playlist/c203a473-fa9d-404e-917d-b1886ede8a84" target="_blank" rel="noopener noreferrer">
+                <img src="/public/horiemon13-gpt.png" alt="ChatGPT資格試験対策コース">
+            </a>
+        </div>
+    </footer>
+
+    <div class="scroll-buttons">
+        <button class="scroll-btn to-top" onclick="scrollToTop()" aria-label="ページトップへ戻る" title="トップへ">↑</button>
+        <button class="scroll-btn to-footer" onclick="scrollToFooter()" aria-label="フッターへ移動" title="関連講座を見る">↓</button>
+    </div>
+
+    <script>
+        function handleNavKey(event, id) { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); scrollToSection(id); } }
+        function scrollToSection(id) { const element = document.getElementById(id); if (element) { const navHeight = document.querySelector('nav').offsetHeight; const seriesNavHeight = document.querySelector('.series-nav').offsetHeight; const elementPosition = element.getBoundingClientRect().top + window.pageYOffset; window.scrollTo({ top: elementPosition - navHeight - seriesNavHeight - 20, behavior: 'smooth' }); } }
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function scrollToFooter() { document.getElementById('footer').scrollIntoView({ behavior: 'smooth' }); }
+        function updateScrollButtons() { const scrollTop = window.pageYOffset; const windowHeight = window.innerHeight; const documentHeight = document.documentElement.scrollHeight; const scrollBottom = documentHeight - scrollTop - windowHeight; const toTopBtn = document.querySelector('.scroll-btn.to-top'); const toFooterBtn = document.querySelector('.scroll-btn.to-footer'); if (scrollTop > 200) { toTopBtn.classList.add('visible'); } else { toTopBtn.classList.remove('visible'); } if (scrollBottom > 200) { toFooterBtn.classList.add('visible'); } else { toFooterBtn.classList.remove('visible'); } }
+        window.addEventListener('scroll', updateScrollButtons); updateScrollButtons();
+        function copyPrompt(button) { const promptCard = button.closest('.prompt-card'); const text = promptCard.querySelector('.prompt-text').textContent; navigator.clipboard.writeText(text).then(() => { const originalText = button.textContent; button.textContent = 'コピーしました！'; button.classList.add('copied'); setTimeout(() => { button.textContent = originalText; button.classList.remove('copied'); }, 2000); }).catch(err => { const textarea = document.createElement('textarea'); textarea.value = text; document.body.appendChild(textarea); textarea.select(); document.execCommand('copy'); document.body.removeChild(textarea); button.textContent = 'コピーしました！'; button.classList.add('copied'); setTimeout(() => { button.textContent = 'コピーする'; button.classList.remove('copied'); }, 2000); }); }
+        const observer = new IntersectionObserver((entries) => { entries.forEach((entry, index) => { if (entry.isIntersecting) { setTimeout(() => { entry.target.classList.add('visible'); }, index * 50); } }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }); document.querySelectorAll('.animate-on-scroll').forEach(el => { observer.observe(el); });
+        document.querySelectorAll('.term').forEach(term => { term.addEventListener('click', function(e) { e.stopPropagation(); document.querySelectorAll('.term').forEach(t => { if (t !== this) t.classList.remove('active'); }); this.classList.toggle('active'); }); }); document.addEventListener('click', function(e) { if (!e.target.closest('.term')) { document.querySelectorAll('.term').forEach(t => t.classList.remove('active')); } });
+        window.addEventListener('scroll', function() { const sections = document.querySelectorAll('section[id]'); const navLinks = document.querySelectorAll('nav a'); let current = ''; sections.forEach(section => { const sectionTop = section.offsetTop; if (pageYOffset >= sectionTop - 200) { current = section.getAttribute('id'); } }); navLinks.forEach(link => { link.classList.remove('active'); const onclick = link.getAttribute('onclick'); if (onclick && onclick.includes(current)) { link.classList.add('active'); } }); });
+    </script>
+</body>
+</html>
