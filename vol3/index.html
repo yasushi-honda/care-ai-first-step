@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ja" class="vol3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vol.3 資料が"しゃべる"感動体験 | 介護×AI はじめの一歩</title>
+    <meta name="description" content="介護×AI講座の第3回。NotebookLMで自法人の情報をリサーチし、AIポッドキャスト（Audio Overview）やマインドマップを体験します。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/shared/style.css">
+    <style>
+        /* Vol.3専用カラー */
+        header { background: linear-gradient(135deg, #6A1B9A 0%, #7B1FA2 50%, #AB47BC 100%); }
+        .step-number { background: #7B1FA2; }
+        .detail-section { border-top-color: #7B1FA2; }
+        nav a:hover, nav a.active { background: #EDE7F6; color: #6A1B9A; border-color: #7B1FA2; }
+        .series-nav a:hover { background: #EDE7F6; }
+        .progress-dot.active { background: #7B1FA2; }
+        .workflow { background: #EDE7F6; }
+        .workflow-title { color: #6A1B9A; }
+        .workflow-num { background: #7B1FA2; }
+        .workflow-link { background: #7B1FA2; }
+        .workflow-link:hover { background: #6A1B9A; }
+        .highlight-box.info { background: linear-gradient(135deg, #EDE7F6 0%, #D1C4E9 100%); border-left-color: #7B1FA2; }
+        .term { color: #7B1FA2; border-bottom-color: #7B1FA2; }
+        .glossary-item { border-left-color: #7B1FA2; }
+        .glossary-term { color: #7B1FA2; }
+        .section-header h2 { color: #6A1B9A; }
+        h3 { border-left-color: #7B1FA2; }
+        .text-primary { color: #7B1FA2; }
+        .copy-btn { background: #7B1FA2; }
+        .copy-btn:hover { background: #6A1B9A; }
+        .prompt-label { background: #7B1FA2; }
+        .scroll-btn.to-top { background: #7B1FA2; }
+        .scroll-btn.to-top:hover { background: #6A1B9A; }
+        .link-card:hover { border-color: #7B1FA2; }
+        .link-arrow { color: #7B1FA2; }
+        .problem-text .solution { color: #7B1FA2; }
+        .workflow-list-num { background: #7B1FA2; }
+        /* Vol.3専用: 比較テーブル */
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0 8px; font-size: 15px; }
+        .comparison-table th, .comparison-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #E0E0E0; }
+        .comparison-table th { background: #F5F5F5; font-weight: 700; font-size: 14px; color: #555; }
+        .comparison-table th:first-child, .comparison-table td:first-child { font-weight: 500; color: #666; white-space: nowrap; }
+        @media (max-width: 768px) { .comparison-table { font-size: 13px; } .comparison-table th, .comparison-table td { padding: 8px 6px; } }
+    </style>
+</head>
+<body>
+    <!-- シリーズナビゲーション -->
+    <div class="series-nav">
+        <div class="series-nav-inner">
+            <a href="/" class="series-nav-item nav-list">一覧</a>
+            <a href="/vol2/" class="series-nav-item">&larr; Vol.2</a>
+            <div class="series-progress">
+                <div class="progress-step"><span class="progress-dot completed" title="Vol.1"></span></div>
+                <span class="progress-line completed"></span>
+                <div class="progress-step"><span class="progress-dot completed" title="Vol.2"></span></div>
+                <span class="progress-line completed"></span>
+                <div class="progress-step"><span class="progress-dot active" title="Vol.3"></span></div>
+                <span class="progress-line"></span>
+                <div class="progress-step"><span class="progress-dot" title="Vol.4"></span></div>
+                <span class="progress-line"></span>
+                <div class="progress-step"><span class="progress-dot" title="Vol.5"></span></div>
+            </div>
+            <span class="series-nav-item disabled">Vol.4 &rarr;</span>
+        </div>
+    </div>
+
+    <header id="top">
+        <div class="header-content">
+            <div class="badge">Vol.3・約2時間</div>
+            <h1>介護×AI 資料が"しゃべる"感動体験</h1>
+            <p>NotebookLMで、あなたの資料がポッドキャストになる</p>
+        </div>
+    </header>
+
+    <nav role="navigation" aria-label="メインナビゲーション">
+        <ul>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('intro')" onkeydown="handleNavKey(event, 'intro')">はじめに</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('overview')" onkeydown="handleNavKey(event, 'overview')">プログラム</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('details')" onkeydown="handleNavKey(event, 'details')">詳細</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('glossary')" onkeydown="handleNavKey(event, 'glossary')">用語集</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="intro" class="container">
+            <div class="section-header">
+                <h2><span class="icon">👋</span>はじめに</h2>
+                <p>今日は新しいAIツール「NotebookLM」で、資料が動き出す体験をします</p>
+            </div>
+
+            <div class="card intro-card animate-on-scroll">
+                <p class="text-lg">Vol.1ではGeminiと会話し、Vol.2では画像編集やWebページ作成に挑戦しました。</p>
+                <p class="text-lg">今日はまったく新しいツール「<strong>NotebookLM</strong>」を体験します。</p>
+                <p>自分の法人の情報をAIに調べさせて、<strong>ポッドキャスト（音声番組）やマインドマップを自動生成</strong>する ── きっと「すごい！」と感動するはずです。</p>
+            </div>
+
+            <h3>Vol.1・Vol.2で学んだこと（復習）</h3>
+            <div class="card animate-on-scroll">
+                <ul class="problem-list">
+                    <li><span class="problem-icon">💬</span><div class="problem-text"><div class="problem">プロンプト・会話</div><div class="solution">→ Geminiに具体的にお願いして、記録や文章を作成</div></div></li>
+                    <li><span class="problem-icon">🎨</span><div class="problem-text"><div class="problem">画像生成・編集</div><div class="solution">→ ポスターを作り、言葉で修正を指示</div></div></li>
+                    <li><span class="problem-icon">🎤</span><div class="problem-text"><div class="problem">音声→議事録</div><div class="solution">→ AI Studioで音声を文字起こし＆整形</div></div></li>
+                    <li><span class="problem-icon">🌐</span><div class="problem-text"><div class="problem">Webページ・チャットボット</div><div class="solution">→ Build機能で紹介ページ作成＆AI応答を追加</div></div></li>
+                    <li><span class="problem-icon">🔒</span><div class="problem-text"><div class="problem">セキュリティ</div><div class="solution">→ 個人情報は入力しない、匿名化が基本</div></div></li>
+                </ul>
+            </div>
+
+            <h3>今日の主役：NotebookLMとは？</h3>
+            <div class="card animate-on-scroll">
+                <div class="highlight-box info">
+                    <strong>💡 GeminiとNotebookLMの違い</strong>
+                    <table class="comparison-table">
+                        <thead><tr><th></th><th>Gemini</th><th>NotebookLM</th></tr></thead>
+                        <tbody>
+                            <tr><td>情報源</td><td>インターネット全体</td><td><strong>あなたが追加した資料だけ</strong></td></tr>
+                            <tr><td>得意なこと</td><td>なんでも聞ける万能AI</td><td>特定の資料を深く理解</td></tr>
+                            <tr><td>回答の根拠</td><td>ネット上の情報</td><td><strong>引用付きで資料を示す</strong></td></tr>
+                            <tr><td>特別な機能</td><td>画像生成・編集</td><td><strong>AIポッドキャスト・マインドマップ</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>NotebookLMは<strong>「あなたの資料専門AI」</strong>です。自分が追加した情報だけをもとに回答するので、<span class="term">ハルシネーション<span class="tooltip">AIが事実と異なる内容をもっともらしく生成してしまうこと。NotebookLMでは資料に基づくため起きにくい。</span></span>（でたらめな回答）が起きにくいのが特長です。</p>
+            </div>
+
+            <h3>今日のゴール</h3>
+            <div class="highlight-box tip animate-on-scroll">
+                <strong>🎯 2時間後にできるようになること</strong>
+                <ul>
+                    <li><strong>NotebookLMでノートブックを作成</strong>できる</li>
+                    <li>Webから自法人の情報を<strong>ソースとして追加</strong>できる</li>
+                    <li>資料について<strong>AIに質問し、引用付きの回答</strong>をもらえる</li>
+                    <li>資料から<strong>AIポッドキャスト（Audio Overview）</strong>を生成できる</li>
+                    <li>資料から<strong>マインドマップ</strong>を生成できる</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="overview" class="container">
+            <div class="section-header">
+                <h2><span class="icon">📚</span>プログラム概要</h2>
+                <p>新しいツールで「すごい！」を体験する2時間</p>
+            </div>
+            <div class="program-overview">
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step1')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step1')"><div class="step-number">1</div><div class="step-content"><div class="step-title">復習＋NotebookLMとは</div><div class="step-desc">Vol.1-2の振り返りと、新しいツールの紹介</div></div><div class="step-time">10分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step2')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step2')"><div class="step-number">2</div><div class="step-content"><div class="step-title">ノートブック作成＋Webリサーチ</div><div class="step-desc">自法人の情報をAIに集めさせる</div></div><div class="step-time">15分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step3')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step3')"><div class="step-number">3</div><div class="step-content"><div class="step-title">Audio Overview＋質問＋マインドマップ【メイン】</div><div class="step-desc">AIポッドキャスト生成 → 待ち時間に質問とマインドマップ体験</div></div><div class="step-time">35分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step program-step-break animate-on-scroll" onclick="scrollToSection('step4')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step4')"><div class="step-number">4</div><div class="step-content"><div class="step-title">休憩 ☕</div><div class="step-desc">一息つきましょう</div></div><div class="step-time">5分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step5')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step5')"><div class="step-number">5</div><div class="step-content"><div class="step-title">個人情報のお約束＋実務活用</div><div class="step-desc">安心して使うためのルールと、業務での活用アイデア</div></div><div class="step-time">20分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step6')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step6')"><div class="step-number">6</div><div class="step-content"><div class="step-title">まとめ・次回予告</div><div class="step-desc">振り返りと、Vol.4の予告</div></div><div class="step-time">10分</div><div class="step-arrow">&rarr;</div></div>
+            </div>
+        </section>
+
+        <section id="details" class="container-narrow">
+            <div class="section-header">
+                <h2><span class="icon">📖</span>プログラム詳細</h2>
+                <p>各ステップの内容と、操作手順を確認</p>
+            </div>
+
+            <!-- Step 1: 復習＋NotebookLMとは -->
+            <div id="step1" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">1</div><div class="detail-header-content"><h3>復習＋NotebookLMとは</h3><div class="time">⏱ 10分</div></div></div>
+                <p>まずはVol.1・Vol.2の振り返りをしてから、今日の主役「NotebookLM」を紹介します。</p>
+
+                <div class="highlight-box info">
+                    <strong>🔤 今日の新しいツール</strong>
+                    <p><strong><span class="term">NotebookLM<span class="tooltip">Googleが提供する「自分の資料専門」AIツール。アップロードした資料だけをもとに回答する。</span></span></strong><br>
+                    ＝ あなたの資料だけで答えるAI</p>
+                    <p class="mb-0">Geminiは「なんでも聞けるAI」でしたが、NotebookLMは<strong>「あなたが追加した資料だけを読んで答えるAI」</strong>です。<br>だから回答にはすべて<strong>引用（出典）</strong>が付きます。</p>
+                </div>
+            </div>
+
+            <!-- Step 2: ノートブック作成＋Webリサーチ -->
+            <div id="step2" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">2</div><div class="detail-header-content"><h3>ノートブック作成＋Webリサーチ</h3><div class="time">⏱ 15分</div></div></div>
+                <p>NotebookLMを開いて、<strong>自法人の情報をAIに集めさせます</strong>。URLを調べる必要はありません。法人名で検索するだけ！</p>
+
+                <div class="workflow">
+                    <div class="workflow-title">📍 このステップの流れ</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><div class="workflow-num">1</div><div class="workflow-text"><strong>NotebookLMにアクセス</strong>（2分）<br>Googleアカウントでログイン<br><a href="https://notebooklm.google/" target="_blank" rel="noopener noreferrer" class="workflow-link">NotebookLMを開く</a></div></div>
+                        <div class="workflow-step"><div class="workflow-num">2</div><div class="workflow-text"><strong>新しいノートブックを作成</strong>（1分）<br>「新しいノートブック」をクリック</div></div>
+                        <div class="workflow-step"><div class="workflow-num">3</div><div class="workflow-text"><strong>ソースを追加する</strong>（7分）<br>「ウェブからソースを検索」で自法人について検索</div></div>
+                        <div class="workflow-step"><div class="workflow-num">4</div><div class="workflow-text"><strong>追加できたか確認</strong>（5分）<br>ソース一覧に追加されていればOK！</div></div>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">🔍 Webリサーチでソース追加</div>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 やり方</strong>
+                        <p class="mb-sm">ソース追加画面で「<strong>ウェブからソースを検索</strong>」を選び、検索キーワードを入力します。</p>
+                        <p class="mb-0">NotebookLMがインターネットから関連ページを探して提案してくれるので、良さそうなものを選んで追加しましょう。</p>
+                    </div>
+                    <div class="prompt-card"><div class="prompt-label">検索キーワード例①</div><div class="prompt-text">いろ葉 デイサービス</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">検索キーワード例②</div><div class="prompt-text">いろ葉 訪問介護</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">検索キーワード例③</div><div class="prompt-text">いろ葉 介護 理念</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>💡 ポイント</strong>
+                    <p class="mb-0">キーワードは自由に変えてOK！<br>自分の<strong>担当しているサービスや興味のある分野</strong>で検索すると、後の体験がもっと楽しくなります。<br>2〜3個のソースを追加してみましょう。</p>
+                </div>
+            </div>
+
+            <!-- Step 3: Audio Overview＋質問＋マインドマップ【メイン】 -->
+            <div id="step3" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">3</div><div class="detail-header-content"><h3>Audio Overview＋質問＋マインドマップ【メイン】</h3><div class="time">⏱ 35分</div></div></div>
+                <p>ここが今日の<strong>最大の見せ場</strong>です。3つの感動を一気に体験します！</p>
+
+                <div class="highlight-box tip">
+                    <strong>✨ 今日の感動ポイント</strong>
+                    <ul>
+                        <li>🎧 <strong>Audio Overview</strong>：資料がポッドキャスト（音声番組）になる</li>
+                        <li>💬 <strong>引用付きチャット</strong>：質問すると、根拠を示しながら回答</li>
+                        <li>🗺️ <strong>マインドマップ</strong>：資料の構造が一目でわかる図を自動生成</li>
+                    </ul>
+                </div>
+
+                <div class="workflow">
+                    <div class="workflow-title">📍 このステップの流れ</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><div class="workflow-num">①</div><div class="workflow-text"><strong>Audio Overviewの生成をスタート</strong>（2分）<br>Studioパネル → Audio Overview → Generate</div></div>
+                        <div class="workflow-step"><div class="workflow-num">②</div><div class="workflow-text"><strong>【待ち時間】チャットで質問してみる</strong>（10分）<br>生成を待つ間に、資料について質問してみよう</div></div>
+                        <div class="workflow-step"><div class="workflow-num">③</div><div class="workflow-text"><strong>【待ち時間】マインドマップを生成</strong>（5分）<br>Studioパネル → Mind Map で構造を可視化</div></div>
+                        <div class="workflow-step"><div class="workflow-num">④</div><div class="workflow-text"><strong>Audio Overviewを聴く</strong>（13分）<br>完成したポッドキャストをみんなで聴く！</div></div>
+                        <div class="workflow-step"><div class="workflow-num">⑤</div><div class="workflow-text"><strong>感想をシェア</strong>（5分）<br>隣の人と感想を共有しよう</div></div>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">🎧 ① Audio Overviewの生成</div>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 やり方</strong>
+                        <p class="mb-sm">画面右側の「<strong>Studio</strong>」パネルを開き、「<strong>Audio Overview</strong>」を選択します。</p>
+                        <p class="mb-sm">形式を選べます：</p>
+                        <ul class="mb-sm">
+                            <li><strong>Deep Dive</strong>（じっくり解説・6〜15分）← おすすめ！</li>
+                            <li><strong>Brief</strong>（2分でサクッと要約）</li>
+                        </ul>
+                        <p class="mb-0">「<strong>Generate</strong>」をクリックしたら、<strong>生成は数分かかります</strong>。<br>その間に次のチャット体験とマインドマップを試しましょう！</p>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">💬 ② 待ち時間：チャットで質問してみよう</div>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 やり方</strong>
+                        <p class="mb-sm">画面下のチャット欄に質問を入力します。NotebookLMは<strong>追加したソース（資料）だけ</strong>をもとに回答します。</p>
+                        <p class="mb-0">回答の横にある<strong>数字（引用番号）</strong>をクリックすると、根拠となった資料の箇所にジャンプ！</p>
+                    </div>
+                    <div class="prompt-card"><div class="prompt-label">質問例①</div><div class="prompt-text">この法人の理念を教えてください</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">質問例②</div><div class="prompt-text">どんなサービスを提供していますか？それぞれの特徴も教えてください</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">質問例③</div><div class="prompt-text">新人スタッフ向けに、この法人の紹介文を300字程度で書いてください</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">質問例④</div><div class="prompt-text">ご家族向けに、この施設の安心ポイントを5つ挙げてください</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">🗺️ ③ 待ち時間：マインドマップを生成しよう</div>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 やり方</strong>
+                        <p class="mb-sm">Studioパネルで「<strong>Mind Map</strong>」を選択すると、資料の内容が<strong>自動的に構造化された図</strong>になります。</p>
+                        <ul class="mb-0">
+                            <li>ズーム・スクロールで全体を見渡せる</li>
+                            <li>枝を<strong>開いたり閉じたり</strong>して詳細を確認</li>
+                            <li>ノードをクリックすると、そのトピックについて<strong>チャットで質問</strong>できる</li>
+                            <li>右上から<strong>ダウンロード</strong>も可能</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">🎧 ④ Audio Overviewを聴こう</div>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 聴き方</strong>
+                        <p class="mb-sm">生成が完了すると、Studioパネルに再生ボタンが表示されます。</p>
+                        <p class="mb-0">2人のAIホストが、<strong>あなたが集めた法人の情報について会話形式で解説</strong>してくれます。<br>まるで自分の施設がラジオで紹介されているような体験です！</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>💡 ポイント</strong>
+                    <p class="mb-sm">Audio Overviewは<strong>ダウンロード</strong>できます。通勤中に聴いたり、同僚にシェアしたりしてみましょう。</p>
+                    <p class="mb-0">一人ひとりキーワードが違うので、<strong>隣の人のも聴かせてもらう</strong>と面白いですよ！</p>
+                </div>
+            </div>
+
+            <!-- Step 4: 休憩 -->
+            <div id="step4" class="detail-section detail-section-compact detail-section-break animate-on-scroll">
+                <div class="detail-header"><div class="step-number">4</div><div class="detail-header-content"><h3>休憩 ☕</h3><p style="margin: 8px 0 0 0; color: #795548;">一息つきましょう。水分補給やストレッチをどうぞ。</p></div></div>
+            </div>
+
+            <!-- Step 5: 個人情報のお約束＋実務活用 -->
+            <div id="step5" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">5</div><div class="detail-header-content"><h3>個人情報のお約束＋実務活用</h3><div class="time">⏱ 20分</div></div></div>
+                <p>NotebookLMを<strong>安心して使うためのルール</strong>と、<strong>業務での活用アイデア</strong>を確認します。</p>
+
+                <div class="highlight-box tip">
+                    <strong>✅ NotebookLMの安心ポイント</strong>
+                    <ul>
+                        <li>アップロードした資料は<strong>AIの学習に使われません</strong>（Google公式）</li>
+                        <li>共有しない限り、<strong>自分しか見えません</strong></li>
+                        <li>今日の「ウェブからソースを検索」で集めた情報も同じです</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box warning">
+                    <strong>⚠️ これだけは気をつけよう</strong>
+                    <ul>
+                        <li>利用者さんの<strong>個人情報が入った書類</strong> → そのままアップロードしない</li>
+                        <li>名前を「Aさん」に変える、住所を消す…<strong>ひと手間かけるだけでOK</strong></li>
+                        <li>Audio Overviewを共有するとき → <strong>中身に個人情報がないか確認</strong></li>
+                        <li>迷ったら → 「<strong>これ、Googleに預けて大丈夫？</strong>」と考えてみる</li>
+                    </ul>
+                </div>
+
+                <h3>業務での活用アイデア</h3>
+                <div class="card animate-on-scroll">
+                    <ul class="problem-list">
+                        <li><span class="problem-icon">📚</span><div class="problem-text"><div class="problem">研修マニュアル</div><div class="solution">→ アップロード → 新人が自分で質問できるノートブックに</div></div></li>
+                        <li><span class="problem-icon">📋</span><div class="problem-text"><div class="problem">介護保険の制度資料</div><div class="solution">→ 要約 → 家族への説明用メモに変換</div></div></li>
+                        <li><span class="problem-icon">🎧</span><div class="problem-text"><div class="problem">会議資料</div><div class="solution">→ Audio Overview → 欠席者への共有に</div></div></li>
+                        <li><span class="problem-icon">🗺️</span><div class="problem-text"><div class="problem">新しい制度の通知文</div><div class="solution">→ マインドマップ → 全体像を把握してから読む</div></div></li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box info">
+                    <strong>💬 みんなで考えてみよう</strong>
+                    <p class="mb-0">「こんな資料をNotebookLMに入れたら便利かも」<br>思いついたアイデアを<strong>隣の人とシェア</strong>してみましょう！</p>
+                </div>
+            </div>
+
+            <!-- Step 6: まとめ -->
+            <div id="step6" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">6</div><div class="detail-header-content"><h3>まとめ・次回予告</h3><div class="time">⏱ 10分</div></div></div>
+                <p>今日の振り返りと、次回の予告です。</p>
+
+                <div class="highlight-box tip">
+                    <strong>🎉 今日できるようになったこと</strong>
+                    <ul>
+                        <li><strong>NotebookLM</strong>で新しいノートブックを作成できた</li>
+                        <li>Webリサーチで<strong>自法人の情報をソースとして追加</strong>できた</li>
+                        <li>資料について<strong>引用付きの回答</strong>をもらえた</li>
+                        <li><strong>Audio Overview</strong>で資料がポッドキャストになった！</li>
+                        <li><strong>マインドマップ</strong>で資料の全体像を可視化できた</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box info">
+                    <strong>💡 復習のヒント</strong>
+                    <ul>
+                        <li>今日作ったノートブックは<strong>いつでも開ける</strong>ので、質問を追加してみましょう</li>
+                        <li>別の資料（PDF、Googleドキュメントなど）でも試してみましょう</li>
+                        <li>Audio Overviewは<strong>ダウンロードして通勤中に</strong>聴けます</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>📅 次回予告：Vol.4</strong>
+                    <p class="mb-0">次回のテーマは準備中です。お楽しみに！</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="glossary" class="container">
+            <div class="section-header">
+                <h2><span class="icon">📖</span>用語集</h2>
+                <p>今日出てきた新しい用語</p>
+            </div>
+            <div class="glossary-grid">
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">NotebookLM</div><div class="glossary-desc">Googleが提供する「自分の資料専門」AIツール。アップロードした資料やWebページだけをもとに回答するため、でたらめな回答（ハルシネーション）が起きにくい。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">ソース</div><div class="glossary-desc">NotebookLMに追加する資料のこと。PDF、Googleドキュメント、Webサイト、YouTube動画など、様々な形式に対応。1つのノートブックに最大50個まで追加できます。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">Audio Overview</div><div class="glossary-desc">NotebookLMの目玉機能。追加した資料をもとに、2人のAIホストが会話形式で解説する音声コンテンツを自動生成します。ダウンロードして持ち運びも可能。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">マインドマップ</div><div class="glossary-desc">資料の内容をAIが分析し、トピックの関係性を視覚的に構造化した図。枝を開閉して詳細を確認でき、ノードをクリックするとそのトピックについてチャットで質問できます。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">引用（Citation）</div><div class="glossary-desc">NotebookLMの回答に付く番号リンク。クリックすると、回答の根拠となった資料の該当箇所にジャンプします。AIの回答が正しいか確認するのに便利。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">ハルシネーション</div><div class="glossary-desc">AIが事実と異なる内容をもっともらしく生成してしまうこと。NotebookLMでは追加した資料だけをもとに回答するため、一般的なAIと比べて起きにくいのが特長です。</div></div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <p>介護×AI はじめの一歩 Vol.3 | 入門講座資料</p>
+        <div class="footer-banner">
+            <a href="https://one-stream.io/user/CwGemEM3sSOZX6f5uhBm0jUJUs93/playlist/c203a473-fa9d-404e-917d-b1886ede8a84" target="_blank" rel="noopener noreferrer">
+                <img src="/public/horiemon13-gpt.png" alt="ChatGPT資格試験対策コース">
+            </a>
+        </div>
+    </footer>
+
+    <div class="scroll-buttons">
+        <button class="scroll-btn to-top" onclick="scrollToTop()" aria-label="ページトップへ戻る" title="トップへ">↑</button>
+        <button class="scroll-btn to-footer" onclick="scrollToFooter()" aria-label="フッターへ移動" title="関連講座を見る">↓</button>
+    </div>
+
+    <script>
+        function handleNavKey(event, id) { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); scrollToSection(id); } }
+        function scrollToSection(id) { const element = document.getElementById(id); if (element) { const navHeight = document.querySelector('nav').offsetHeight; const seriesNavHeight = document.querySelector('.series-nav').offsetHeight; const elementPosition = element.getBoundingClientRect().top + window.pageYOffset; window.scrollTo({ top: elementPosition - navHeight - seriesNavHeight - 20, behavior: 'smooth' }); } }
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function scrollToFooter() { document.getElementById('footer').scrollIntoView({ behavior: 'smooth' }); }
+        function updateScrollButtons() { const scrollTop = window.pageYOffset; const windowHeight = window.innerHeight; const documentHeight = document.documentElement.scrollHeight; const scrollBottom = documentHeight - scrollTop - windowHeight; const toTopBtn = document.querySelector('.scroll-btn.to-top'); const toFooterBtn = document.querySelector('.scroll-btn.to-footer'); if (scrollTop > 200) { toTopBtn.classList.add('visible'); } else { toTopBtn.classList.remove('visible'); } if (scrollBottom > 200) { toFooterBtn.classList.add('visible'); } else { toFooterBtn.classList.remove('visible'); } }
+        window.addEventListener('scroll', updateScrollButtons); updateScrollButtons();
+        function copyPrompt(button) { const promptCard = button.closest('.prompt-card'); const text = promptCard.querySelector('.prompt-text').textContent; navigator.clipboard.writeText(text).then(() => { const originalText = button.textContent; button.textContent = 'コピーしました！'; button.classList.add('copied'); setTimeout(() => { button.textContent = originalText; button.classList.remove('copied'); }, 2000); }).catch(err => { const textarea = document.createElement('textarea'); textarea.value = text; document.body.appendChild(textarea); textarea.select(); document.execCommand('copy'); document.body.removeChild(textarea); button.textContent = 'コピーしました！'; button.classList.add('copied'); setTimeout(() => { button.textContent = 'コピーする'; button.classList.remove('copied'); }, 2000); }); }
+        const observer = new IntersectionObserver((entries) => { entries.forEach((entry, index) => { if (entry.isIntersecting) { setTimeout(() => { entry.target.classList.add('visible'); }, index * 50); } }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }); document.querySelectorAll('.animate-on-scroll').forEach(el => { observer.observe(el); });
+        document.querySelectorAll('.term').forEach(term => { term.addEventListener('click', function(e) { e.stopPropagation(); document.querySelectorAll('.term').forEach(t => { if (t !== this) t.classList.remove('active'); }); this.classList.toggle('active'); }); }); document.addEventListener('click', function(e) { if (!e.target.closest('.term')) { document.querySelectorAll('.term').forEach(t => t.classList.remove('active')); } });
+        window.addEventListener('scroll', function() { const sections = document.querySelectorAll('section[id]'); const navLinks = document.querySelectorAll('nav a'); let current = ''; sections.forEach(section => { const sectionTop = section.offsetTop; if (pageYOffset >= sectionTop - 200) { current = section.getAttribute('id'); } }); navLinks.forEach(link => { link.classList.remove('active'); const onclick = link.getAttribute('onclick'); if (onclick && onclick.includes(current)) { link.classList.add('active'); } }); });
+    </script>
+</body>
+</html>
