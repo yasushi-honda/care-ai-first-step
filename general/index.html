@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>介護×AI はじめの一歩 | シリーズ講座</title>
+    <meta name="description" content="介護現場で働く方向けのAI入門講座シリーズ。全12回で、AIを使った業務効率化を段階的に学べます。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/shared/style.css">
+</head>
+<body>
+    <header id="top">
+        <div class="header-content">
+            <div class="badge">介護職向け・全12回シリーズ</div>
+            <h1>介護×AI はじめの一歩</h1>
+            <p>現場で「使える！」を実感する入門講座シリーズ</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="container">
+            <div class="section-header">
+                <h2><span class="icon">📚</span>講座一覧</h2>
+                <p>各回約2時間。段階的にAI活用スキルを身につけます</p>
+            </div>
+
+            <div class="series-grid">
+                <!-- Vol.1 -->
+                <a href="/general/vol1/" class="series-card animate-on-scroll">
+                    <div class="series-card-header">
+                        <div class="series-card-vol">Vol.1</div>
+                        <div class="series-card-title">はじめの一歩</div>
+                    </div>
+                    <div class="series-card-body">
+                        <p class="series-card-desc">AIの基本を学び、Gemini・AI Studioを体験。記録作成、画像生成、アプリ作成の第一歩を踏み出します。</p>
+                        <span class="series-card-status published">公開中</span>
+                    </div>
+                </a>
+
+                <!-- Vol.2 -->
+                <a href="/general/vol2/" class="series-card animate-on-scroll">
+                    <div class="series-card-header" style="background: linear-gradient(135deg, #1565C0 0%, #1976D2 50%, #42A5F5 100%);">
+                        <div class="series-card-vol">Vol.2</div>
+                        <div class="series-card-title">一歩先へ</div>
+                    </div>
+                    <div class="series-card-body">
+                        <p class="series-card-desc">Vol.1の復習から、画像編集・自社Webページ作成・AIチャットボット追加へステップアップ。</p>
+                        <span class="series-card-status published">公開中</span>
+                    </div>
+                </a>
+
+                <!-- Vol.3 -->
+                <a href="/general/vol3/" class="series-card animate-on-scroll">
+                    <div class="series-card-header" style="background: linear-gradient(135deg, #6A1B9A 0%, #7B1FA2 50%, #AB47BC 100%);">
+                        <div class="series-card-vol">Vol.3</div>
+                        <div class="series-card-title">資料が"しゃべる"感動体験</div>
+                    </div>
+                    <div class="series-card-body">
+                        <p class="series-card-desc">NotebookLMで自法人の情報をリサーチ。AIポッドキャスト・マインドマップで「すごい！」を体験。</p>
+                        <span class="series-card-status published">公開中</span>
+                    </div>
+                </a>
+
+                <div class="series-card coming-soon animate-on-scroll">
+                    <div class="series-card-header" style="background: linear-gradient(135deg, #7B1FA2 0%, #9C27B0 50%, #BA68C8 100%);">
+                        <div class="series-card-vol">Vol.4</div>
+                        <div class="series-card-title">準備中</div>
+                    </div>
+                    <div class="series-card-body">
+                        <p class="series-card-desc">Coming soon...</p>
+                        <span class="series-card-status coming">準備中</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card intro-card mt-lg animate-on-scroll">
+                <h3 style="margin-top: 0; border: none; padding-left: 0;">このシリーズについて</h3>
+                <p>「介護×AI はじめの一歩」は、介護現場で働く方向けのAI入門講座シリーズです。</p>
+                <p>ITが苦手な方でも安心して学べるよう、実際に手を動かしながら、段階的にAI活用スキルを身につけていきます。</p>
+                <div class="highlight-box tip" style="margin-bottom: 0;">
+                    <strong>シリーズの特徴</strong>
+                    <ul>
+                        <li>各回約2時間、無理なく学べるペース</li>
+                        <li>前回の復習から始まるので、忘れても大丈夫</li>
+                        <li>介護現場ですぐに使えるプロンプト例が満載</li>
+                        <li>セキュリティ（個人情報の扱い）も毎回確認</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <p>介護×AI はじめの一歩 | シリーズ講座</p>
+    </footer>
+
+    <div class="scroll-buttons">
+        <button class="scroll-btn to-top" onclick="scrollToTop()" aria-label="ページトップへ戻る" title="トップへ">↑</button>
+    </div>
+
+    <script>
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        function updateScrollButtons() {
+            const scrollTop = window.pageYOffset;
+            const toTopBtn = document.querySelector('.scroll-btn.to-top');
+            if (scrollTop > 200) {
+                toTopBtn.classList.add('visible');
+            } else {
+                toTopBtn.classList.remove('visible');
+            }
+        }
+        window.addEventListener('scroll', updateScrollButtons);
+        updateScrollButtons();
+
+        // アニメーション
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => { entry.target.classList.add('visible'); }, index * 50);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.animate-on-scroll').forEach(el => { observer.observe(el); });
+    </script>
+</body>
+</html>
