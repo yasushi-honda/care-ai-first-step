@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ja" class="vol4">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vol.4 AI Studioが進化した！ | 介護×AI はじめの一歩</title>
+    <meta name="description" content="介護×AI講座の第4回。AI Studioの新機能（Firebase連携）で、ログイン・データ保存付きの本格アプリを作成します。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/shared/style.css">
+    <style>
+        /* Vol.4専用カラー（Deep Orange） */
+        header { background: linear-gradient(135deg, #D84315 0%, #E64A19 50%, #FF7043 100%); }
+        .step-number { background: #E64A19; }
+        .detail-section { border-top-color: #E64A19; }
+        nav a:hover, nav a.active { background: #FBE9E7; color: #D84315; border-color: #E64A19; }
+        .series-nav a:hover { background: #FBE9E7; }
+        .progress-dot.active { background: #E64A19; }
+        .workflow { background: #FBE9E7; }
+        .workflow-title { color: #D84315; }
+        .workflow-num { background: #E64A19; }
+        .workflow-link { background: #E64A19; }
+        .workflow-link:hover { background: #D84315; }
+        .highlight-box.info { background: linear-gradient(135deg, #FBE9E7 0%, #FFCCBC 100%); border-left-color: #E64A19; }
+        .term { color: #E64A19; border-bottom-color: #E64A19; }
+        .glossary-item { border-left-color: #E64A19; }
+        .glossary-term { color: #E64A19; }
+        .section-header h2 { color: #D84315; }
+        h3 { border-left-color: #E64A19; }
+        .text-primary { color: #E64A19; }
+        .copy-btn { background: #E64A19; }
+        .copy-btn:hover { background: #D84315; }
+        .prompt-label { background: #E64A19; }
+        .scroll-btn.to-top { background: #E64A19; }
+        .scroll-btn.to-top:hover { background: #D84315; }
+        .link-card:hover { border-color: #E64A19; }
+        .link-arrow { color: #E64A19; }
+        .problem-text .solution { color: #E64A19; }
+        .workflow-list-num { background: #E64A19; }
+        /* Vol.4専用: 比較テーブル */
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0 8px; font-size: 15px; }
+        .comparison-table th, .comparison-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #E0E0E0; }
+        .comparison-table th { background: #F5F5F5; font-weight: 700; font-size: 14px; color: #555; }
+        .comparison-table th:first-child, .comparison-table td:first-child { font-weight: 500; color: #666; white-space: nowrap; }
+        @media (max-width: 768px) { .comparison-table { font-size: 13px; } .comparison-table th, .comparison-table td { padding: 8px 6px; } }
+    </style>
+</head>
+<body>
+    <!-- シリーズナビゲーション -->
+    <div class="series-nav">
+        <div class="series-nav-inner">
+            <a href="/" class="series-nav-item nav-list">一覧</a>
+            <a href="/vol3/" class="series-nav-item">&larr; Vol.3</a>
+            <div class="series-progress">
+                <div class="progress-step"><span class="progress-dot completed" title="Vol.1"></span></div>
+                <span class="progress-line completed"></span>
+                <div class="progress-step"><span class="progress-dot completed" title="Vol.2"></span></div>
+                <span class="progress-line completed"></span>
+                <div class="progress-step"><span class="progress-dot completed" title="Vol.3"></span></div>
+                <span class="progress-line completed"></span>
+                <div class="progress-step"><span class="progress-dot active" title="Vol.4"></span></div>
+                <span class="progress-line"></span>
+                <div class="progress-step"><span class="progress-dot" title="Vol.5"></span></div>
+            </div>
+            <span class="series-nav-item disabled">Vol.5 &rarr;</span>
+        </div>
+    </div>
+
+    <header id="top">
+        <div class="header-content">
+            <div class="badge">Vol.4・約2時間</div>
+            <h1>介護×AI AI Studioが進化した！</h1>
+            <p>ログイン＆保存で「本当に使える」アプリへ</p>
+        </div>
+    </header>
+
+    <nav role="navigation" aria-label="メインナビゲーション">
+        <ul>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('intro')" onkeydown="handleNavKey(event, 'intro')">はじめに</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('overview')" onkeydown="handleNavKey(event, 'overview')">プログラム</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('details')" onkeydown="handleNavKey(event, 'details')">詳細</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('glossary')" onkeydown="handleNavKey(event, 'glossary')">用語集</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="intro" class="container">
+            <div class="section-header">
+                <h2><span class="icon">👋</span>はじめに</h2>
+                <p>馴染みのAI Studioが大進化！「使える」アプリを作りましょう</p>
+            </div>
+
+            <div class="card intro-card animate-on-scroll">
+                <p class="text-lg">Vol.1ではGeminiと会話し、Vol.2ではWebページやチャットボットを作り、Vol.3ではNotebookLMで資料がポッドキャストに！</p>
+                <p class="text-lg">今日は、Vol.1・Vol.2で使った<strong>「AI Studio」が大幅パワーアップ</strong>したことを体験します。</p>
+                <p>以前はアプリを作っても「画面を閉じたらデータが消える」状態でした。でも今は、<strong>ログイン機能</strong>と<strong>データ保存</strong>がボタンひとつで追加できるようになりました！</p>
+            </div>
+
+            <h3>Vol.1〜Vol.3で学んだこと（復習）</h3>
+            <div class="card animate-on-scroll">
+                <ul class="problem-list">
+                    <li><span class="problem-icon">💬</span><div class="problem-text"><div class="problem">プロンプト・会話</div><div class="solution">→ Geminiに具体的にお願いして、記録や文章を作成</div></div></li>
+                    <li><span class="problem-icon">🎨</span><div class="problem-text"><div class="problem">画像生成・編集</div><div class="solution">→ ポスターを作り、言葉で修正を指示</div></div></li>
+                    <li><span class="problem-icon">🌐</span><div class="problem-text"><div class="problem">Webページ・チャットボット</div><div class="solution">→ AI Studioで紹介ページ作成＆AI応答を追加</div></div></li>
+                    <li><span class="problem-icon">📚</span><div class="problem-text"><div class="problem">NotebookLM</div><div class="solution">→ 資料をAIに読ませてポッドキャスト＆マインドマップ生成</div></div></li>
+                    <li><span class="problem-icon">🔒</span><div class="problem-text"><div class="problem">セキュリティ</div><div class="solution">→ 個人情報は入力しない、匿名化が基本</div></div></li>
+                </ul>
+            </div>
+
+            <h3>AI Studioの「何が変わった？」</h3>
+            <div class="card animate-on-scroll">
+                <div class="highlight-box info">
+                    <strong>💡 AI Studioの進化ポイント</strong>
+                    <table class="comparison-table">
+                        <thead><tr><th></th><th>以前（Vol.1-2の頃）</th><th>今（2026年3月〜）</th></tr></thead>
+                        <tbody>
+                            <tr><td>アプリ作成</td><td>簡単なチャットボット</td><td><strong>本格的なWebアプリ</strong></td></tr>
+                            <tr><td>ログイン</td><td>なし</td><td><strong>Googleログインをワンクリック追加</strong></td></tr>
+                            <tr><td>データ保存</td><td>画面を閉じたら消える</td><td><strong>ずっと保存される（ユーザーごと）</strong></td></tr>
+                            <tr><td>開発サポート</td><td>自分でプロンプトを考える</td><td><strong>AIエージェントが自動で構築</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>この進化のカギは「<strong><span class="term">Firebase<span class="tooltip">Googleが提供するアプリ開発プラットフォーム。ログイン機能やデータベースなどを、コードを書かずに追加できる。</span></span></strong>」との連携です。難しそうに聞こえますが、<strong>ボタンを押すだけ</strong>でAIが全部やってくれます！</p>
+            </div>
+
+            <h3>今日のゴール</h3>
+            <div class="highlight-box tip animate-on-scroll">
+                <strong>🎯 2時間後にできるようになること</strong>
+                <ul>
+                    <li>AI Studioの<strong>新しい画面（Build機能）</strong>を使える</li>
+                    <li>アプリに<strong>Googleログイン</strong>を追加できる</li>
+                    <li>アプリに<strong>データ保存機能</strong>を追加できる</li>
+                    <li>「<strong>本当に使えるアプリ</strong>」を作って共有できる</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="overview" class="container">
+            <div class="section-header">
+                <h2><span class="icon">📚</span>プログラム概要</h2>
+                <p>馴染みのツールの「進化」を体験する約2時間</p>
+            </div>
+            <div class="program-overview">
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step1')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step1')"><div class="step-number">1</div><div class="step-content"><div class="step-title">復習＋AI Studioの進化</div><div class="step-desc">Vol.1-3の振り返りと、AI Studioの新機能紹介</div></div><div class="step-time">15分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step2')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step2')"><div class="step-number">2</div><div class="step-content"><div class="step-title">AI Studioを開いてみよう</div><div class="step-desc">新しい画面を確認、アプリの土台を作成</div></div><div class="step-time">15分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step3')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step3')"><div class="step-number">3</div><div class="step-content"><div class="step-title">ログイン機能を追加【メイン①】</div><div class="step-desc">ボタンひとつでGoogleログインを追加</div></div><div class="step-time">25分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step program-step-break animate-on-scroll" onclick="scrollToSection('step4')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step4')"><div class="step-number">4</div><div class="step-content"><div class="step-title">休憩 ☕</div><div class="step-desc">一息つきましょう</div></div><div class="step-time">10分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step5')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step5')"><div class="step-number">5</div><div class="step-content"><div class="step-title">データ保存を追加【メイン②】</div><div class="step-desc">ユーザーごとにデータが残る仕組みを追加</div></div><div class="step-time">25分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step6')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step6')"><div class="step-number">6</div><div class="step-content"><div class="step-title">セキュリティ＋実務活用＋まとめ</div><div class="step-desc">安全な使い方と、現場での活用アイデア</div></div><div class="step-time">20分</div><div class="step-arrow">&rarr;</div></div>
+            </div>
+        </section>
+
+        <section id="details" class="container-narrow">
+            <div class="section-header">
+                <h2><span class="icon">📖</span>プログラム詳細</h2>
+                <p>各ステップの内容と、操作手順を確認</p>
+            </div>
+
+            <!-- Step 1: 復習＋AI Studioの進化 -->
+            <div id="step1" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">1</div><div class="detail-header-content"><h3>復習＋AI Studioの進化</h3><div class="time">⏱ 15分</div></div></div>
+                <p>まずはVol.1〜Vol.3の振り返りをしてから、AI Studioの進化を紹介します。</p>
+
+                <div class="highlight-box info">
+                    <strong>🔤 今日のキーワード</strong>
+                    <p><strong><span class="term">Firebase連携<span class="tooltip">AI Studioで「Enable Firebase」ボタンを押すだけで、ログインやデータ保存の仕組みが自動的にアプリに追加される機能。</span></span></strong><br>
+                    ＝ ボタンひとつで、アプリに「ログイン」と「データ保存」を追加できる仕組み</p>
+                    <p class="mb-0">Vol.2で作ったアプリは、画面を閉じるとデータが消えてしまいました。<br>今日はそれを<strong>「閉じても残る、自分専用のアプリ」</strong>に進化させます！</p>
+                </div>
+            </div>
+
+            <!-- Step 2: AI Studioを開いてみよう -->
+            <div id="step2" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">2</div><div class="detail-header-content"><h3>AI Studioを開いてみよう</h3><div class="time">⏱ 15分</div></div></div>
+                <p>AI Studioを開いて、<strong>新しくなった画面を確認</strong>します。そしてアプリの土台を作ります。</p>
+
+                <div class="workflow">
+                    <div class="workflow-title">📍 このステップの流れ</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><div class="workflow-num">1</div><div class="workflow-text"><strong>AI Studioにアクセス</strong>（2分）<br>Googleアカウントでログイン<br><a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" class="workflow-link">AI Studioを開く</a></div></div>
+                        <div class="workflow-step"><div class="workflow-num">2</div><div class="workflow-text"><strong>「Build」を選択</strong>（1分）<br>左メニューから「Build」をクリック</div></div>
+                        <div class="workflow-step"><div class="workflow-num">3</div><div class="workflow-text"><strong>アプリの土台を作る</strong>（7分）<br>プロンプトでアプリの内容を指示</div></div>
+                        <div class="workflow-step"><div class="workflow-num">4</div><div class="workflow-text"><strong>プレビューで確認</strong>（5分）<br>右側のプレビュー画面でアプリを確認</div></div>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">🛠️ アプリの土台を作るプロンプト</div>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 やり方</strong>
+                        <p class="mb-sm">AI Studioの「Build」画面で、チャット欄に以下のようなプロンプトを入力します。</p>
+                        <p class="mb-0">AIが自動的にアプリのコードを生成してくれます。<strong>コードを読む必要はありません</strong>。プレビューで結果を確認しましょう。</p>
+                    </div>
+                    <div class="prompt-card"><div class="prompt-label">プロンプト例① 介護記録メモ</div><div class="prompt-text">介護記録のメモアプリを作ってください。利用者名、日付、体温・血圧・食事量を入力できるフォームと、入力した記録の一覧表示ができるシンプルなアプリです。日本語で表示してください。</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">プロンプト例② 申し送りボード</div><div class="prompt-text">スタッフ間の申し送りボードアプリを作ってください。メッセージの投稿、表示、重要マークの切り替えができるシンプルなアプリです。日本語で表示してください。</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">プロンプト例③ ヒヤリハット報告</div><div class="prompt-text">ヒヤリハット報告アプリを作ってください。発生日時、場所、内容、対応策を入力するフォームと、過去の報告一覧を表示できるアプリです。日本語で表示してください。</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>💡 ポイント</strong>
+                    <p class="mb-0">自分の現場で「あったら便利だな」と思うものを作ってみましょう！<br>うまくいかなくても、<strong>チャットで「〇〇を変えて」と頼めばAIが修正</strong>してくれます。</p>
+                </div>
+            </div>
+
+            <!-- Step 3: ログイン機能を追加 -->
+            <div id="step3" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">3</div><div class="detail-header-content"><h3>ログイン機能を追加【メイン①】</h3><div class="time">⏱ 25分</div></div></div>
+                <p>ここが今日の<strong>最初の見せ場</strong>です。ボタンひとつで、アプリに<strong>Googleログイン</strong>が追加されます！</p>
+
+                <div class="highlight-box tip">
+                    <strong>✨ 今日の感動ポイント①</strong>
+                    <ul>
+                        <li>🔐 <strong>「Enable Firebase」ボタン</strong>を押すだけでログイン機能が追加される</li>
+                        <li>👤 自分のGoogleアカウントでログインできるようになる</li>
+                        <li>🔒 ログインしないと使えない＝<strong>セキュリティが自動的に確保</strong></li>
+                    </ul>
+                </div>
+
+                <div class="workflow">
+                    <div class="workflow-title">📍 このステップの流れ</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><div class="workflow-num">1</div><div class="workflow-text"><strong>Firebase連携を有効にする</strong>（3分）<br>画面上部の「<strong>Enable Firebase</strong>」ボタンをクリック → 確認画面で「有効にする」</div></div>
+                        <div class="workflow-step"><div class="workflow-num">2</div><div class="workflow-text"><strong>AIに認証を追加してもらう</strong>（5分）<br>チャットで「Googleログイン機能を追加して」と指示</div></div>
+                        <div class="workflow-step"><div class="workflow-num">3</div><div class="workflow-text"><strong>ログインを試す</strong>（5分）<br>プレビュー画面でGoogleアカウントでログインしてみる</div></div>
+                        <div class="workflow-step"><div class="workflow-num">4</div><div class="workflow-text"><strong>ログアウトも確認</strong>（2分）<br>ログアウトして、もう一度ログインしてみる</div></div>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">🔐 ログイン機能を追加するプロンプト</div>
+                    <div class="prompt-card"><div class="prompt-label">ステップ① Firebase有効化後に</div><div class="prompt-text">このアプリにGoogleアカウントでのログイン機能を追加してください。ログインしていない場合はログイン画面を表示し、ログイン後にアプリの機能が使えるようにしてください。</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">ステップ② ログイン画面をカスタマイズ</div><div class="prompt-text">ログイン画面に「介護記録メモ」というタイトルと、「Googleアカウントでログインしてご利用ください」というメッセージを追加してください。</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>💡 ポイント</strong>
+                    <p class="mb-sm">「Enable Firebase」ボタンを押すと、AIが<strong>自動でログインの仕組みを構築</strong>してくれます。</p>
+                    <p class="mb-0">コードを書く必要はまったくありません。<strong>ボタンとプロンプトだけ</strong>で完了します！</p>
+                </div>
+            </div>
+
+            <!-- Step 4: 休憩 -->
+            <div id="step4" class="detail-section detail-section-compact detail-section-break animate-on-scroll">
+                <div class="detail-header"><div class="step-number">4</div><div class="detail-header-content"><h3>休憩 ☕</h3><p style="margin: 8px 0 0 0; color: #795548;">一息つきましょう。水分補給やストレッチをどうぞ。</p></div></div>
+            </div>
+
+            <!-- Step 5: データ保存を追加 -->
+            <div id="step5" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">5</div><div class="detail-header-content"><h3>データ保存を追加【メイン②】</h3><div class="time">⏱ 25分</div></div></div>
+                <p>次は<strong>データ保存</strong>です。画面を閉じてもデータが残り、別のデバイスからも見られるようになります！</p>
+
+                <div class="highlight-box tip">
+                    <strong>✨ 今日の感動ポイント②</strong>
+                    <ul>
+                        <li>💾 入力したデータが<strong>閉じても消えない</strong></li>
+                        <li>📱 スマホからも同じデータが見られる</li>
+                        <li>👥 ユーザーごとに<strong>自分のデータだけ</strong>が表示される</li>
+                    </ul>
+                </div>
+
+                <div class="workflow">
+                    <div class="workflow-title">📍 このステップの流れ</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><div class="workflow-num">1</div><div class="workflow-text"><strong>データ保存を追加</strong>（5分）<br>チャットで「データをFirestoreに保存して」と指示</div></div>
+                        <div class="workflow-step"><div class="workflow-num">2</div><div class="workflow-text"><strong>データを入力してみる</strong>（5分）<br>フォームに何か入力して保存</div></div>
+                        <div class="workflow-step"><div class="workflow-num">3</div><div class="workflow-text"><strong>画面を閉じて再度開く</strong>（5分）<br>データが残っていることを確認！</div></div>
+                        <div class="workflow-step"><div class="workflow-num">4</div><div class="workflow-text"><strong>アプリを改良してみる</strong>（10分）<br>「検索機能を追加して」「日付で並び替えて」などカスタマイズ</div></div>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">💾 データ保存を追加するプロンプト</div>
+                    <div class="prompt-card"><div class="prompt-label">ステップ① データ保存の追加</div><div class="prompt-text">入力したデータをFirestoreに保存するようにしてください。ユーザーごとにデータを分けて、ログインしたユーザーのデータだけが表示されるようにしてください。</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">ステップ② 削除機能の追加</div><div class="prompt-text">各記録に削除ボタンを追加してください。削除する前に「本当に削除しますか？」という確認ダイアログを表示してください。</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                    <div class="prompt-card"><div class="prompt-label">ステップ③ 検索・並び替え</div><div class="prompt-text">記録を日付の新しい順に並び替えてください。また、利用者名で検索できる機能も追加してください。</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>💡 ポイント</strong>
+                    <p class="mb-sm"><strong>Firestore</strong>（ファイアストア）はGoogleのデータベースです。難しい名前ですが、使う側は名前を知らなくても大丈夫。</p>
+                    <p class="mb-0">AIに「データを保存して」と言えば、<strong>AIが裏側の仕組みを全部作ってくれます</strong>。</p>
+                </div>
+            </div>
+
+            <!-- Step 6: セキュリティ＋実務活用＋まとめ -->
+            <div id="step6" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">6</div><div class="detail-header-content"><h3>セキュリティ＋実務活用＋まとめ</h3><div class="time">⏱ 20分</div></div></div>
+                <p>今日の振り返りと、<strong>安全に使うためのルール</strong>、そして<strong>現場での活用アイデア</strong>を確認します。</p>
+
+                <div class="highlight-box tip">
+                    <strong>✅ スプレッドシートよりも安全に</strong>
+                    <p class="mb-sm">現在スプレッドシートで記録を管理している施設も多いですが、今日作ったアプリは<strong>セキュリティ面で改善</strong>されています。</p>
+                    <table class="comparison-table">
+                        <thead><tr><th></th><th>スプレッドシート</th><th>今日のアプリ</th></tr></thead>
+                        <tbody>
+                            <tr><td>ログイン</td><td>なし or リンク共有</td><td><strong>Googleログイン必須</strong></td></tr>
+                            <tr><td>アクセス制御</td><td>全員同じデータ</td><td><strong>ユーザーごとに分離</strong></td></tr>
+                            <tr><td>データ保管</td><td>Googleドライブ</td><td><strong>Googleの安全なサーバー</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="highlight-box info">
+                    <strong>📋 今日のアプリの位置づけ</strong>
+                    <p class="mb-sm">今日は<strong>個人Googleアカウントでの練習</strong>です。練習では「Aさん」「利用者①」など<strong>匿名化したデータ</strong>を使いましょう。</p>
+                    <p class="mb-0">実務で本格的に使うには、施設の<strong>Google Workspace</strong>（組織アカウント）で運用し、データの保管場所を日本に設定するなどの対応が必要です。詳しくは施設の情報管理担当者に相談しましょう。</p>
+                </div>
+
+                <div class="highlight-box warning">
+                    <strong>⚠️ 最低限守ること</strong>
+                    <ul>
+                        <li>今日の練習では<strong>匿名化データを使う</strong>（「Aさん」「利用者①」など）</li>
+                        <li>アプリのURLを<strong>むやみに共有しない</strong> → 必要な人にだけ伝える</li>
+                        <li><strong>セキュリティルール</strong>は必ず確認 → 「自分のデータだけ見える」設定になっているか</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>🚀 本格運用への道筋</strong>
+                    <p class="mb-sm">今日学んだ技術は、環境を整えれば<strong>実務でも使えます</strong>。</p>
+                    <ul class="mb-0">
+                        <li><strong>Google Workspace</strong>（組織アカウント）でアカウント管理を徹底</li>
+                        <li>データ保管場所を<strong>日本リージョン</strong>に設定</li>
+                        <li>セキュリティルールの<strong>専門家レビュー</strong></li>
+                        <li>もちろん、<strong>介護専用ソフト</strong>（ほのぼの、カイポケ等）も有力な選択肢です</li>
+                    </ul>
+                </div>
+
+                <h3>業務での活用アイデア</h3>
+                <div class="card animate-on-scroll">
+                    <ul class="problem-list">
+                        <li><span class="problem-icon">📋</span><div class="problem-text"><div class="problem">介護記録メモ</div><div class="solution">→ スマホからサッと入力、後でPCから見返す</div></div></li>
+                        <li><span class="problem-icon">📢</span><div class="problem-text"><div class="problem">申し送りボード</div><div class="solution">→ シフト交代時の引き継ぎをアプリで共有</div></div></li>
+                        <li><span class="problem-icon">⚠️</span><div class="problem-text"><div class="problem">ヒヤリハット報告</div><div class="solution">→ その場ですぐ記録、後から検索して傾向分析</div></div></li>
+                        <li><span class="problem-icon">📅</span><div class="problem-text"><div class="problem">行事カレンダー</div><div class="solution">→ レクリエーションの予定と準備物をまとめて管理</div></div></li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box info">
+                    <strong>💬 みんなで考えてみよう</strong>
+                    <p class="mb-0">「自分の職場で、こんなアプリがあったら便利！」<br>思いついたアイデアを<strong>隣の人とシェア</strong>してみましょう！</p>
+                </div>
+
+                <h3>今日のまとめ</h3>
+                <div class="highlight-box tip animate-on-scroll">
+                    <strong>🎉 今日できるようになったこと</strong>
+                    <ul>
+                        <li>AI Studioの<strong>新しいBuild機能</strong>でアプリを作成できた</li>
+                        <li><strong>Googleログイン</strong>を追加できた</li>
+                        <li><strong>データ保存（Firestore）</strong>を追加して、閉じてもデータが残るようになった</li>
+                        <li>アプリを<strong>自分好みにカスタマイズ</strong>できた</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box info">
+                    <strong>💡 復習のヒント</strong>
+                    <ul>
+                        <li>今日作ったアプリは<strong>AI Studio内に保存</strong>されています。いつでも開いて改良できます</li>
+                        <li>別のアプリを作りたくなったら、同じ手順（Build → プロンプト → Firebase有効化）でOK</li>
+                        <li>チャットで「〇〇な機能を追加して」と頼めば、AIがどんどん機能を追加してくれます</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>📅 次回予告：Vol.5</strong>
+                    <p class="mb-0">次回のテーマは準備中です。お楽しみに！</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="glossary" class="container">
+            <div class="section-header">
+                <h2><span class="icon">📖</span>用語集</h2>
+                <p>今日出てきた新しい用語</p>
+            </div>
+            <div class="glossary-grid">
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">Firebase</div><div class="glossary-desc">Googleが提供するアプリ開発プラットフォーム。ログイン機能やデータベースなど、アプリに必要な「裏側の仕組み」をまとめて提供してくれるサービス。AI Studioではボタンひとつで連携できます。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">Firestore</div><div class="glossary-desc">Firebaseに含まれるデータベース。アプリのデータを安全に保存・管理できます。「ファイアストア」と読みます。ユーザーごとにデータを分けて保存できるのが特徴。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">認証（Authentication）</div><div class="glossary-desc">「この人は本当にこの人か？」を確認する仕組み。Googleログインを使えば、Googleアカウントで本人確認ができます。「オーセンティケーション」と読みますが、覚えなくてOK。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">セキュリティルール</div><div class="glossary-desc">「誰がどのデータを見られるか」を決めるルール。AI Studioが自動で設定してくれますが、公開前に「自分のデータだけ見える」設定になっているか確認しましょう。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">Build機能</div><div class="glossary-desc">AI Studioの中にあるアプリ作成機能。プロンプト（指示文）を入力するだけで、AIが自動的にアプリのコードを生成してくれます。以前より大幅にパワーアップしました。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">デプロイ</div><div class="glossary-desc">作ったアプリをインターネット上に公開すること。AI Studioでは、完成したアプリにURLが発行され、そのURLを共有するだけで他の人も使えるようになります。</div></div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <p>介護×AI はじめの一歩 Vol.4 | 入門講座資料</p>
+        <div class="footer-banner">
+            <a href="https://one-stream.io/user/CwGemEM3sSOZX6f5uhBm0jUJUs93/playlist/c203a473-fa9d-404e-917d-b1886ede8a84" target="_blank" rel="noopener noreferrer">
+                <img src="/public/horiemon13-gpt.png" alt="ChatGPT資格試験対策コース">
+            </a>
+        </div>
+    </footer>
+
+    <div class="scroll-buttons">
+        <button class="scroll-btn to-top" onclick="scrollToTop()" aria-label="ページトップへ戻る" title="トップへ">↑</button>
+        <button class="scroll-btn to-footer" onclick="scrollToFooter()" aria-label="フッターへ移動" title="関連講座を見る">↓</button>
+    </div>
+
+    <script>
+        function handleNavKey(event, id) { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); scrollToSection(id); } }
+        function scrollToSection(id) { const element = document.getElementById(id); if (element) { const navHeight = document.querySelector('nav').offsetHeight; const seriesNavHeight = document.querySelector('.series-nav').offsetHeight; const elementPosition = element.getBoundingClientRect().top + window.pageYOffset; window.scrollTo({ top: elementPosition - navHeight - seriesNavHeight - 20, behavior: 'smooth' }); } }
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function scrollToFooter() { document.getElementById('footer').scrollIntoView({ behavior: 'smooth' }); }
+        function updateScrollButtons() { const scrollTop = window.pageYOffset; const windowHeight = window.innerHeight; const documentHeight = document.documentElement.scrollHeight; const scrollBottom = documentHeight - scrollTop - windowHeight; const toTopBtn = document.querySelector('.scroll-btn.to-top'); const toFooterBtn = document.querySelector('.scroll-btn.to-footer'); if (scrollTop > 200) { toTopBtn.classList.add('visible'); } else { toTopBtn.classList.remove('visible'); } if (scrollBottom > 200) { toFooterBtn.classList.add('visible'); } else { toFooterBtn.classList.remove('visible'); } }
+        window.addEventListener('scroll', updateScrollButtons); updateScrollButtons();
+        function copyPrompt(button) { const promptCard = button.closest('.prompt-card'); const text = promptCard.querySelector('.prompt-text').textContent; navigator.clipboard.writeText(text).then(() => { const originalText = button.textContent; button.textContent = 'コピーしました！'; button.classList.add('copied'); setTimeout(() => { button.textContent = originalText; button.classList.remove('copied'); }, 2000); }).catch(err => { const textarea = document.createElement('textarea'); textarea.value = text; document.body.appendChild(textarea); textarea.select(); document.execCommand('copy'); document.body.removeChild(textarea); button.textContent = 'コピーしました！'; button.classList.add('copied'); setTimeout(() => { button.textContent = 'コピーする'; button.classList.remove('copied'); }, 2000); }); }
+        const observer = new IntersectionObserver((entries) => { entries.forEach((entry, index) => { if (entry.isIntersecting) { setTimeout(() => { entry.target.classList.add('visible'); }, index * 50); } }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }); document.querySelectorAll('.animate-on-scroll').forEach(el => { observer.observe(el); });
+        document.querySelectorAll('.term').forEach(term => { term.addEventListener('click', function(e) { e.stopPropagation(); document.querySelectorAll('.term').forEach(t => { if (t !== this) t.classList.remove('active'); }); this.classList.toggle('active'); }); }); document.addEventListener('click', function(e) { if (!e.target.closest('.term')) { document.querySelectorAll('.term').forEach(t => t.classList.remove('active')); } });
+        window.addEventListener('scroll', function() { const sections = document.querySelectorAll('section[id]'); const navLinks = document.querySelectorAll('nav a'); let current = ''; sections.forEach(section => { const sectionTop = section.offsetTop; if (pageYOffset >= sectionTop - 200) { current = section.getAttribute('id'); } }); navLinks.forEach(link => { link.classList.remove('active'); const onclick = link.getAttribute('onclick'); if (onclick && onclick.includes(current)) { link.classList.add('active'); } }); });
+    </script>
+</body>
+</html>
