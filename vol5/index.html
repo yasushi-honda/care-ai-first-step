@@ -55,6 +55,12 @@
         /* 危険ボックス強化 */
         .highlight-box.warning { background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); border-left-color: #C62828; }
         .highlight-box.warning strong { color: #B71C1C; }
+        /* 参考リンク */
+        .reference-links li { margin-bottom: 12px; line-height: 1.5; }
+        .reference-links li:last-child { margin-bottom: 0; }
+        .reference-links a { color: #00695C; font-weight: 500; text-decoration: underline; word-break: break-word; }
+        .reference-links a:hover { color: #00897B; }
+        .reference-links .ref-source { display: inline-block; margin-top: 2px; font-size: 12px; color: #757575; }
     </style>
 </head>
 <body>
@@ -224,7 +230,7 @@
                 <div class="highlight-box info">
                     <strong>📰 公式リリース概要（2026年3月27日）</strong>
                     <ul class="mb-0">
-                        <li>Google Japan 公式ブログで発表</li>
+                        <li><a href="https://blog.google/intl/ja-jp/company-news/technology/caremanager/" target="_blank" rel="noopener noreferrer">Google Japan 公式ブログで発表</a></li>
                         <li>Gemini アプリの<strong>Gem 機能のプリセット</strong>として提供</li>
                         <li>音声メモ・手書きメモの写真・テキストから、<strong>SOAP / F-DAR 形式</strong>の記録草案を生成</li>
                         <li>シーユーシー社の実証で<strong>記録時間 約20%削減</strong> (4.0分→3.3分)</li>
@@ -238,6 +244,18 @@
                     <ul class="mb-0">
                         <li>第28回 東京都ケアマネ実務研修受講試験 ── <strong>99.7%</strong></li>
                         <li>第37回 介護福祉士国家試験 ── <strong>100%</strong></li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box info">
+                    <strong>📚 参考・公式情報</strong>
+                    <p class="mb-sm">研修中の補足説明や、後でじっくり確認したい時に役立つ一次ソースです。</p>
+                    <ul class="mb-0 reference-links">
+                        <li><a href="https://blog.google/intl/ja-jp/company-news/technology/caremanager/" target="_blank" rel="noopener noreferrer">日本の介護現場に、人が人と繋がる時間を。Gemini アプリの Gem 機能に「ケア記録アシスト」を公開</a><br><span class="ref-source">Google Japan 公式ブログ（一次ソース）</span></li>
+                        <li><a href="https://k-tai.watch.impress.co.jp/docs/news/2096830.html" target="_blank" rel="noopener noreferrer">Googleの生成AI「Gemini」で介護業界向けの「ケア記録アシスト」を提供開始</a><br><span class="ref-source">ケータイ Watch（プレス報道）</span></li>
+                        <li><a href="https://www.joint-kaigo.com/articles/45120/" target="_blank" rel="noopener noreferrer">Gemini、ケアマネ試験で99.7%の回答精度 Google公表 Gemのケア記録アシストも公開</a><br><span class="ref-source">介護ニュースJoint（業界紙・精度データ）</span></li>
+                        <li><a href="https://gleamhub.net/media/0114-google-gemini-care-record-assist/" target="_blank" rel="noopener noreferrer">Google「ケア記録アシスト」とは？Gemini Gem で介護記録を自動生成する新機能を解説</a><br><span class="ref-source">GH Media（操作手順の詳細解説）</span></li>
+                        <li><a href="https://www.issoh.co.jp/tech/details/11567/" target="_blank" rel="noopener noreferrer">介護記録を自動生成するGeminiケア記録アシストの仕組みと対象施設</a><br><span class="ref-source">株式会社一創（対象プラン・仕組み解説）</span></li>
                     </ul>
                 </div>
             </div>
