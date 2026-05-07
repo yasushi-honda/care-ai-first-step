@@ -168,16 +168,17 @@
                         </tr>
                         <tr>
                             <td>Google Workspace 版<br>Gemini アプリ</td>
-                            <td><span class="caution">⚠️ 条件付きOK</span></td>
-                            <td>顧客データはモデル学習に使われない契約。<strong>法人として Workspace 契約</strong>が前提</td>
+                            <td><span class="caution">✅ 契約上はOK<br>（要・運用整備）</span></td>
+                            <td>顧客データはモデル学習に使われない契約。ただし施設として<strong>本人同意・利用目的明示・運用ルール・委託契約</strong>を整える必要あり</td>
                         </tr>
                         <tr>
                             <td>Vertex AI<br>（東京リージョン）</td>
                             <td><span class="ok">✅ OK（推奨ライン）</span></td>
-                            <td>データの保管場所を日本に固定でき、監査ログも完備。介護記録の本番運用に最適</td>
+                            <td>データの保管場所を日本に固定でき、監査ログも完備。要配慮個人情報の本番運用に最適</td>
                         </tr>
                     </tbody>
                 </table>
+                <p class="mb-sm">補足：Google 自身が「ケア記録アシスト」を Workspace 上で日本の介護業界向けに公開しているので、<strong>Workspace 環境での介護記録利用は技術的・契約的に想定されています</strong>。ただし「契約があれば自動で安全」ではなく、施設側の運用整備とセットです。</p>
                 <p class="mb-0">いろ葉さんはまだ Workspace を契約していないので、<strong>今日は「触ってみる・試してみる」が目的</strong>。本番運用は施設として方針を決めてから、別途環境を整えていきます。</p>
             </div>
 
@@ -269,7 +270,7 @@
                 <div class="highlight-box info">
                     <strong>💡 なぜ厳しめのルールにしているの？</strong>
                     <p class="mb-sm">個人の Google アカウントで使う Gemini は、入力したデータが<strong>Googleの AI モデル改善に使われる可能性</strong>があります（規約上）。</p>
-                    <p class="mb-0">本物の介護記録を扱うには、後ほど紹介する <strong>Google Workspace の Gemini</strong> や <strong>Vertex AI（東京リージョン）</strong> など、データが学習に使われない契約環境が必要です。</p>
+                    <p class="mb-0">本物の介護記録を扱うには、データが学習に使われない契約環境（<strong>Google Workspace の Gemini</strong> や <strong>Vertex AI 東京リージョン</strong>）と、施設側の<strong>運用ルール整備</strong>（本人同意・利用目的明示・委託契約など）の両方が必要です。</p>
                 </div>
 
                 <div class="highlight-box accent">
@@ -428,11 +429,11 @@
                             <tr>
                                 <td><strong>② 業務利用</strong><br>（次の段階）</td>
                                 <td>Google Workspace<br>Business Standard 以上</td>
-                                <td><span class="caution">条件付きOK</span></td>
+                                <td><span class="caution">OK<br>（要・運用整備）</span></td>
                                 <td>経営・管理者</td>
                             </tr>
                             <tr>
-                                <td><strong>③ 高機密運用</strong><br>（要配慮個人情報）</td>
+                                <td><strong>③ より厳格な運用</strong><br>（監査ログ重視）</td>
                                 <td>Vertex AI<br>東京リージョン</td>
                                 <td><span class="ok">OK（推奨）</span></td>
                                 <td>経営・IT責任者</td>
