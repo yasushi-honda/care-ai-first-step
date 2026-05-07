@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ja" class="vol5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vol.5 現場の記録革命 | 介護×AI はじめの一歩</title>
+    <meta name="description" content="介護×AI講座の第5回。Googleが介護業界向けに公開した「ケア記録アシスト」を体験。架空の利用者データで安全に学び、いろ葉専用にカスタマイズします。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/shared/style.css">
+    <style>
+        /* Vol.5専用カラー（Teal — ケア・癒し・安全） */
+        header { background: linear-gradient(135deg, #00695C 0%, #00897B 50%, #4DB6AC 100%); }
+        .step-number { background: #00897B; }
+        .detail-section { border-top-color: #00897B; }
+        nav a:hover, nav a.active { background: #E0F2F1; color: #00695C; border-color: #00897B; }
+        .series-nav a:hover { background: #E0F2F1; }
+        .progress-dot.active { background: #00897B; }
+        .workflow { background: #E0F2F1; }
+        .workflow-title { color: #00695C; }
+        .workflow-num { background: #00897B; }
+        .workflow-link { background: #00897B; }
+        .workflow-link:hover { background: #00695C; }
+        .highlight-box.info { background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%); border-left-color: #00897B; }
+        .term { color: #00897B; border-bottom-color: #00897B; }
+        .glossary-item { border-left-color: #00897B; }
+        .glossary-term { color: #00897B; }
+        .section-header h2 { color: #00695C; }
+        h3 { border-left-color: #00897B; }
+        .text-primary { color: #00897B; }
+        .copy-btn { background: #00897B; }
+        .copy-btn:hover { background: #00695C; }
+        .prompt-label { background: #00897B; }
+        .scroll-btn.to-top { background: #00897B; }
+        .scroll-btn.to-top:hover { background: #00695C; }
+        .link-card:hover { border-color: #00897B; }
+        .link-arrow { color: #00897B; }
+        .problem-text .solution { color: #00897B; }
+        .workflow-list-num { background: #00897B; }
+        /* Vol.5専用: 比較テーブル */
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0 8px; font-size: 15px; }
+        .comparison-table th, .comparison-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #E0E0E0; vertical-align: top; }
+        .comparison-table th { background: #F5F5F5; font-weight: 700; font-size: 14px; color: #555; }
+        .comparison-table th:first-child, .comparison-table td:first-child { font-weight: 500; color: #666; white-space: nowrap; }
+        .comparison-table .ng { color: #C62828; font-weight: 700; }
+        .comparison-table .ok { color: #2E7D32; font-weight: 700; }
+        .comparison-table .caution { color: #EF6C00; font-weight: 700; }
+        @media (max-width: 768px) { .comparison-table { font-size: 13px; } .comparison-table th, .comparison-table td { padding: 8px 6px; } }
+        /* SOAP例示用 */
+        .soap-example { background: #FAFAFA; border: 1px solid #E0E0E0; border-radius: 8px; padding: 16px; margin: 12px 0; font-size: 14px; line-height: 1.7; }
+        .soap-example .soap-label { display: inline-block; background: #00897B; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; margin-right: 8px; min-width: 26px; text-align: center; }
+        .soap-example p { margin: 6px 0; }
+        /* 危険ボックス強化 */
+        .highlight-box.warning { background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%); border-left-color: #C62828; }
+        .highlight-box.warning strong { color: #B71C1C; }
+    </style>
+</head>
+<body>
+    <!-- シリーズナビゲーション -->
+    <div class="series-nav">
+        <div class="series-nav-inner">
+            <a href="/" class="series-nav-item nav-list">一覧</a>
+            <a href="/vol4/" class="series-nav-item">&larr; Vol.4</a>
+            <div class="series-progress">
+                <div class="progress-step"><span class="progress-dot completed" title="Vol.1"></span></div>
+                <span class="progress-line completed"></span>
+                <div class="progress-step"><span class="progress-dot completed" title="Vol.2"></span></div>
+                <span class="progress-line completed"></span>
+                <div class="progress-step"><span class="progress-dot completed" title="Vol.3"></span></div>
+                <span class="progress-line completed"></span>
+                <div class="progress-step"><span class="progress-dot completed" title="Vol.4"></span></div>
+                <span class="progress-line completed"></span>
+                <div class="progress-step"><span class="progress-dot active" title="Vol.5"></span></div>
+            </div>
+            <span class="series-nav-item disabled">Vol.6 &rarr;</span>
+        </div>
+    </div>
+
+    <header id="top">
+        <div class="header-content">
+            <div class="badge">Vol.5・約2時間</div>
+            <h1>介護×AI 現場の記録革命</h1>
+            <p>「ケア記録アシスト」をいろ葉仕様に育てる</p>
+        </div>
+    </header>
+
+    <nav role="navigation" aria-label="メインナビゲーション">
+        <ul>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('intro')" onkeydown="handleNavKey(event, 'intro')">はじめに</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('overview')" onkeydown="handleNavKey(event, 'overview')">プログラム</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('details')" onkeydown="handleNavKey(event, 'details')">詳細</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('glossary')" onkeydown="handleNavKey(event, 'glossary')">用語集</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="intro" class="container">
+            <div class="section-header">
+                <h2><span class="icon">👋</span>はじめに</h2>
+                <p>2026年3月、介護業界に「Googleの記録AI」が本格上陸しました</p>
+            </div>
+
+            <div class="card intro-card animate-on-scroll">
+                <p class="text-lg">Vol.1〜4で、Gemini・AI Studio・NotebookLM・Firebase まで体験してきました。</p>
+                <p class="text-lg">今日のテーマは、いま介護業界で<strong>もっとも話題になっているAI</strong> ──<br>Googleが2026年3月27日に公開した「<strong>ケア記録アシスト</strong>」です。</p>
+                <p>音声メモや手書きメモの写真から、<strong>SOAP・F-DAR形式の介護記録の草案</strong>を自動で作ってくれます。実証実験では記録時間が<strong>約20%短縮</strong>（4.0分→3.3分）。スタッフ1人あたり月3.5時間の事務工数削減が確認されました。</p>
+            </div>
+
+            <h3>Vol.1〜Vol.4で学んだこと（復習）</h3>
+            <div class="card animate-on-scroll">
+                <ul class="problem-list">
+                    <li><span class="problem-icon">💬</span><div class="problem-text"><div class="problem">Vol.1 はじめの一歩</div><div class="solution">→ Gemini・AI Studioで、AIと会話・記録・画像を体験</div></div></li>
+                    <li><span class="problem-icon">🌐</span><div class="problem-text"><div class="problem">Vol.2 一歩先へ</div><div class="solution">→ 画像編集、いろ葉のWebページ作成、AIチャットボット追加</div></div></li>
+                    <li><span class="problem-icon">📚</span><div class="problem-text"><div class="problem">Vol.3 資料がしゃべる</div><div class="solution">→ NotebookLMでリサーチ、ポッドキャスト、マインドマップ</div></div></li>
+                    <li><span class="problem-icon">🔥</span><div class="problem-text"><div class="problem">Vol.4 AI Studio進化</div><div class="solution">→ ログイン・データ保存付きの本格アプリを作成</div></div></li>
+                    <li><span class="problem-icon">🔒</span><div class="problem-text"><div class="problem">毎回のセキュリティ</div><div class="solution">→ 個人情報は入力しない、匿名化が基本</div></div></li>
+                </ul>
+            </div>
+
+            <h3>今日の主役：「ケア記録アシスト」とは？</h3>
+            <div class="card animate-on-scroll">
+                <p>Googleが日本の介護業界向けに公開した、<strong>Gemini Gem機能のプリセット</strong>です。</p>
+                <div class="highlight-box info">
+                    <strong>💡 ケア記録アシスト 3つの特徴</strong>
+                    <ul>
+                        <li>📝 <strong>音声メモ／写真／テキスト</strong> から、SOAP・F-DAR形式の記録草案を即生成</li>
+                        <li>🧠 <strong>Gemini 3.0 Flash</strong> 搭載 — ケアマネ試験99.7%、介護福祉士国家試験100%の精度</li>
+                        <li>🛠 各施設の運用に合わせて<strong>カスタマイズ可能</strong>（Gemをコピーして指示を編集）</li>
+                    </ul>
+                </div>
+                <div class="highlight-box accent">
+                    <strong>📊 SOAP形式って？</strong>
+                    <p class="mb-sm">介護・医療現場で使われる記録の標準フォーマット。</p>
+                    <div class="soap-example">
+                        <p><span class="soap-label">S</span><strong>Subjective</strong>（主観的情報）：本人・家族の発言</p>
+                        <p><span class="soap-label">O</span><strong>Objective</strong>（客観的情報）：観察・測定したこと</p>
+                        <p><span class="soap-label">A</span><strong>Assessment</strong>（評価）：状態の判断</p>
+                        <p><span class="soap-label">P</span><strong>Plan</strong>（計画）：今後の対応</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 id="security-rule">⚠️ 今日いちばん大事なルール</h3>
+            <div class="highlight-box warning animate-on-scroll">
+                <strong>🚫 個人 Gemini に、本物の利用者情報を入れてはいけません</strong>
+                <p class="mb-sm">今日の研修は、いろ葉さんが普段お使いの<strong>個人 Google アカウント</strong>で行います。<br>個人 Gemini に入力したデータは、Googleの規約上、<strong>モデル改善（学習）に使われる可能性</strong>があります。</p>
+                <p class="mb-0">そのため今日は、<strong>架空の利用者「鈴木花子さん」</strong>を使って練習します。実名・生年月日・住所などは絶対に入力しないでください。</p>
+            </div>
+
+            <div class="card animate-on-scroll">
+                <h3 style="margin-top: 0;">「じゃあ、本物の記録に使うにはどうすれば？」</h3>
+                <p>結論から言うと、<strong>環境の選び方</strong>でセキュリティが決まります。今日の最後にも詳しく扱いますが、先に全体像を見ておきましょう。</p>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>環境</th>
+                            <th>個人情報を入れて良い？</th>
+                            <th>主な理由</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>個人 Gemini<br>（今日使うもの）</td>
+                            <td><span class="ng">❌ NG</span></td>
+                            <td>入力データが学習に使われる可能性。利用規約でも機密情報の入力は禁止</td>
+                        </tr>
+                        <tr>
+                            <td>Google Workspace 版<br>Gemini アプリ</td>
+                            <td><span class="caution">⚠️ 条件付きOK</span></td>
+                            <td>顧客データはモデル学習に使われない契約。<strong>法人として Workspace 契約</strong>が前提</td>
+                        </tr>
+                        <tr>
+                            <td>Vertex AI<br>（東京リージョン）</td>
+                            <td><span class="ok">✅ OK（推奨ライン）</span></td>
+                            <td>データの保管場所を日本に固定でき、監査ログも完備。介護記録の本番運用に最適</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="mb-0">いろ葉さんはまだ Workspace を契約していないので、<strong>今日は「触ってみる・試してみる」が目的</strong>。本番運用は施設として方針を決めてから、別途環境を整えていきます。</p>
+            </div>
+
+            <h3>今日のゴール</h3>
+            <div class="highlight-box tip animate-on-scroll">
+                <strong>🎯 2時間後にできるようになること</strong>
+                <ul>
+                    <li>Gemini の<strong>Gem 機能</strong>を開いて使える</li>
+                    <li>「ケア記録アシスト」を<strong>コピーしてカスタマイズ</strong>できる</li>
+                    <li>架空の利用者の音声メモから<strong>SOAP記録の草案</strong>を生成できる</li>
+                    <li>本物の業務で使うために<strong>どんな環境が必要か</strong>を理解できる</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="overview" class="container">
+            <div class="section-header">
+                <h2><span class="icon">📚</span>プログラム概要</h2>
+                <p>ニュースになっている最新AIを、安全に体験する約2時間</p>
+            </div>
+            <div class="program-overview">
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step1')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step1')"><div class="step-number">1</div><div class="step-content"><div class="step-title">復習＋ケア記録アシストとは</div><div class="step-desc">Vol.1-4の振り返りと、新機能の全体像</div></div><div class="step-time">15分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step2')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step2')"><div class="step-number">2</div><div class="step-content"><div class="step-title">今日の安全ルール【最重要】</div><div class="step-desc">なぜ架空データを使うのか、ルールを共有</div></div><div class="step-time">10分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step3')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step3')"><div class="step-number">3</div><div class="step-content"><div class="step-title">Gem を開いて体験</div><div class="step-desc">Geminiの「Gem」機能を実際に触ってみる</div></div><div class="step-time">15分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step4')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step4')"><div class="step-number">4</div><div class="step-content"><div class="step-title">いろ葉仕様にカスタマイズ【メイン①】</div><div class="step-desc">Gemをコピーして、いろ葉の理念や記録様式を反映</div></div><div class="step-time">25分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step program-step-break animate-on-scroll" onclick="scrollToSection('step5')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step5')"><div class="step-number">5</div><div class="step-content"><div class="step-title">休憩 ☕</div><div class="step-desc">一息つきましょう</div></div><div class="step-time">10分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step6')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step6')"><div class="step-number">6</div><div class="step-content"><div class="step-title">架空の利用者で SOAP 記録生成【メイン②】</div><div class="step-desc">音声メモ・写真から記録草案を作る体験</div></div><div class="step-time">25分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step7')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step7')"><div class="step-number">7</div><div class="step-content"><div class="step-title">本格運用への道筋＋まとめ</div><div class="step-desc">Workspace・Vertex AI への展開、次回予告</div></div><div class="step-time">20分</div><div class="step-arrow">&rarr;</div></div>
+            </div>
+        </section>
+
+        <section id="details" class="container-narrow">
+            <div class="section-header">
+                <h2><span class="icon">📖</span>プログラム詳細</h2>
+                <p>各ステップの内容と、操作手順を確認</p>
+            </div>
+
+            <!-- Step 1: 復習＋ケア記録アシストとは -->
+            <div id="step1" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">1</div><div class="detail-header-content"><h3>復習＋ケア記録アシストとは</h3><div class="time">⏱ 15分</div></div></div>
+                <p>まずはVol.1〜4の振り返りをしてから、<strong>2026年3月にGoogleが公開したばかりの新機能</strong>「ケア記録アシスト」の全体像を見ていきます。</p>
+
+                <div class="highlight-box info">
+                    <strong>📰 公式リリース概要（2026年3月27日）</strong>
+                    <ul class="mb-0">
+                        <li>Google Japan 公式ブログで発表</li>
+                        <li>Gemini アプリの<strong>Gem 機能のプリセット</strong>として提供</li>
+                        <li>音声メモ・手書きメモの写真・テキストから、<strong>SOAP / F-DAR 形式</strong>の記録草案を生成</li>
+                        <li>シーユーシー社の実証で<strong>記録時間 約20%削減</strong> (4.0分→3.3分)</li>
+                        <li>59拠点展開で年間<strong>3万時間超</strong>の事務作業削減見込み</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>🧠 AIの精度はもう"おもちゃ"じゃない</strong>
+                    <p class="mb-sm">搭載されている <strong>Gemini 3.0 Flash</strong> は介護分野の試験で次の精度を出しています：</p>
+                    <ul class="mb-0">
+                        <li>第28回 東京都ケアマネ実務研修受講試験 ── <strong>99.7%</strong></li>
+                        <li>第37回 介護福祉士国家試験 ── <strong>100%</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 2: 今日の安全ルール -->
+            <div id="step2" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">2</div><div class="detail-header-content"><h3>今日の安全ルール【最重要】</h3><div class="time">⏱ 10分</div></div></div>
+                <p>今日のいちばん大事な話です。<strong>このルールだけは絶対に守ってください</strong>。</p>
+
+                <div class="highlight-box warning">
+                    <strong>🚫 これは絶対NG</strong>
+                    <ul class="mb-0">
+                        <li>本物の利用者の<strong>名前・生年月日・住所</strong>を入力する</li>
+                        <li>家族構成・既往歴・連絡先を入力する</li>
+                        <li>顔写真・施設の内部写真をアップロードする</li>
+                        <li>個人が特定できる<strong>音声録音</strong>をそのまま入れる</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box tip">
+                    <strong>✅ 今日OKな使い方</strong>
+                    <ul class="mb-0">
+                        <li>架空の利用者「<strong>鈴木花子さん（仮名）</strong>」を使う</li>
+                        <li>「Aさん」「利用者①」など<strong>匿名化したテキスト</strong>を入力</li>
+                        <li>研修用に用意した<strong>サンプル音声・サンプル写真</strong>を使う</li>
+                        <li>SOAP記録の<strong>形式や流れ</strong>を学ぶことに集中する</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box info">
+                    <strong>💡 なぜ厳しめのルールにしているの？</strong>
+                    <p class="mb-sm">個人の Google アカウントで使う Gemini は、入力したデータが<strong>Googleの AI モデル改善に使われる可能性</strong>があります（規約上）。</p>
+                    <p class="mb-0">本物の介護記録を扱うには、後ほど紹介する <strong>Google Workspace の Gemini</strong> や <strong>Vertex AI（東京リージョン）</strong> など、データが学習に使われない契約環境が必要です。</p>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>👤 今日使う架空利用者プロフィール</strong>
+                    <p class="mb-sm">講師から配布された「鈴木花子さん」プロフィールを使います。</p>
+                    <ul class="mb-0">
+                        <li>架空の82歳女性、デイサービス利用、軽度の認知症想定</li>
+                        <li>生年月日・住所はすべて架空のもの</li>
+                        <li>研修用に用意したサンプルなので、安心して入力できます</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 3: Gem を開いて体験 -->
+            <div id="step3" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">3</div><div class="detail-header-content"><h3>Gem を開いて体験</h3><div class="time">⏱ 15分</div></div></div>
+                <p>まずは <strong>Gemini の Gem 機能</strong> を開いて、どんな雰囲気か触ってみます。</p>
+
+                <div class="highlight-box info">
+                    <strong>🔤 今日のキーワード：Gem（ジェム）</strong>
+                    <p class="mb-0">Gemini に「あらかじめ役割や指示を覚えさせた専用バージョン」を作る機能。<br>例えば「ケア記録専用」「広報文専用」「議事録専用」など、<strong>用途別の AI アシスタント</strong>を持てるイメージです。</p>
+                </div>
+
+                <div class="workflow">
+                    <div class="workflow-title">📍 このステップの流れ</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><div class="workflow-num">1</div><div class="workflow-text"><strong>Gemini を開く</strong>（2分）<br>個人 Google アカウントでログイン<br><a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="workflow-link">Gemini を開く</a></div></div>
+                        <div class="workflow-step"><div class="workflow-num">2</div><div class="workflow-text"><strong>左メニューの「Gem」を探す</strong>（3分）<br>「Gemを使う」「Gemマネージャー」などの項目をクリック</div></div>
+                        <div class="workflow-step"><div class="workflow-num">3</div><div class="workflow-text"><strong>「ケア記録アシスト」を見つける</strong>（5分）<br>プリセット一覧から日本語の介護向けGemを開く</div></div>
+                        <div class="workflow-step"><div class="workflow-num">4</div><div class="workflow-text"><strong>説明文を読んで雰囲気を掴む</strong>（5分）<br>どんな入力に何を返すGemか、最初の説明文を確認</div></div>
+                    </div>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>💡 ポイント</strong>
+                    <p class="mb-0">「ケア記録アシスト」が見つからない場合は、Gem 一覧の検索欄で<strong>「ケア」「介護」</strong>と入れて探してください。プリセットの提供範囲は順次拡大中なので、表示されない場合は講師に声をかけてください。</p>
+                </div>
+            </div>
+
+            <!-- Step 4: いろ葉仕様にカスタマイズ -->
+            <div id="step4" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">4</div><div class="detail-header-content"><h3>いろ葉仕様にカスタマイズ【メイン①】</h3><div class="time">⏱ 25分</div></div></div>
+                <p>ここが今日の<strong>最初の見せ場</strong>です。プリセットの「ケア記録アシスト」を<strong>コピーして</strong>、いろ葉さんの理念や記録様式に合わせていきます。</p>
+
+                <div class="highlight-box tip">
+                    <strong>✨ 今日の感動ポイント①</strong>
+                    <ul>
+                        <li>📝 <strong>「コピーを作成」</strong>で、自分用の Gem が一瞬で生まれる</li>
+                        <li>🏠 <strong>いろ葉の理念</strong>（暮らしの保健室、地域とともに、その人らしく）を反映できる</li>
+                        <li>🔧 <strong>記録様式・口調・気を付ける視点</strong>を細かく指示できる</li>
+                    </ul>
+                </div>
+
+                <div class="workflow">
+                    <div class="workflow-title">📍 このステップの流れ</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><div class="workflow-num">1</div><div class="workflow-text"><strong>「コピーを作成する」を実行</strong>（3分）<br>ケア記録アシストの画面右上の三点リーダーから「コピー」を選ぶ</div></div>
+                        <div class="workflow-step"><div class="workflow-num">2</div><div class="workflow-text"><strong>コピーしたGemに名前をつける</strong>（2分）<br>例：「いろ葉ケア記録アシスト」</div></div>
+                        <div class="workflow-step"><div class="workflow-num">3</div><div class="workflow-text"><strong>カスタム指示を読む</strong>（5分）<br>元のGemにどんな指示が書かれているか確認</div></div>
+                        <div class="workflow-step"><div class="workflow-num">4</div><div class="workflow-text"><strong>いろ葉らしさを追記</strong>（10分）<br>下のプロンプトを参考に、施設の理念・記録様式を反映</div></div>
+                        <div class="workflow-step"><div class="workflow-num">5</div><div class="workflow-text"><strong>保存して動作確認</strong>（5分）<br>架空の利用者でテスト入力してみる</div></div>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">🛠️ カスタム指示に追加するテンプレート</div>
+                    <div class="highlight-box info" style="margin-bottom: 20px;">
+                        <strong>💡 使い方</strong>
+                        <p class="mb-0">「コピーしたGem」のカスタム指示欄に、下のテンプレートを<strong>追記</strong>します。元の指示は消さずに、文末に追加してください。</p>
+                    </div>
+
+                    <div class="prompt-card"><div class="prompt-label">追記① いろ葉の理念を反映</div><div class="prompt-text">この事業所「株式会社いろ葉」は、利用者が住み慣れた地域でその人らしく暮らし続けることを大切にしています。「暮らしの保健室」として地域に開かれ、その人の人生の物語を尊重したケアを行っています。記録を作成する際は、利用者を「お客様」ではなく「ご本人」として捉え、生活の主体は本人であるという視点を必ず反映してください。</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+
+                    <div class="prompt-card"><div class="prompt-label">追記② 記録の口調・敬語の指示</div><div class="prompt-text">記録は「ですます調」ではなく、業務記録として簡潔な体言止め・常体で書いてください。ただし、ご本人の発言は「」付きで原文どおり残してください。専門用語が必要な場合は使ってよいですが、家族にも読まれる前提で平易な表現を心がけてください。</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+
+                    <div class="prompt-card"><div class="prompt-label">追記③ 必ず確認してほしい視点</div><div class="prompt-text">SOAP記録を作成する際、以下の視点を必ず含めてください：(1) 表情・気分の変化、(2) 食事・水分量、(3) 排泄、(4) 睡眠、(5) ご本人の発言や希望、(6) 他の利用者やスタッフとの関わり。情報がない項目は「記録なし」と明記し、勝手に推測で埋めないでください。</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+
+                    <div class="prompt-card"><div class="prompt-label">追記④ 個人情報の取り扱いルール</div><div class="prompt-text">入力された情報のうち、本人の氏名・生年月日・住所・電話番号・家族の氏名は、出力時に「ご本人」「ご家族」など匿名化した表現に置き換えてください。日付・時刻・バイタル値はそのまま記載してください。</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>💡 ポイント</strong>
+                    <p class="mb-0">追記する内容は<strong>1つでも構いません</strong>。まずは「①理念」だけでも大丈夫。Gemは何度でも編集できるので、使いながら<strong>少しずつ育てていく</strong>のがコツです。</p>
+                </div>
+            </div>
+
+            <!-- Step 5: 休憩 -->
+            <div id="step5" class="detail-section detail-section-compact detail-section-break animate-on-scroll">
+                <div class="detail-header"><div class="step-number">5</div><div class="detail-header-content"><h3>休憩 ☕</h3><p style="margin: 8px 0 0 0; color: #795548;">一息つきましょう。水分補給やストレッチをどうぞ。</p></div></div>
+            </div>
+
+            <!-- Step 6: 架空の利用者で SOAP 記録生成 -->
+            <div id="step6" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">6</div><div class="detail-header-content"><h3>架空の利用者で SOAP 記録生成【メイン②】</h3><div class="time">⏱ 25分</div></div></div>
+                <p>後半の見せ場です。<strong>架空の利用者「鈴木花子さん」</strong>の音声メモ・写真から、SOAP記録の草案を実際に作ってみます。</p>
+
+                <div class="highlight-box tip">
+                    <strong>✨ 今日の感動ポイント②</strong>
+                    <ul>
+                        <li>🎙️ <strong>2〜3分の音声メモ</strong>から、整った記録が出てくる</li>
+                        <li>📷 <strong>手書きメモの写真</strong>を読み取って、文字起こし＋SOAP整形</li>
+                        <li>⏱ 普段5分かかる記録が<strong>3分前後で草案完成</strong></li>
+                    </ul>
+                </div>
+
+                <div class="workflow">
+                    <div class="workflow-title">📍 このステップの流れ</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step"><div class="workflow-num">1</div><div class="workflow-text"><strong>テキスト入力で試す</strong>（5分）<br>下のサンプルテキストをコピーしてGemに送信</div></div>
+                        <div class="workflow-step"><div class="workflow-num">2</div><div class="workflow-text"><strong>音声メモを録音して試す</strong>（7分）<br>講師が読み上げるサンプル音声を録音してアップロード</div></div>
+                        <div class="workflow-step"><div class="workflow-num">3</div><div class="workflow-text"><strong>手書きメモの写真で試す</strong>（7分）<br>研修用サンプル画像をアップロード</div></div>
+                        <div class="workflow-step"><div class="workflow-num">4</div><div class="workflow-text"><strong>出力を見比べる</strong>（6分）<br>テキスト／音声／写真でどう違うか確認、修正指示も試す</div></div>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-group-title">📝 練習用サンプル（架空の鈴木花子さん）</div>
+
+                    <div class="prompt-card"><div class="prompt-label">サンプル① テキスト入力</div><div class="prompt-text">鈴木花子さん（架空・82歳女性・デイ）。今日10時の血圧128/76、体温36.5度。朝食は7割摂取。「昨日は孫が来てくれた」とにこにこ話される。レク参加、塗り絵に集中。14時、ベッドで30分ほど休まれる。トイレ自立、便1回。帰り際「また来週ね」と笑顔。</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+
+                    <div class="prompt-card"><div class="prompt-label">サンプル② 音声メモ用の読み上げ原稿</div><div class="prompt-text">えーと、鈴木さん、架空ですけど、今日の様子を記録します。10時頃の血圧が128の76、体温は36度5分でした。朝ごはんは7割くらい食べていただいて、お孫さんが昨日来てくれたみたいで、すごく嬉しそうにお話されてました。午前中のレクは塗り絵で、集中して取り組まれていました。お昼寝は14時から30分ほど。トイレは自立で、便は1回ありました。お帰りの時に「また来週ね」と笑顔で手を振ってくださいました。</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+
+                    <div class="prompt-card"><div class="prompt-label">サンプル③ 出力を改善する追加指示</div><div class="prompt-text">SOAPの「A（評価）」をもう少し具体的に書いてください。前回（先週金曜）と比較して、表情や活動意欲がどう変化したか触れてください。前回は「無口で塗り絵も短時間で中断」だったとします。</div><button class="copy-btn" onclick="copyPrompt(this)" aria-label="プロンプトをクリップボードにコピー">コピーする</button></div>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>💡 ポイント：AIの出力は"草案"です</strong>
+                    <p class="mb-sm">どんなに精度が高くても、<strong>そのまま記録にしてはいけません</strong>。必ず人の目で確認し、必要に応じて修正してから保存します。</p>
+                    <p class="mb-0">「AIが書いた」のではなく「<strong>AIが下書きしたものを、私が確認した記録</strong>」です。最後の責任は人が持ちます。</p>
+                </div>
+            </div>
+
+            <!-- Step 7: 本格運用への道筋＋まとめ -->
+            <div id="step7" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">7</div><div class="detail-header-content"><h3>本格運用への道筋＋まとめ</h3><div class="time">⏱ 20分</div></div></div>
+                <p>今日体験したのは「<strong>個人 Gemini で安全に試す</strong>」段階。次は、本物の業務でも使えるようにするための<strong>環境の整え方</strong>を確認します。</p>
+
+                <div class="highlight-box info">
+                    <strong>🛤 本格運用への3つのステップ</strong>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>段階</th>
+                                <th>環境</th>
+                                <th>個人情報</th>
+                                <th>誰が決める？</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>① 試す</strong><br>（今日）</td>
+                                <td>個人 Gemini<br>＋架空データ</td>
+                                <td><span class="ng">入れない</span></td>
+                                <td>現場スタッフ</td>
+                            </tr>
+                            <tr>
+                                <td><strong>② 業務利用</strong><br>（次の段階）</td>
+                                <td>Google Workspace<br>Business Standard 以上</td>
+                                <td><span class="caution">条件付きOK</span></td>
+                                <td>経営・管理者</td>
+                            </tr>
+                            <tr>
+                                <td><strong>③ 高機密運用</strong><br>（要配慮個人情報）</td>
+                                <td>Vertex AI<br>東京リージョン</td>
+                                <td><span class="ok">OK（推奨）</span></td>
+                                <td>経営・IT責任者</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="highlight-box tip">
+                    <strong>💼 管理者・リーダー層へ</strong>
+                    <p class="mb-sm">本格導入を検討する場合、次のような順序がおすすめです：</p>
+                    <ul class="mb-0">
+                        <li><strong>方針決定</strong> ── どこまでAIに任せるか、最終確認は誰がするか</li>
+                        <li><strong>環境選定</strong> ── Workspace か Vertex AI か（コスト・運用負荷で判断）</li>
+                        <li><strong>業務委託契約・DPA</strong> ── データ取扱いの契約を確認</li>
+                        <li><strong>パイロット運用</strong> ── まず1〜2拠点・少人数で試す</li>
+                        <li><strong>研修と運用ルール</strong> ── 「下書きはAI、最終責任は人」を徹底</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box warning">
+                    <strong>⚠️ 個人 Gemini で本番運用しない</strong>
+                    <p class="mb-0">「便利だから」と個人アカウントの Gemini に本物の利用者情報を入れることは、<strong>個人情報保護法・利用規約・施設の信用</strong>のすべてに抵触するリスクがあります。便利さと安全さは、<strong>環境を整えてから両立</strong>させましょう。</p>
+                </div>
+
+                <h3>業務での活用アイデア</h3>
+                <div class="card animate-on-scroll">
+                    <ul class="problem-list">
+                        <li><span class="problem-icon">📝</span><div class="problem-text"><div class="problem">日々のケア記録</div><div class="solution">→ 音声メモから SOAP 形式で草案、人が確認して保存</div></div></li>
+                        <li><span class="problem-icon">📋</span><div class="problem-text"><div class="problem">モニタリング記録</div><div class="solution">→ 月次の様子をまとめて、ケアプラン見直しの素材に</div></div></li>
+                        <li><span class="problem-icon">📅</span><div class="problem-text"><div class="problem">家族への連絡帳</div><div class="solution">→ 業務記録と別に、家族向けに優しい言葉で要約</div></div></li>
+                        <li><span class="problem-icon">🤝</span><div class="problem-text"><div class="problem">担当者会議の議事録</div><div class="solution">→ 録音から議事録草案、決定事項とToDoを整理</div></div></li>
+                        <li><span class="problem-icon">📚</span><div class="problem-text"><div class="problem">事故・ヒヤリハット報告</div><div class="solution">→ 5W1Hを抜けなく整え、再発防止策の検討素材に</div></div></li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box info">
+                    <strong>💬 みんなで考えてみよう</strong>
+                    <p class="mb-0">「自分の業務で、いちばん時間を取られている記録は何ですか？」<br>その記録を、AIに下書きしてもらえたら何分くらい節約できそうか、<strong>隣の人とシェア</strong>してみましょう！</p>
+                </div>
+
+                <h3>今日のまとめ</h3>
+                <div class="highlight-box tip animate-on-scroll">
+                    <strong>🎉 今日できるようになったこと</strong>
+                    <ul>
+                        <li>Gemini の<strong>Gem機能</strong>を理解して触れた</li>
+                        <li>「ケア記録アシスト」を<strong>コピーしてカスタマイズ</strong>できた</li>
+                        <li>架空の利用者で<strong>SOAP記録の草案</strong>を生成できた</li>
+                        <li>本物の業務に使うには<strong>Workspace or Vertex AI</strong>が必要だと理解できた</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box info">
+                    <strong>💡 復習のヒント</strong>
+                    <ul>
+                        <li>カスタマイズした Gem は<strong>個人アカウントに保存</strong>されています。何度でも編集できます</li>
+                        <li>家でも研修用の架空データで練習してみてください（本物データは入れない）</li>
+                        <li>「うまくいかなかった出力」も貴重な学び。Gemに「ここをこう直して」と伝えると改善されます</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>📅 次回予告：Vol.6</strong>
+                    <p class="mb-0">次回のテーマは準備中です。お楽しみに！</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="glossary" class="container">
+            <div class="section-header">
+                <h2><span class="icon">📖</span>用語集</h2>
+                <p>今日出てきた新しい用語</p>
+            </div>
+            <div class="glossary-grid">
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">ケア記録アシスト</div><div class="glossary-desc">2026年3月にGoogleが日本の介護業界向けに公開した、Gemini Gem機能の介護記録専用プリセット。音声メモ・写真・テキストから、SOAP・F-DAR形式の記録草案を自動生成します。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">Gem（ジェム）</div><div class="glossary-desc">Geminiに「あらかじめ役割や指示」を覚えさせた専用バージョンを作る機能。「ケア記録専用」「広報文専用」など、用途別のAIアシスタントを用意できます。コピーして自分好みにカスタマイズも可能。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">SOAP記録</div><div class="glossary-desc">介護・医療現場で使われる記録の標準フォーマット。S=主観的情報（本人の発言）、O=客観的情報（観察・測定値）、A=評価、P=計画、の4項目で整理します。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">F-DAR記録</div><div class="glossary-desc">SOAPと並ぶ記録フォーマット。F=Focus（焦点）、D=Data（情報）、A=Action（行動）、R=Response（反応）。出来事ごとに焦点を当てて整理する形式です。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">カスタム指示<br>（Custom Instructions）</div><div class="glossary-desc">Gemに「どんな役割で、どんな口調で、何を大事にして答えてほしいか」を書いておく文章。一度書いておけば、毎回その指示に沿って動いてくれます。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">Google Workspace</div><div class="glossary-desc">企業・施設向けのGoogleの有料サービス。@iroha-care.jp のような独自ドメインのGmailや、企業向けのGemini（顧客データを学習に使わない契約）が含まれます。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">Vertex AI</div><div class="glossary-desc">Googleが提供する企業向けAIプラットフォーム。データの保管場所を東京リージョンに固定でき、監査ログも完備。介護記録など要配慮個人情報を扱う本番運用に向いています。「バーテックス エーアイ」と読みます。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">東京リージョン</div><div class="glossary-desc">データの保管場所が「東京（日本国内）」に固定される設定。海外のサーバーにデータが渡らないため、個人情報保護法やismap準拠の運用に適しています。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">モデル学習からの除外</div><div class="glossary-desc">入力したデータがAIの学習（モデル改善）に使われないこと。個人GeminiではこれがONになっておらず、Workspace版・Vertex AIでは標準でOFF（学習に使わない）になっています。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">要配慮個人情報</div><div class="glossary-desc">個人情報保護法で特に厳重に扱う必要がある情報。病歴・心身の障害・健康診断結果などが該当し、介護記録の多くがこれに含まれます。本人の同意取得や、より厳格な管理が求められます。</div></div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <p>介護×AI はじめの一歩 Vol.5 | 入門講座資料</p>
+        <div class="footer-banner">
+            <a href="https://one-stream.io/user/CwGemEM3sSOZX6f5uhBm0jUJUs93/playlist/c203a473-fa9d-404e-917d-b1886ede8a84" target="_blank" rel="noopener noreferrer">
+                <img src="/public/horiemon13-gpt.png" alt="ChatGPT資格試験対策コース">
+            </a>
+        </div>
+    </footer>
+
+    <div class="scroll-buttons">
+        <button class="scroll-btn to-top" onclick="scrollToTop()" aria-label="ページトップへ戻る" title="トップへ">↑</button>
+        <button class="scroll-btn to-footer" onclick="scrollToFooter()" aria-label="フッターへ移動" title="関連講座を見る">↓</button>
+    </div>
+
+    <script>
+        function handleNavKey(event, id) { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); scrollToSection(id); } }
+        function scrollToSection(id) { const element = document.getElementById(id); if (element) { const navHeight = document.querySelector('nav').offsetHeight; const seriesNavHeight = document.querySelector('.series-nav').offsetHeight; const elementPosition = element.getBoundingClientRect().top + window.pageYOffset; window.scrollTo({ top: elementPosition - navHeight - seriesNavHeight - 20, behavior: 'smooth' }); } }
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function scrollToFooter() { document.getElementById('footer').scrollIntoView({ behavior: 'smooth' }); }
+        function updateScrollButtons() { const scrollTop = window.pageYOffset; const windowHeight = window.innerHeight; const documentHeight = document.documentElement.scrollHeight; const scrollBottom = documentHeight - scrollTop - windowHeight; const toTopBtn = document.querySelector('.scroll-btn.to-top'); const toFooterBtn = document.querySelector('.scroll-btn.to-footer'); if (scrollTop > 200) { toTopBtn.classList.add('visible'); } else { toTopBtn.classList.remove('visible'); } if (scrollBottom > 200) { toFooterBtn.classList.add('visible'); } else { toFooterBtn.classList.remove('visible'); } }
+        window.addEventListener('scroll', updateScrollButtons); updateScrollButtons();
+        function copyPrompt(button) { const promptCard = button.closest('.prompt-card'); const text = promptCard.querySelector('.prompt-text').textContent; navigator.clipboard.writeText(text).then(() => { const originalText = button.textContent; button.textContent = 'コピーしました！'; button.classList.add('copied'); setTimeout(() => { button.textContent = originalText; button.classList.remove('copied'); }, 2000); }).catch(err => { const textarea = document.createElement('textarea'); textarea.value = text; document.body.appendChild(textarea); textarea.select(); document.execCommand('copy'); document.body.removeChild(textarea); button.textContent = 'コピーしました！'; button.classList.add('copied'); setTimeout(() => { button.textContent = 'コピーする'; button.classList.remove('copied'); }, 2000); }); }
+        const observer = new IntersectionObserver((entries) => { entries.forEach((entry, index) => { if (entry.isIntersecting) { setTimeout(() => { entry.target.classList.add('visible'); }, index * 50); } }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }); document.querySelectorAll('.animate-on-scroll').forEach(el => { observer.observe(el); });
+        document.querySelectorAll('.term').forEach(term => { term.addEventListener('click', function(e) { e.stopPropagation(); document.querySelectorAll('.term').forEach(t => { if (t !== this) t.classList.remove('active'); }); this.classList.toggle('active'); }); }); document.addEventListener('click', function(e) { if (!e.target.closest('.term')) { document.querySelectorAll('.term').forEach(t => t.classList.remove('active')); } });
+        window.addEventListener('scroll', function() { const sections = document.querySelectorAll('section[id]'); const navLinks = document.querySelectorAll('nav a'); let current = ''; sections.forEach(section => { const sectionTop = section.offsetTop; if (pageYOffset >= sectionTop - 200) { current = section.getAttribute('id'); } }); navLinks.forEach(link => { link.classList.remove('active'); const onclick = link.getAttribute('onclick'); if (onclick && onclick.includes(current)) { link.classList.add('active'); } }); });
+    </script>
+</body>
+</html>
