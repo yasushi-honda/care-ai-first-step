@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ja" class="vol6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vol.6 ここまでの振り返り｜節目の回 | 介護×AI はじめの一歩</title>
+    <meta name="description" content="介護×AI講座の第6回。Vol.1〜5を一緒に振り返り、現場での活用状況をシェア。2026年6月時点のNotebookLM × Google Workspace連携の新情報も共有します。">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/shared/style.css">
+    <style>
+        /* Vol.6専用カラー（Indigo — 立ち止まり・思考・節目） */
+        header { background: linear-gradient(135deg, #283593 0%, #3949AB 50%, #7986CB 100%); }
+        .step-number { background: #3949AB; }
+        .detail-section { border-top-color: #3949AB; }
+        nav a:hover, nav a.active { background: #E8EAF6; color: #283593; border-color: #3949AB; }
+        .series-nav a:hover { background: #E8EAF6; }
+        .progress-dot.active { background: #3949AB; }
+        .workflow { background: #E8EAF6; }
+        .workflow-title { color: #283593; }
+        .workflow-num { background: #3949AB; }
+        .workflow-link { background: #3949AB; }
+        .workflow-link:hover { background: #283593; }
+        .highlight-box.info { background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%); border-left-color: #3949AB; }
+        .term { color: #3949AB; border-bottom-color: #3949AB; }
+        .glossary-item { border-left-color: #3949AB; }
+        .glossary-term { color: #3949AB; }
+        .section-header h2 { color: #283593; }
+        h3 { border-left-color: #3949AB; }
+        .text-primary { color: #3949AB; }
+        .copy-btn { background: #3949AB; }
+        .copy-btn:hover { background: #283593; }
+        .prompt-label { background: #3949AB; }
+        .scroll-btn.to-top { background: #3949AB; }
+        .scroll-btn.to-top:hover { background: #283593; }
+        .link-card:hover { border-color: #3949AB; }
+        .link-arrow { color: #3949AB; }
+        .problem-text .solution { color: #3949AB; }
+        .workflow-list-num { background: #3949AB; }
+        /* 振り返り回ならではの "vol別カード" */
+        .recap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin: 16px 0 8px; }
+        .recap-card { background: #FAFAFA; border: 1px solid #E0E0E0; border-radius: 12px; padding: 18px 20px; }
+        .recap-card .recap-vol { display: inline-block; background: #3949AB; color: white; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 12px; margin-bottom: 8px; }
+        .recap-card .recap-title { font-weight: 700; font-size: 16px; margin-bottom: 6px; color: #283593; }
+        .recap-card .recap-desc { font-size: 14px; color: #555; line-height: 1.7; }
+        /* 参考リンク */
+        .reference-links li { margin-bottom: 12px; line-height: 1.5; }
+        .reference-links li:last-child { margin-bottom: 0; }
+        .reference-links a { color: #283593; font-weight: 500; text-decoration: underline; word-break: break-word; }
+        .reference-links a:hover { color: #3949AB; }
+        .reference-links .ref-source { display: inline-block; margin-top: 2px; font-size: 12px; color: #757575; }
+    </style>
+</head>
+<body>
+    <!-- シリーズナビゲーション -->
+    <div class="series-nav">
+        <div class="series-nav-inner">
+            <a href="/" class="series-nav-item nav-list">一覧</a>
+            <a href="/vol5/" class="series-nav-item">&larr; Vol.5</a>
+            <div class="series-progress">
+                <div class="progress-step"><span class="progress-dot completed" title="Vol.1"></span></div>
+                <span class="progress-line completed"></span>
+                <div class="progress-step"><span class="progress-dot completed" title="Vol.2"></span></div>
+                <span class="progress-line completed"></span>
+                <div class="progress-step"><span class="progress-dot completed" title="Vol.3"></span></div>
+                <span class="progress-line completed"></span>
+                <div class="progress-step"><span class="progress-dot completed" title="Vol.4"></span></div>
+                <span class="progress-line completed"></span>
+                <div class="progress-step"><span class="progress-dot completed" title="Vol.5"></span></div>
+                <span class="progress-line completed"></span>
+                <div class="progress-step"><span class="progress-dot active" title="Vol.6"></span></div>
+            </div>
+            <span class="series-nav-item disabled">Vol.7 &rarr;</span>
+        </div>
+    </div>
+
+    <header id="top">
+        <div class="header-content">
+            <div class="badge">Vol.6・約2時間</div>
+            <h1>介護×AI ここまでの振り返り</h1>
+            <p>Vol.1〜5 を一緒に振り返り、次の一歩を決める節目の回</p>
+        </div>
+    </header>
+
+    <nav role="navigation" aria-label="メインナビゲーション">
+        <ul>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('intro')" onkeydown="handleNavKey(event, 'intro')">はじめに</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('overview')" onkeydown="handleNavKey(event, 'overview')">プログラム</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('details')" onkeydown="handleNavKey(event, 'details')">詳細</a></li>
+            <li><a tabindex="0" role="button" onclick="scrollToSection('glossary')" onkeydown="handleNavKey(event, 'glossary')">用語集</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="intro" class="container">
+            <div class="section-header">
+                <h2><span class="icon">👋</span>はじめに</h2>
+                <p>今日は新しい何かを覚える日ではなく、これまでを棚卸しする日です</p>
+            </div>
+
+            <div class="card intro-card animate-on-scroll">
+                <p class="text-lg">Vol.1〜5 まで進んできて、たくさんの道具に触れてきました。<br>今日 Vol.6 は <strong>「立ち止まって振り返る回」</strong>です。</p>
+                <p class="text-lg">大事にしたいのは、<strong>「皆さんが今、現場で何を使っているか」</strong>。<br>使えているものも、止まってしまったものも、両方とも大切な情報です。</p>
+                <p>講師からの一方的な復習講義ではなく、<strong>皆さんと対話しながら</strong>進めます。和気あいあいと、気軽に話してください。</p>
+            </div>
+
+            <h3>Vol.1〜Vol.5でやってきたこと</h3>
+            <div class="card animate-on-scroll">
+                <div class="recap-grid">
+                    <div class="recap-card">
+                        <span class="recap-vol">Vol.1</span>
+                        <div class="recap-title">はじめの一歩</div>
+                        <div class="recap-desc">Gemini・AI Studio で AI と会話、記録、画像生成を体験</div>
+                    </div>
+                    <div class="recap-card">
+                        <span class="recap-vol">Vol.2</span>
+                        <div class="recap-title">一歩先へ</div>
+                        <div class="recap-desc">画像編集、自社 Web ページ作成、AI チャットボット追加</div>
+                    </div>
+                    <div class="recap-card">
+                        <span class="recap-vol">Vol.3</span>
+                        <div class="recap-title">資料がしゃべる</div>
+                        <div class="recap-desc">NotebookLM でリサーチ、ポッドキャスト、マインドマップ</div>
+                    </div>
+                    <div class="recap-card">
+                        <span class="recap-vol">Vol.4</span>
+                        <div class="recap-title">AI Studio 進化</div>
+                        <div class="recap-desc">ログイン・データ保存付きの本格アプリを Build で作成</div>
+                    </div>
+                    <div class="recap-card">
+                        <span class="recap-vol">Vol.5</span>
+                        <div class="recap-title">自分専用 AI</div>
+                        <div class="recap-desc">Gem × NotebookLM で施設の頭脳を持った AI アシスタント</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>今日のゴール</h3>
+            <div class="highlight-box tip animate-on-scroll">
+                <strong>🎯 2時間後にできるようになること</strong>
+                <ul>
+                    <li>これまでの 5 回で <strong>何を学んだか</strong>を自分の言葉で思い出せる</li>
+                    <li>現場で <strong>使い続けている機能・止まっている機能</strong>を整理できる</li>
+                    <li>NotebookLM Studio で何ができるかを<strong>もう一度俯瞰</strong>できる</li>
+                    <li>2026年6月時点の<strong>新しい連携情報</strong>を知っておける</li>
+                    <li><strong>Vol.7 でやりたいこと</strong>を自分のなかで言語化できる</li>
+                </ul>
+            </div>
+
+            <div class="card animate-on-scroll">
+                <h3 style="margin-top: 0;">今日の進め方について</h3>
+                <p>振り返り回なので、<strong>難しい操作の練習はありません</strong>。当日の流れも講師が皆さんの反応を見ながら<strong>臨機応変に進めます</strong>。</p>
+                <ul class="problem-list">
+                    <li><span class="problem-icon">💬</span><div class="problem-text"><div class="problem">アイスブレイクで活用シェア</div><div class="solution">→ お一人ずつ「最近 AI 使ってますか？」を伺います。Vol.1〜5 のどれでも OK</div></div></li>
+                    <li><span class="problem-icon">📚</span><div class="problem-text"><div class="problem">講師のまとめスライドは NotebookLM 製</div><div class="solution">→ 今日のスライドは NotebookLM で作りました。Vol.3 の機能の生きた使用例として共有</div></div></li>
+                    <li><span class="problem-icon">🔄</span><div class="problem-text"><div class="problem">横断ミニ体験ワーク</div><div class="solution">→ 画像生成・AI Studio Build など、これまでの回の機能を軽く触り直す</div></div></li>
+                    <li><span class="problem-icon">🗳️</span><div class="problem-text"><div class="problem">Vol.7 の方向性を一緒に決める</div><div class="solution">→ 過去回の深掘りか、新しいテーマか、皆さんの声で決めます</div></div></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="overview" class="container">
+            <div class="section-header">
+                <h2><span class="icon">📚</span>プログラム概要</h2>
+                <p>振り返り 7 割＋2026年6月の新情報 ＋ Vol.7 の方向性決め</p>
+            </div>
+            <div class="program-overview">
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step1')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step1')"><div class="step-number">1</div><div class="step-content"><div class="step-title">オープニング（アイスブレイク＆活用シェア）</div><div class="step-desc">「最近 AI 使ってますか？」を一人ずつ。NotebookLM 製のまとめスライドも共有</div></div><div class="step-time">25-30分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step2')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step2')"><div class="step-number">2</div><div class="step-content"><div class="step-title">NotebookLM Studio の棚卸し＋2026年6月の新情報</div><div class="step-desc">Studio パネルで何ができるか／Workspace Studio 連携・Drive 自動同期</div></div><div class="step-time">25-30分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step program-step-break animate-on-scroll" onclick="scrollToSection('step3')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step3')"><div class="step-number">3</div><div class="step-content"><div class="step-title">休憩 ☕</div><div class="step-desc">一息つきましょう</div></div><div class="step-time">10分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step4')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step4')"><div class="step-number">4</div><div class="step-content"><div class="step-title">横断ミニ体験ワーク</div><div class="step-desc">画像生成・AI Studio Build など、これまでの回の機能を軽く触り直す</div></div><div class="step-time">35-40分</div><div class="step-arrow">&rarr;</div></div>
+                <div class="program-step animate-on-scroll" onclick="scrollToSection('step5')" tabindex="0" role="button" onkeydown="handleNavKey(event, 'step5')"><div class="step-number">5</div><div class="step-content"><div class="step-title">Vol.7 の方向性を聞く＋まとめ</div><div class="step-desc">過去回の深掘り or 新しいテーマ、皆さんの声で次回を決める</div></div><div class="step-time">15-20分</div><div class="step-arrow">&rarr;</div></div>
+            </div>
+        </section>
+
+        <section id="details" class="container-narrow">
+            <div class="section-header">
+                <h2><span class="icon">📖</span>プログラム詳細</h2>
+                <p>各ステップの狙いと、当日の進め方</p>
+            </div>
+
+            <!-- Step 1: オープニング -->
+            <div id="step1" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">1</div><div class="detail-header-content"><h3>オープニング（アイスブレイク＆活用シェア）</h3><div class="time">⏱ 25-30分</div></div></div>
+                <p>今日は <strong>アイスブレイクと振り返りを兼ねた時間</strong>から始めます。</p>
+
+                <div class="highlight-box info">
+                    <strong>💬 一人ひとりに伺います</strong>
+                    <p class="mb-sm">「<strong>最近、AI 使ってますか？</strong>」を、お一人ずつ伺います。</p>
+                    <p class="mb-0">使っていれば「何を、どんなふうに」を一言。使っていなければ「使ってないです」だけで全然 OK です。<strong>正解はありません</strong>、現状をそのまま教えてください。</p>
+                </div>
+
+                <div class="card">
+                    <h3 style="margin-top: 0;">話のきっかけ（思い出せない時に）</h3>
+                    <p>「最近何使ったっけ…」と詰まったら、Vol.1〜5 のどれでも構いません。下のキーワードを眺めながらでも OK。</p>
+                    <div class="recap-grid">
+                        <div class="recap-card">
+                            <span class="recap-vol">Vol.1</span>
+                            <div class="recap-desc">Gemini との会話／AI Studio／画像生成／簡単アプリ</div>
+                        </div>
+                        <div class="recap-card">
+                            <span class="recap-vol">Vol.2</span>
+                            <div class="recap-desc">画像編集／Web ページ作成／チャットボット</div>
+                        </div>
+                        <div class="recap-card">
+                            <span class="recap-vol">Vol.3</span>
+                            <div class="recap-desc">NotebookLM／ポッドキャスト／マインドマップ</div>
+                        </div>
+                        <div class="recap-card">
+                            <span class="recap-vol">Vol.4</span>
+                            <div class="recap-desc">AI Studio Build／ログイン付きアプリ／データ保存</div>
+                        </div>
+                        <div class="recap-card">
+                            <span class="recap-vol">Vol.5</span>
+                            <div class="recap-desc">Gem 機能／カスタム指示／NotebookLM 接続</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>📑 講師のまとめスライドは NotebookLM 製です</strong>
+                    <p class="mb-0">今日お見せするまとめスライドは、講師が <strong>NotebookLM</strong> に Vol.1〜5 の資料を入れて作りました。Vol.3 でやった機能の "生きた使用例" として、作り方のポイントも一緒に共有します。</p>
+                </div>
+            </div>
+
+            <!-- Step 2: NotebookLM Studio の棚卸し＋2026年6月の新情報 -->
+            <div id="step2" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">2</div><div class="detail-header-content"><h3>NotebookLM Studio の棚卸し＋2026年6月の新情報</h3><div class="time">⏱ 25-30分</div></div></div>
+                <p>NotebookLM の右側、<strong>「Studio パネル」</strong>で何ができるかをもう一度俯瞰します。さらに、<strong>2026年6月時点</strong>の新しい連携情報も共有します。</p>
+
+                <h3 style="margin-top: 24px;">Studio パネルでできること（棚卸し）</h3>
+                <div class="highlight-box info">
+                    <strong>🛠️ Studio で生成できるもの</strong>
+                    <ul class="mb-0">
+                        <li><strong>音声概要（Audio Overview）</strong> ── ポッドキャスト風の解説音声（Vol.3 で体験済み）</li>
+                        <li><strong>マインドマップ</strong> ── 情報のつながりを図で可視化（Vol.3 で体験済み）</li>
+                        <li><strong>動画概要（Video Overview）</strong> ── ナレーション付きスライド動画</li>
+                        <li><strong>ブリーフィング ドキュメント</strong> ── 要点を整理した資料</li>
+                        <li><strong>学習ガイド</strong> ── 理解を深めるための質問集</li>
+                        <li><strong>FAQ</strong> ── よくある質問と回答</li>
+                        <li><strong>レポート</strong> ── 体系立てた長めの文書</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <p>当日は、講師の画面で <strong>Studio パネルを開いて指差し確認</strong>します。「これ使ったことある」「これは初めて見た」を気軽に教えてください。<strong>その場で重い生成は走らせません</strong>（時間がかかるので）。</p>
+                </div>
+
+                <h3>2026年6月時点の新情報（インフォメーション枠）</h3>
+                <p>5月〜6月にかけて、NotebookLM と Google Workspace の連携が一段進みました。<strong>触らずに情報共有として</strong>紹介します。</p>
+
+                <div class="highlight-box accent">
+                    <strong>🔗 ① NotebookLM が Google Workspace Studio と繋がった（2026年5月12日〜）</strong>
+                    <p class="mb-sm">Google Workspace の「Workspace Studio」という自動化機能の中で、<strong>「Ask NotebookLM」ステップ</strong>が使えるようになりました。既存のノートブックを AI の知識源として業務の自動化に組み込めます。</p>
+                    <p class="mb-0"><strong>2026年6月1日からは AI Expanded Access ライセンスで利用上限が拡大</strong>されています。</p>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>🔄 ② Google Drive と自動同期できるようになった</strong>
+                    <p class="mb-0">NotebookLM のソースに Google Docs / Sheets / Slides を登録しておくと、<strong>Drive 側でファイルを更新すれば NotebookLM の中身も自動で追いかけて更新</strong>されるようになりました。今までは手動で「再読み込み」していたのが不要に。施設マニュアル更新時の手間が一気に減ります。</p>
+                </div>
+
+                <div class="highlight-box warning">
+                    <strong>⚠️ 注意：いずれも契約プラン次第</strong>
+                    <p class="mb-0">Workspace Studio 連携は Google Workspace の契約と、特定のライセンス（AI Expanded Access など）が前提です。<strong>「今すぐ全員で使える」とは限りません</strong>。詳しくは法人の情シス／管理者にご確認ください。今日は「こういう方向に進んでいる」という<strong>業界ニュースとして</strong>受け取ってください。</p>
+                </div>
+
+                <div class="highlight-box info">
+                    <strong>📚 出典（一次ソース）</strong>
+                    <ul class="mb-0 reference-links">
+                        <li><a href="https://workspaceupdates.googleblog.com/2026/05/notebooklm-in-workspace-studio.html" target="_blank" rel="noopener noreferrer">Use NotebookLM in your Google Workspace Studio flows</a><br><span class="ref-source">Google Workspace Updates（2026年5月・一次ソース）</span></li>
+                        <li><a href="https://workspaceupdates.googleblog.com/2026/" target="_blank" rel="noopener noreferrer">Google Workspace Updates 2026 一覧</a><br><span class="ref-source">Drive 自動同期含むアップデート全般</span></li>
+                        <li><a href="https://blog.google/innovation-and-ai/models-and-research/google-labs/notebooklm-video-overviews-studio-upgrades/" target="_blank" rel="noopener noreferrer">NotebookLM Video Overviews and upgraded Studio</a><br><span class="ref-source">Google Blog（Studio 機能の解説）</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Step 3: 休憩 -->
+            <div id="step3" class="detail-section detail-section-compact detail-section-break animate-on-scroll">
+                <div class="detail-header"><div class="step-number">3</div><div class="detail-header-content"><h3>休憩 ☕</h3><p style="margin: 8px 0 0 0; color: #795548;">一息つきましょう。水分補給やストレッチをどうぞ。</p></div></div>
+            </div>
+
+            <!-- Step 4: 横断ミニ体験ワーク -->
+            <div id="step4" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">4</div><div class="detail-header-content"><h3>横断ミニ体験ワーク</h3><div class="time">⏱ 35-40分</div></div></div>
+                <p>これまでの回で触ってきた機能を、<strong>横断的に軽く触り直し</strong>ます。深掘りはせず「思い出す」が目的。"久しぶりに開く"ことで、自然と現場活用のヒントも見えてきます。</p>
+
+                <div class="highlight-box info">
+                    <strong>💡 ワークのトーン</strong>
+                    <ul class="mb-0">
+                        <li>講師が画面を共有しながら、皆さんも別タブで一緒に試します</li>
+                        <li>「うまくいった人？」「どうでしたか？」程度の<strong>軽い確認</strong>で進めます</li>
+                        <li>結果をチャット共有するのは<strong>任意</strong>。プレッシャーはありません</li>
+                        <li>時間配分は当日の盛り上がりで講師が調整します</li>
+                    </ul>
+                </div>
+
+                <h3>横断ミニ体験 4 連発</h3>
+                <p>下の 4 つを順番に軽く触り直します。各 5〜10 分目安、合計 30〜35 分。<strong>「最後までできなくても OK」</strong>のトーンで進めます。時間配分は当日の盛り上がりで講師が調整します。</p>
+
+                <div class="workflow">
+                    <div class="workflow-title">📍 ミニ体験ワークの流れ</div>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <div class="workflow-num">1</div>
+                            <div class="workflow-text">
+                                <strong>🎨 画像生成（Vol.1・Vol.2 復習）</strong>（約 8 分）<br>
+                                お題：<strong>「梅雨の季節をテーマに、施設だより用の挿絵を1枚作る」</strong><br>
+                                Gemini のチャット欄で「梅雨をテーマにした優しいタッチのイラストを作って」など、気軽に頼んでみます。
+                                <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="workflow-link">Gemini を開く</a>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="workflow-num">2</div>
+                            <div class="workflow-text">
+                                <strong>🛠️ AI Studio Build（Vol.4 復習）</strong>(約 10 分)<br>
+                                お題：<strong>「『今日のひとこと記録メモ』アプリを Build で試しに作る」</strong><br>
+                                AI Studio の Build モードで「シンプルなメモアプリを作って」と頼んで、できあがりを眺めます。
+                                <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" class="workflow-link">AI Studio を開く</a>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="workflow-num">3</div>
+                            <div class="workflow-text">
+                                <strong>📚 NotebookLM（Vol.3 復習）</strong>（約 8 分）<br>
+                                お題：<strong>「Vol.1〜5 のページ URL をソース追加して『一番便利だった機能はどれ？』と聞いてみる」</strong><br>
+                                ソース欄にこの講座サイトの各 Vol URL を入れて、中央のチャット欄で質問します。
+                                <a href="https://notebooklm.google/" target="_blank" rel="noopener noreferrer" class="workflow-link">NotebookLM を開く</a>
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="workflow-num">4</div>
+                            <div class="workflow-text">
+                                <strong>💎 Gem（Vol.5 復習）</strong>（約 8 分）<br>
+                                お題：<strong>「Vol.5 で作った Gem を呼び出して、サンプル文章を投げて反応を見る」</strong><br>
+                                Gemini を開いたら、<strong>左メニューから「Gem」</strong>を選んで自分の Gem を呼び出します。<br>
+                                ※ Gem を作っていない方は、表示されているサンプル Gem を1つ試す形で OK。
+                                <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="workflow-link">Gemini を開く</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box tip">
+                    <strong>✨ このワークの目的</strong>
+                    <p class="mb-0">"<strong>覚えているか試す</strong>" ではなく "<strong>もう一度触ってみる</strong>" こと。久しぶりに開くと「あれ、こんなだったっけ」と新しい発見があるはずです。</p>
+                </div>
+            </div>
+
+            <!-- Step 5: Vol.7 の方向性を聞く＋まとめ -->
+            <div id="step5" class="detail-section animate-on-scroll">
+                <div class="detail-header"><div class="step-number">5</div><div class="detail-header-content"><h3>Vol.7 の方向性を聞く＋まとめ</h3><div class="time">⏱ 15-20分</div></div></div>
+                <p>振り返り回の締めくくりは、<strong>次回 Vol.7 のテーマを皆さんと決める</strong>時間です。</p>
+
+                <div class="highlight-box info">
+                    <strong>🗳️ こんなふうに聞きます</strong>
+                    <ul class="mb-0">
+                        <li><strong>過去回でもう一度深掘りしたいもの</strong>はありますか？（例：NotebookLM をもっと使い込みたい／Gem を業務向けに進化させたい）</li>
+                        <li><strong>新しくやってみたいこと</strong>はありますか？（例：動画生成／音声入力／業務特化のテーマなど）</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <p>どちらでも構いません。「これ知りたい」「これ困ってる」を遠慮なくお寄せください。<strong>次回の Vol.7 は、ここで集まった声をもとに講師が組み立てます</strong>。</p>
+                </div>
+
+                <h3>今日のまとめ</h3>
+                <div class="highlight-box tip animate-on-scroll">
+                    <strong>🎉 今日できたこと</strong>
+                    <ul>
+                        <li>Vol.1〜5 を<strong>自分の言葉で振り返れた</strong></li>
+                        <li>現場で使い続けている機能・止まっている機能を<strong>整理できた</strong></li>
+                        <li>NotebookLM Studio で何ができるかを<strong>もう一度俯瞰できた</strong></li>
+                        <li>2026年6月時点の<strong>Workspace 連携の新情報</strong>を知った</li>
+                        <li>Vol.7 でやりたいことを<strong>言語化できた</strong></li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box info">
+                    <strong>💡 次回までの過ごし方（無理しない範囲で）</strong>
+                    <ul>
+                        <li>今日「久しぶりに触った機能」を、現場で<strong>もう一度</strong>使ってみる</li>
+                        <li>気になった機能があれば、Vol.1〜5 の資料を見返してみる</li>
+                        <li>「これ困ってるな」と思ったことがあれば、メモしておく（Vol.7 のヒントになります）</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box accent">
+                    <strong>📅 次回予告：Vol.7</strong>
+                    <p class="mb-0">皆さんの声をもとに、次回テーマを準備します。お楽しみに！</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="glossary" class="container">
+            <div class="section-header">
+                <h2><span class="icon">📖</span>用語集</h2>
+                <p>今日出てきた用語のおさらい</p>
+            </div>
+            <div class="glossary-grid">
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">NotebookLM Studio</div><div class="glossary-desc">NotebookLM 画面の右側にあるパネル。ソースに追加した情報から、音声概要・マインドマップ・動画概要・ブリーフィング ドキュメント・学習ガイド・FAQ・レポートなどを生成できます。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">音声概要<br>（Audio Overview）</div><div class="glossary-desc">NotebookLM が作る、ポッドキャスト風の解説音声。2 人の AI ホストが会話形式で内容を要約してくれます。Vol.3 で体験済みです。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">動画概要<br>（Video Overview）</div><div class="glossary-desc">音声概要の動画版。ナレーションに合わせてスライド形式で内容を解説してくれます。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">Workspace Studio</div><div class="glossary-desc">Google Workspace が提供する自動化機能。Gemini や他のツールを組み合わせて業務フローを自動化できます。2026年5月から「Ask NotebookLM」ステップが追加されました。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">Drive 自動同期</div><div class="glossary-desc">NotebookLM のソースに Google Docs / Sheets / Slides を登録すると、Drive 側の更新が自動で NotebookLM に反映される機能。手動の再読み込みが不要になりました。</div></div>
+                <div class="glossary-item animate-on-scroll"><div class="glossary-term">AI Expanded Access</div><div class="glossary-desc">Google Workspace の AI 機能を拡張する追加ライセンス。2026年6月1日から Workspace Studio の利用上限が拡大されました。契約の有無は法人の情シスに確認が必要です。</div></div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <p>介護×AI はじめの一歩 Vol.6 | 入門講座資料</p>
+        <div class="footer-banner">
+            <a href="https://one-stream.io/user/CwGemEM3sSOZX6f5uhBm0jUJUs93/playlist/c203a473-fa9d-404e-917d-b1886ede8a84" target="_blank" rel="noopener noreferrer">
+                <img src="/public/horiemon13-gpt.png" alt="ChatGPT資格試験対策コース">
+            </a>
+        </div>
+    </footer>
+
+    <div class="scroll-buttons">
+        <button class="scroll-btn to-top" onclick="scrollToTop()" aria-label="ページトップへ戻る" title="トップへ">↑</button>
+        <button class="scroll-btn to-footer" onclick="scrollToFooter()" aria-label="フッターへ移動" title="関連講座を見る">↓</button>
+    </div>
+
+    <script>
+        function handleNavKey(event, id) { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); scrollToSection(id); } }
+        function scrollToSection(id) { const element = document.getElementById(id); if (element) { const navHeight = document.querySelector('nav').offsetHeight; const seriesNavHeight = document.querySelector('.series-nav').offsetHeight; const elementPosition = element.getBoundingClientRect().top + window.pageYOffset; window.scrollTo({ top: elementPosition - navHeight - seriesNavHeight - 20, behavior: 'smooth' }); } }
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function scrollToFooter() { document.getElementById('footer').scrollIntoView({ behavior: 'smooth' }); }
+        function updateScrollButtons() { const scrollTop = window.pageYOffset; const windowHeight = window.innerHeight; const documentHeight = document.documentElement.scrollHeight; const scrollBottom = documentHeight - scrollTop - windowHeight; const toTopBtn = document.querySelector('.scroll-btn.to-top'); const toFooterBtn = document.querySelector('.scroll-btn.to-footer'); if (scrollTop > 200) { toTopBtn.classList.add('visible'); } else { toTopBtn.classList.remove('visible'); } if (scrollBottom > 200) { toFooterBtn.classList.add('visible'); } else { toFooterBtn.classList.remove('visible'); } }
+        window.addEventListener('scroll', updateScrollButtons); updateScrollButtons();
+        const observer = new IntersectionObserver((entries) => { entries.forEach((entry, index) => { if (entry.isIntersecting) { setTimeout(() => { entry.target.classList.add('visible'); }, index * 50); } }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }); document.querySelectorAll('.animate-on-scroll').forEach(el => { observer.observe(el); });
+        document.querySelectorAll('.term').forEach(term => { term.addEventListener('click', function(e) { e.stopPropagation(); document.querySelectorAll('.term').forEach(t => { if (t !== this) t.classList.remove('active'); }); this.classList.toggle('active'); }); }); document.addEventListener('click', function(e) { if (!e.target.closest('.term')) { document.querySelectorAll('.term').forEach(t => t.classList.remove('active')); } });
+        window.addEventListener('scroll', function() { const sections = document.querySelectorAll('section[id]'); const navLinks = document.querySelectorAll('nav a'); let current = ''; sections.forEach(section => { const sectionTop = section.offsetTop; if (pageYOffset >= sectionTop - 200) { current = section.getAttribute('id'); } }); navLinks.forEach(link => { link.classList.remove('active'); const onclick = link.getAttribute('onclick'); if (onclick && onclick.includes(current)) { link.classList.add('active'); } }); });
+    </script>
+</body>
+</html>
